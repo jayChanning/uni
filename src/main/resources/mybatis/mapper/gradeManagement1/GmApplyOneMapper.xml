@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.uni.gradeManagement1.mapper.GmApplyOneMapper" >
+  <resultMap id="BaseResultMap" type="edu.uni.gradeManagement1.bean.GmApplyOne" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="approval_main_id" property="approvalMainId" jdbcType="BIGINT" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+    <result column="semester_id" property="semesterId" jdbcType="BIGINT" />
+    <result column="student_id" property="studentId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="stu_grade_main_id" property="stuGradeMainId" jdbcType="BIGINT" />
+    <result column="stu_item_grade_detail_new_id" property="stuItemGradeDetailNewId" jdbcType="BIGINT" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="by_who" property="byWho" jdbcType="BIGINT" />
+    <result column="by_send" property="bySend" jdbcType="BIGINT" />
+    <result column="datatime" property="datatime" jdbcType="TIMESTAMP" />
+    <result column="deleted" property="deleted" jdbcType="TINYINT" />
+    <result column="stu_item_grade_detail_old_id" property="stuItemGradeDetailOldId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, approval_main_id, university_id, semester_id, student_id, course_id, stu_grade_main_id, 
+    stu_item_grade_detail_new_id, attachment, reason, by_who, by_send, datatime, deleted, 
+    stu_item_grade_detail_old_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.gradeManagement1.bean.GmApplyOneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gm_apply_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from gm_apply_one
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from gm_apply_one
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="edu.uni.gradeManagement1.bean.GmApplyOneExample" >
+    delete from gm_apply_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.GmApplyOne" >
+    insert into gm_apply_one (id, approval_main_id, university_id, 
+      semester_id, student_id, course_id, 
+      stu_grade_main_id, stu_item_grade_detail_new_id, 
+      attachment, reason, by_who, 
+      by_send, datatime, deleted, 
+      stu_item_grade_detail_old_id)
+    values (#{id,jdbcType=BIGINT}, #{approvalMainId,jdbcType=BIGINT}, #{universityId,jdbcType=BIGINT}, 
+      #{semesterId,jdbcType=BIGINT}, #{studentId,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, 
+      #{stuGradeMainId,jdbcType=BIGINT}, #{stuItemGradeDetailNewId,jdbcType=BIGINT}, 
+      #{attachment,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{byWho,jdbcType=BIGINT}, 
+      #{bySend,jdbcType=BIGINT}, #{datatime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT}, 
+      #{stuItemGradeDetailOldId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.GmApplyOne" >
+    insert into gm_apply_one
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="approvalMainId != null" >
+        approval_main_id,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="semesterId != null" >
+        semester_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="stuGradeMainId != null" >
+        stu_grade_main_id,
+      </if>
+      <if test="stuItemGradeDetailNewId != null" >
+        stu_item_grade_detail_new_id,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="byWho != null" >
+        by_who,
+      </if>
+      <if test="bySend != null" >
+        by_send,
+      </if>
+      <if test="datatime != null" >
+        datatime,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="stuItemGradeDetailOldId != null" >
+        stu_item_grade_detail_old_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="approvalMainId != null" >
+        #{approvalMainId,jdbcType=BIGINT},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="semesterId != null" >
+        #{semesterId,jdbcType=BIGINT},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="stuGradeMainId != null" >
+        #{stuGradeMainId,jdbcType=BIGINT},
+      </if>
+      <if test="stuItemGradeDetailNewId != null" >
+        #{stuItemGradeDetailNewId,jdbcType=BIGINT},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="byWho != null" >
+        #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="bySend != null" >
+        #{bySend,jdbcType=BIGINT},
+      </if>
+      <if test="datatime != null" >
+        #{datatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="stuItemGradeDetailOldId != null" >
+        #{stuItemGradeDetailOldId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.uni.gradeManagement1.bean.GmApplyOneExample" resultType="java.lang.Integer" >
+    select count(*) from gm_apply_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gm_apply_one
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.approvalMainId != null" >
+        approval_main_id = #{record.approvalMainId,jdbcType=BIGINT},
+      </if>
+      <if test="record.universityId != null" >
+        university_id = #{record.universityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.semesterId != null" >
+        semester_id = #{record.semesterId,jdbcType=BIGINT},
+      </if>
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.courseId != null" >
+        course_id = #{record.courseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.stuGradeMainId != null" >
+        stu_grade_main_id = #{record.stuGradeMainId,jdbcType=BIGINT},
+      </if>
+      <if test="record.stuItemGradeDetailNewId != null" >
+        stu_item_grade_detail_new_id = #{record.stuItemGradeDetailNewId,jdbcType=BIGINT},
+      </if>
+      <if test="record.attachment != null" >
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.byWho != null" >
+        by_who = #{record.byWho,jdbcType=BIGINT},
+      </if>
+      <if test="record.bySend != null" >
+        by_send = #{record.bySend,jdbcType=BIGINT},
+      </if>
+      <if test="record.datatime != null" >
+        datatime = #{record.datatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.stuItemGradeDetailOldId != null" >
+        stu_item_grade_detail_old_id = #{record.stuItemGradeDetailOldId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gm_apply_one
+    set id = #{record.id,jdbcType=BIGINT},
+      approval_main_id = #{record.approvalMainId,jdbcType=BIGINT},
+      university_id = #{record.universityId,jdbcType=BIGINT},
+      semester_id = #{record.semesterId,jdbcType=BIGINT},
+      student_id = #{record.studentId,jdbcType=BIGINT},
+      course_id = #{record.courseId,jdbcType=BIGINT},
+      stu_grade_main_id = #{record.stuGradeMainId,jdbcType=BIGINT},
+      stu_item_grade_detail_new_id = #{record.stuItemGradeDetailNewId,jdbcType=BIGINT},
+      attachment = #{record.attachment,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      by_who = #{record.byWho,jdbcType=BIGINT},
+      by_send = #{record.bySend,jdbcType=BIGINT},
+      datatime = #{record.datatime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=TINYINT},
+      stu_item_grade_detail_old_id = #{record.stuItemGradeDetailOldId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.uni.gradeManagement1.bean.GmApplyOne" >
+    update gm_apply_one
+    <set >
+      <if test="approvalMainId != null" >
+        approval_main_id = #{approvalMainId,jdbcType=BIGINT},
+      </if>
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="semesterId != null" >
+        semester_id = #{semesterId,jdbcType=BIGINT},
+      </if>
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="stuGradeMainId != null" >
+        stu_grade_main_id = #{stuGradeMainId,jdbcType=BIGINT},
+      </if>
+      <if test="stuItemGradeDetailNewId != null" >
+        stu_item_grade_detail_new_id = #{stuItemGradeDetailNewId,jdbcType=BIGINT},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="byWho != null" >
+        by_who = #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="bySend != null" >
+        by_send = #{bySend,jdbcType=BIGINT},
+      </if>
+      <if test="datatime != null" >
+        datatime = #{datatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="stuItemGradeDetailOldId != null" >
+        stu_item_grade_detail_old_id = #{stuItemGradeDetailOldId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.uni.gradeManagement1.bean.GmApplyOne" >
+    update gm_apply_one
+    set approval_main_id = #{approvalMainId,jdbcType=BIGINT},
+      university_id = #{universityId,jdbcType=BIGINT},
+      semester_id = #{semesterId,jdbcType=BIGINT},
+      student_id = #{studentId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      stu_grade_main_id = #{stuGradeMainId,jdbcType=BIGINT},
+      stu_item_grade_detail_new_id = #{stuItemGradeDetailNewId,jdbcType=BIGINT},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      by_who = #{byWho,jdbcType=BIGINT},
+      by_send = #{bySend,jdbcType=BIGINT},
+      datatime = #{datatime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=TINYINT},
+      stu_item_grade_detail_old_id = #{stuItemGradeDetailOldId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.uni.gradeManagement1.mapper.GmApplyApprovalOneMapper" >
+  <resultMap id="BaseResultMap" type="edu.uni.gradeManagement1.bean.GmApplyApprovalOne" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gm_apply_id" property="gmApplyId" jdbcType="BIGINT" />
+    <result column="step" property="step" jdbcType="INTEGER" />
+    <result column="application_status" property="applicationStatus" jdbcType="TINYINT" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="by_who" property="byWho" jdbcType="BIGINT" />
+    <result column="send_who" property="sendWho" jdbcType="BIGINT" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
+    <result column="deleted" property="deleted" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gm_apply_id, step, application_status, reason, by_who, send_who, datetime, deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gm_apply_approval_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from gm_apply_approval_one
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from gm_apply_approval_one
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOneExample" >
+    delete from gm_apply_approval_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOne" >
+    insert into gm_apply_approval_one (id, gm_apply_id, step, 
+      application_status, reason, by_who, 
+      send_who, datetime, deleted
+      )
+    values (#{id,jdbcType=BIGINT}, #{gmApplyId,jdbcType=BIGINT}, #{step,jdbcType=INTEGER}, 
+      #{applicationStatus,jdbcType=TINYINT}, #{reason,jdbcType=VARCHAR}, #{byWho,jdbcType=BIGINT}, 
+      #{sendWho,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOne" >
+    insert into gm_apply_approval_one
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmApplyId != null" >
+        gm_apply_id,
+      </if>
+      <if test="step != null" >
+        step,
+      </if>
+      <if test="applicationStatus != null" >
+        application_status,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="byWho != null" >
+        by_who,
+      </if>
+      <if test="sendWho != null" >
+        send_who,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmApplyId != null" >
+        #{gmApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="step != null" >
+        #{step,jdbcType=INTEGER},
+      </if>
+      <if test="applicationStatus != null" >
+        #{applicationStatus,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="byWho != null" >
+        #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="sendWho != null" >
+        #{sendWho,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOneExample" resultType="java.lang.Integer" >
+    select count(*) from gm_apply_approval_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gm_apply_approval_one
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmApplyId != null" >
+        gm_apply_id = #{record.gmApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.step != null" >
+        step = #{record.step,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicationStatus != null" >
+        application_status = #{record.applicationStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.byWho != null" >
+        by_who = #{record.byWho,jdbcType=BIGINT},
+      </if>
+      <if test="record.sendWho != null" >
+        send_who = #{record.sendWho,jdbcType=BIGINT},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gm_apply_approval_one
+    set id = #{record.id,jdbcType=BIGINT},
+      gm_apply_id = #{record.gmApplyId,jdbcType=BIGINT},
+      step = #{record.step,jdbcType=INTEGER},
+      application_status = #{record.applicationStatus,jdbcType=TINYINT},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      by_who = #{record.byWho,jdbcType=BIGINT},
+      send_who = #{record.sendWho,jdbcType=BIGINT},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOne" >
+    update gm_apply_approval_one
+    <set >
+      <if test="gmApplyId != null" >
+        gm_apply_id = #{gmApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="step != null" >
+        step = #{step,jdbcType=INTEGER},
+      </if>
+      <if test="applicationStatus != null" >
+        application_status = #{applicationStatus,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="byWho != null" >
+        by_who = #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="sendWho != null" >
+        send_who = #{sendWho,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOne" >
+    update gm_apply_approval_one
+    set gm_apply_id = #{gmApplyId,jdbcType=BIGINT},
+      step = #{step,jdbcType=INTEGER},
+      application_status = #{applicationStatus,jdbcType=TINYINT},
+      reason = #{reason,jdbcType=VARCHAR},
+      by_who = #{byWho,jdbcType=BIGINT},
+      send_who = #{sendWho,jdbcType=BIGINT},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

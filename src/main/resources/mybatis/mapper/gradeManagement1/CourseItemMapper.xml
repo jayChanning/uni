@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.uni.gradeManagement1.mapper.CourseItemMapper" >
+    <resultMap id="BaseResultMap" type="edu.uni.gradeManagement1.bean.CourseItem" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="university_id" property="universityId" jdbcType="BIGINT" />
+        <result column="course_id" property="courseId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="TINYINT" />
+        <result column="rate" property="rate" jdbcType="DOUBLE" />
+        <result column="count" property="count" jdbcType="INTEGER" />
+        <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
+        <result column="by_who" property="byWho" jdbcType="BIGINT" />
+        <result column="deleted" property="deleted" jdbcType="TINYINT" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+    id, university_id, course_id, name, rate, count, datetime, by_who, deleted
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.gradeManagement1.bean.CourseItemExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from course_item_one
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from course_item_one
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course_item_one
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="edu.uni.gradeManagement1.bean.CourseItemExample" >
+        delete from course_item_one
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.CourseItem" >
+    insert into course_item_one (id, university_id, course_id,
+      name, rate, count, datetime, 
+      by_who, deleted)
+    values (#{id,jdbcType=BIGINT}, #{universityId,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, 
+      #{name,jdbcType=TINYINT}, #{rate,jdbcType=DOUBLE}, #{count,jdbcType=INTEGER}, #{datetime,jdbcType=TIMESTAMP}, 
+      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT})
+  </insert>
+    <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.CourseItem" >
+        insert into course_item_one
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="universityId != null" >
+                university_id,
+            </if>
+            <if test="courseId != null" >
+                course_id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="rate != null" >
+                rate,
+            </if>
+            <if test="count != null" >
+                count,
+            </if>
+            <if test="datetime != null" >
+                datetime,
+            </if>
+            <if test="byWho != null" >
+                by_who,
+            </if>
+            <if test="deleted != null" >
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="universityId != null" >
+                #{universityId,jdbcType=BIGINT},
+            </if>
+            <if test="courseId != null" >
+                #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=TINYINT},
+            </if>
+            <if test="rate != null" >
+                #{rate,jdbcType=DOUBLE},
+            </if>
+            <if test="count != null" >
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="datetime != null" >
+                #{datetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="byWho != null" >
+                #{byWho,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null" >
+                #{deleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="edu.uni.gradeManagement1.bean.CourseItemExample" resultType="java.lang.Integer" >
+        select count(*) from course_item_one
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update course_item_one
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.universityId != null" >
+                university_id = #{record.universityId,jdbcType=BIGINT},
+            </if>
+            <if test="record.courseId != null" >
+                course_id = #{record.courseId,jdbcType=BIGINT},
+            </if>
+            <if test="record.name != null" >
+                name = #{record.name,jdbcType=TINYINT},
+            </if>
+            <if test="record.rate != null" >
+                rate = #{record.rate,jdbcType=DOUBLE},
+            </if>
+            <if test="record.count != null" >
+                count = #{record.count,jdbcType=INTEGER},
+            </if>
+            <if test="record.datetime != null" >
+                datetime = #{record.datetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.byWho != null" >
+                by_who = #{record.byWho,jdbcType=BIGINT},
+            </if>
+            <if test="record.deleted != null" >
+                deleted = #{record.deleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update course_item_one
+        set id = #{record.id,jdbcType=BIGINT},
+        university_id = #{record.universityId,jdbcType=BIGINT},
+        course_id = #{record.courseId,jdbcType=BIGINT},
+        name = #{record.name,jdbcType=TINYINT},
+        rate = #{record.rate,jdbcType=DOUBLE},
+        count = #{record.count,jdbcType=INTEGER},
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
+        by_who = #{record.byWho,jdbcType=BIGINT},
+        deleted = #{record.deleted,jdbcType=TINYINT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="edu.uni.gradeManagement1.bean.CourseItem" >
+        update course_item_one
+        <set >
+            <if test="universityId != null" >
+                university_id = #{universityId,jdbcType=BIGINT},
+            </if>
+            <if test="courseId != null" >
+                course_id = #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=TINYINT},
+            </if>
+            <if test="rate != null" >
+                rate = #{rate,jdbcType=DOUBLE},
+            </if>
+            <if test="count != null" >
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="datetime != null" >
+                datetime = #{datetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="byWho != null" >
+                by_who = #{byWho,jdbcType=BIGINT},
+            </if>
+            <if test="deleted != null" >
+                deleted = #{deleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="edu.uni.gradeManagement1.bean.CourseItem" >
+    update course_item_one
+    set university_id = #{universityId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      name = #{name,jdbcType=TINYINT},
+      rate = #{rate,jdbcType=DOUBLE},
+      count = #{count,jdbcType=INTEGER},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
+      by_who = #{byWho,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

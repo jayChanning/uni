@@ -77,8 +77,11 @@ public class CourseItemDetailController {
                 return Result.build(ResultType.Failed);
             }
         }
+        //05.29 MAC 测试下新增push上github
+        System.out.println("新增课程组成项，mac测试");
         return Result.build(ResultType.ParamError);
     }
+
 
     /**
      * 根据id查询组成项明细

@@ -10,7 +10,7 @@ public class ItemName {
         private String itemName;
         private boolean isIn;
 
-        public ItemName(String itemName, boolean isIn) {
+        ItemName(String itemName, boolean isIn) {
             this.itemName = itemName;
             this.isIn = isIn;
         }

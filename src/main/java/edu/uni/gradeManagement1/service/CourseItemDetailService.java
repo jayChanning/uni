@@ -15,7 +15,7 @@ import java.util.List;
 public interface CourseItemDetailService {
     /**
      * 录入成绩到课程组成项明细表中
-     * @param cid
+     * @param cid courseItemDetail id
      * @return 是否成功（true or false）
      */
     boolean insert(CourseItemDetail cid);
@@ -30,7 +30,7 @@ public interface CourseItemDetailService {
     /**
      * 分页查询所有组成项
      * @param pageNum 页码
-     * @return
+     * @return page分页信息
      */
     PageInfo<CourseItemDetail> selectPage(int pageNum);
 

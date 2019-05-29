@@ -2,6 +2,9 @@ package edu.uni.gradeManagement1.service;
 
 import com.github.pagehelper.PageInfo;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
+import edu.uni.gradeManagement1.pojo.Item;
+
+import java.util.List;
 
 /**
  * @author 蔡政堂
@@ -38,4 +41,12 @@ public interface CourseItemDetailService {
      * @return
      */
     PageInfo<CourseItemDetail> selectPageByCourseItem(int pageNum, long courseItemId);
+
+
+    /**
+     * 查询树型数组
+     * @return
+     */
+    //todo 查询树型数组
+    List<Item> selectTree(long id);
 }

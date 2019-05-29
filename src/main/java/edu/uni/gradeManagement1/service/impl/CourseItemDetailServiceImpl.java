@@ -6,10 +6,14 @@ import edu.uni.gradeManagement1.bean.CourseItemDetail;
 import edu.uni.gradeManagement1.bean.CourseItemDetailExample;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.CourseItemDetailMapper;
+import edu.uni.gradeManagement1.pojo.Item;
 import edu.uni.gradeManagement1.service.CourseItemDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -21,7 +25,7 @@ import java.util.List;
 @Service
 public class CourseItemDetailServiceImpl implements CourseItemDetailService {
     @Autowired
-    private CourseItemDetailMapper courseItemDetailMapper;
+    private CourseItemDetailMapper courseItemDetailMapper;  //此处报错可忽略，编译后会自动生成
 
     @Autowired
     private GradeManagementConfig gradeManagementConfig;
@@ -94,5 +98,41 @@ public class CourseItemDetailServiceImpl implements CourseItemDetailService {
         }else {
             return null;
         }
+    }
+
+
+    /**
+     * 查询树型数组
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Item> selectTree(long id) {
+        List<HashMap> mapList = courseItemDetailMapper.choose(id);
+       // System.out.println(mapList);
+        ArrayList<Item> lists = new ArrayList<>();
+        HashMap<Integer, Item> hashMap = new HashMap<>();
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (HashMap hm:
+                mapList) {
+            int name = (int)hm.get("name");
+            int number = (int)hm.get("number");
+            int count = (int)hm.get("count");
+            if (!hashSet.add(name)){
+                Item item = hashMap.get(name);
+                item.setItemName(number);
+            } else{
+                hashMap.put(name,new Item(name,count));
+                Item item = hashMap.get(name);
+                item.setItemName(number);
+            }
+        }
+        for (Item itme :
+                hashMap.values()) {
+            lists.add(itme);
+        }
+        //System.out.println(lists);
+        return lists;
     }
 }

@@ -3,6 +3,7 @@ package edu.uni.gradeManagement1.service.impl;
 import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.bean.CourseItemExample;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
+import edu.uni.gradeManagement1.pojo.Item;
 import edu.uni.gradeManagement1.service.CourseItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.util.List;
 @Service
 public class CourseItemServiceImpl implements CourseItemService {
     @Autowired
-    private CourseItemMapper courseItemMapper;
+    private CourseItemMapper courseItemMapper;  //此处报错可忽略，编译后会自动生成
 
     /**
      * 实现课程成绩评分组成项表的录入
@@ -57,4 +58,5 @@ public class CourseItemServiceImpl implements CourseItemService {
         List<CourseItem> allCourseItem = courseItemMapper.selectByExample(example);
         return allCourseItem;
     }
+
 }

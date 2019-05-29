@@ -1,7 +1,7 @@
 package edu.uni.gradeManagement1.service;
 
 import edu.uni.gradeManagement1.bean.CourseItem;
-
+import edu.uni.gradeManagement1.pojo.*;
 import java.util.List;
 
 /**
@@ -30,4 +30,5 @@ public interface CourseItemService {
      * @return
      */
     List<CourseItem> selectAll();
+
 }

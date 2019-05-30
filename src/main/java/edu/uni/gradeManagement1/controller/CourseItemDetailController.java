@@ -222,6 +222,7 @@ public class CourseItemDetailController {
      * @param id
      * @return 成绩主表ID
      * @throws Exception
+     * TODO 获取树状数组
      */
     @ApiOperation(value = "获取树状数组", notes = "已实现")
     @GetMapping("/courseItemDetail/itemName")

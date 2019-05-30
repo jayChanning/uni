@@ -47,6 +47,6 @@ public interface CourseItemDetailService {
      * 查询树型数组
      * @return
      */
-    //todo 查询树型数组
+    //TODO 查询树型数组
     List<Item> selectTree(long id);
 }

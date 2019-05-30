@@ -162,25 +162,25 @@
         WHERE 1=1
     <trim suffixOverrides=",">
       <if test="universityId != null">
-        AND university_id=#{universityId},
+        AND university_id=#{universityId}
       </if>
       <if test="canlendarId != null">
-        AND canlendar_id=#{canlendarId},
+        AND canlendar_id=#{canlendarId}
       </if>
       <if test="timeTableId != null">
-        AND time_table_id=#{timeTableId},
+        AND time_table_id=#{timeTableId}
       </if>
       <if test="fieldId != null">
-        AND field_id=#{fieldId},
+        AND field_id=#{fieldId}
       </if>
       <if test="classId != null">
-        AND class_id=#{classId},
+        AND class_id=#{classId}
       </if>
       <if test="employeeId != null">
-        AND employee_id=#{employeeId},
+        AND employee_id=#{employeeId}
       </if>
       <if test="courseId != null">
-        AND course_id=#{courseId},
+        AND course_id=#{courseId}
       </if>
     </trim>
     GROUP BY
@@ -227,7 +227,7 @@
   </resultMap>
 
   <select id="getCurriculumMsgList" parameterType="hashmap" resultMap="BaseResultMap">
-      SELECT * FROM ea_curriculum WHERE 1=1
+      SELECT * FROM ea_curriculum WHERE deleted=0
     <trim suffixOverrides=",">
       <if test="semesterId != null and semesterId.size>0 ">
         AND canlendar_id IN
@@ -256,6 +256,24 @@
         </foreach>
       </if>
     </trim>
+  </select>
+
+  <select id="getCurriculumIdByUserAndCanlendar" parameterType="hashmap" resultType="long">
+    SELECT id FROM ea_curriculum WHERE class_id IN
+                                       (select class_id from classmate where student_id=#{studentId})
+                                  AND canlendar_id IN (SELECT id FROM ea_canlendar WHERE the_date BETWEEN #{start} AND #{end})
+
+  </select>
+
+  <select id="getCurriculumByStudentOrEmployeeAndSemesterIDANDWeek" parameterType="hashmap" resultMap="BaseResultMap">
+    SELECT *
+    FROM ea_curriculum as cu
+    WHERE cu.class_id IN (
+      SELECT class_id
+      FROM classmate
+      WHERE classmate.student_id=
+            (SELECT user_id FROM student WHERE student.stu_no=#{no})
+    ) AND canlendar_id IN (SELECT id FROM ea_canlendar WHERE semester_id=#{semesterId} AND `week`=#{week} )
   </select>
 
   <select id="selectByExample" parameterType="edu.uni.educateAffair.bean.CurriculumExample" resultMap="BaseResultMap">

@@ -13,21 +13,22 @@ import java.util.List;
 public interface CourseItemService {
     /**
      * 录入成绩到课程成绩评分组成项表
-     * @param courseItem
+     * @param courseItem courseItem对象
      * @return true of false
      */
     boolean insert(CourseItem courseItem);
 
     /**
      * 根据id查询课程成绩评分组成项
-     * @param id
-     * @return
+     * @param id course_item表的id
+     * @return courseItem对象
      */
     CourseItem select(Long id);
 
     /**
      * 查询出所有的成绩评分组成项
-     * @return
+     * @return courseItem的List对象
      */
     List<CourseItem> selectAll();
+
 }

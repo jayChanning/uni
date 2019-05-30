@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Result extends HashMap<String, Object>{
 
 
-    private Result(int code, String msg) {    
+    private Result(int code, String msg) {
         this.put("code", code);    this.put("msg", msg);   
     }
 

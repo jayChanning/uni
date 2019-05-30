@@ -2,6 +2,9 @@ package edu.uni.gradeManagement1.service;
 
 import com.github.pagehelper.PageInfo;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
+import edu.uni.gradeManagement1.pojo.Item;
+
+import java.util.List;
 
 /**
  * @author 蔡政堂
@@ -12,7 +15,7 @@ import edu.uni.gradeManagement1.bean.CourseItemDetail;
 public interface CourseItemDetailService {
     /**
      * 录入成绩到课程组成项明细表中
-     * @param cid
+     * @param cid courseItemDetail id
      * @return 是否成功（true or false）
      */
     boolean insert(CourseItemDetail cid);
@@ -27,7 +30,7 @@ public interface CourseItemDetailService {
     /**
      * 分页查询所有组成项
      * @param pageNum 页码
-     * @return
+     * @return page分页信息
      */
     PageInfo<CourseItemDetail> selectPage(int pageNum);
 
@@ -38,4 +41,12 @@ public interface CourseItemDetailService {
      * @return
      */
     PageInfo<CourseItemDetail> selectPageByCourseItem(int pageNum, long courseItemId);
+
+
+    /**
+     * 查询树型数组
+     * @return
+     */
+    //todo 查询树型数组
+    List<Item> selectTree(long id);
 }

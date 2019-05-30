@@ -8,10 +8,7 @@ import edu.uni.gradeManagement1.pojo.TreeDataPOJO;
 import edu.uni.gradeManagement1.service.CourseItemDetailService;
 import edu.uni.gradeManagement1.utils.UploadUtil;
 import edu.uni.utils.RedisCache;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-//import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
 
 /**
  * @author 蔡政堂
@@ -216,6 +212,25 @@ public class CourseItemDetailController {
         String filePath = uploadUtil.uploadFile(file);
 //        返回文件路径
         return filePath;
+
+    }
+
+    /**
+     * <p>
+     *     获取树状数组
+     * </p>
+     * @param id
+     * @return 成绩主表ID
+     * @throws Exception
+     */
+    @ApiOperation(value = "获取树状数组", notes = "已实现")
+    @GetMapping("/courseItemDetail/itemName")
+    @ResponseBody
+    public Result executeUpload( @ApiParam(value = "成绩主表Id") @RequestParam(name = "id") long id, HttpServletResponse response) throws Exception{
+      //  System.out.println(id);
+        //System.out.println(courseItemDetailService.selectTree(id));
+
+        return Result.build(ResultType.Success).appendData("data", courseItemDetailService.selectTree(id));
 
     }
 

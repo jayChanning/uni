@@ -132,7 +132,7 @@ public class CourseItemDetailServiceImpl implements CourseItemDetailService {
                 hashMap.values()) {
             lists.add(itme);
         }
-        //System.out.println(lists);
+        System.out.println(lists);
         return lists;
     }
 }

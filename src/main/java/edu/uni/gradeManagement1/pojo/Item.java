@@ -4,9 +4,9 @@ package edu.uni.gradeManagement1.pojo;
 import java.util.ArrayList;
 
 /**
-* @author 陈少鑫
-* date 19:19 2019-05-12
-* modified 19:19 2019-05-29
+ * @author 陈少鑫
+ * date 19:19 2019-05-12
+ * modified 19:19 2019-05-29
  * description TODO 显示给前台显示的数据
 */
 public class Item {

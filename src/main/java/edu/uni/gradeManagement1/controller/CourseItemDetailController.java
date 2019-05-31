@@ -24,7 +24,7 @@ import java.util.LinkedHashMap;
  * @author 蔡政堂
  * create 2019/5/5
  * modified 2019/5/5
- * description TODO
+ * description TODO 课程组成项明细模块Controller
  */
 
 @Api(description = "成绩管理：课程组成项明细模块")
@@ -227,8 +227,9 @@ public class CourseItemDetailController {
     @ApiOperation(value = "获取树状数组", notes = "已实现")
     @GetMapping("/courseItemDetail/itemName")
     @ResponseBody
-    public Result executeUpload( @ApiParam(value = "成绩主表Id") @RequestParam(name = "id") long id, HttpServletResponse response) throws Exception{
-      //  System.out.println(id);
+    public Result executeUpload(@ApiParam(value = "成绩主表Id")
+                                @RequestParam(name = "id") long id) throws Exception{
+        //System.out.println(id);
         //System.out.println(courseItemDetailService.selectTree(id));
 
         return Result.build(ResultType.Success).appendData("data", courseItemDetailService.selectTree(id));

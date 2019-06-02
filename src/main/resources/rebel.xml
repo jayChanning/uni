@@ -7,8 +7,14 @@
 <application generated-by="intellij" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://update.zeroturnaround.com/jrebel/rebel-2_1.xsd">
 
 	<classpath>
+		<!-- Windows Dir -->
 		<dir name="D:/JayChoi/codes/Idea/uni/target/classes">
 		</dir>
+
+		<!-- MacOS Dir -->
+<!--		<dir name="/Codes/uni/target/classes">-->
+<!--		</dir>-->
+
 	</classpath>
 
 </application>

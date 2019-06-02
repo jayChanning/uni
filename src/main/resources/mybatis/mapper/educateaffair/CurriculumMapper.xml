@@ -78,88 +78,41 @@
     course_id, status, datetime, by_who, deleted
   </sql>
 
-<!--  <select id="selectCurriculumByDateAndTeacherId" parameterType="edu.uni.educateAffair.bean.Curriculum" resultMap="test">
-   /* ca.the_date as cad,ti.name as tin,fi.name as fin,cl.name as cln,co.name as con*/
-      select cu.id as cuid,ca.id as caid,ti.id as tiid,fi.id as fiid,cl.id as clid,us.id as usid,co.id as coid,cu.university_id as cuunid,cu.status as cs
-      FROM ea_curriculum cu,ea_canlendar ca,ea_time_table ti,p_field fi,class cl,`user` us,course co
-      WHERE 1=1
-          AND cu.canlendar_id=ca.id
-          AND cu.time_table_id=ti.id
-          AND cu.field_id=fi.id
-          AND cu.class_id=cl.id
-          AND cu.employee_id=us.id
-          AND cu.course_id=co.id
-          AND cu.id=#{id}
-  </select>
-  <resultMap id="test" type="edu.uni.educateAffair.VO.CurriculumVO">
-    <id property="id" column="cuid" />
-    <result property="universityId" column="cuunid" />
-    <result property="canlendarId" column="caid" />
-    <result property="timeTableId" column="tiid" />
-    <result property="fieldId" column="fiid" />
-    <result property="classId" column="clid" />
-    <result property="employeeId" column="usid" />
-    <result property="courseId" column="coid" />
-    <result property="status" column="cs" />
-    <association property="canlendarDate" column="caid" select="select1"/>
-    <association property="timeTableName" column="tiid" select="select2"/>
-    <association property="fieldName" column="fiid" select="select3"/>
-    <association property="className" column="clid" select="select4"/>
-    <association property="employeeName" column="usid" select="select5"/>
-    <association property="courseName" column="coid" select="select6"/>
-  </resultMap>
-  <select id="select1" parameterType="Long" resultType="java.util.Date">
-    select the_date From ea_canlendar where id=#{id}
-  </select>
-  <select id="select2" parameterType="Long" resultType="String">
-    select `name` From ea_time_table where id=#{id}
-  </select>
-  <select id="select3" parameterType="Long" resultType="String">
-    select `name` From p_field where id=#{id}
-  </select>
-  <select id="select4" parameterType="Long" resultType="String">
-    select `name` From class where id=#{id}
-  </select>
-  <select id="select5" parameterType="Long" resultType="String">
-    select user_name From `user` where id=#{id}
-  </select>
-  <select id="select6" parameterType="Long" resultType="String">
-    select `name` From course where id=#{id}
-  </select>-->
+
   <select id="selectCurriculumNameByCondition" parameterType="edu.uni.educateAffair.VO.CurriculumWithCondition" resultMap="test">
     SELECT
-        <trim suffixOverrides=",">
-        <if test="Canlendar == true">
-          ca.the_date as ctd,ca.id as caid,
-        </if>
-        <if test="Timetable == true">
-          ti.`name` as tname,ti.id as tiid,
-        </if>
-        <if test="Field == true">
-          pf.`name` as pname,pf.id as pfid,
-        </if>
-        <if test="Class == true">
-          cl.`name` as cname,cl.id as clid,
-        </if>
-        <if test="Employee == true">
-          us.user_name as uname,us.id as usid,
-        </if>
-        <if test="Course == true">
-          co.`name` as coname,co.id as coid,
-        </if>
-        <if test="Canlendar == false and Timetable == false and Field == false and Class == false and Employee == false and Course == false">
-          ca.the_date as ctd,ca.id as caid,ti.`name` as tname,ti.id as tiid, pf.`name` as pname,pf.id as pfid,
-           cl.`name` as cname,cl.id as clid,us.user_name as uname,us.id as usid,co.`name` as coname,co.id as coid,
-        </if>
-        </trim>
+    <trim suffixOverrides=",">
+      <if test="Canlendar == true">
+        ca.the_date as ctd,ca.id as caid,
+      </if>
+      <if test="Timetable == true">
+        ti.`name` as tname,ti.id as tiid,
+      </if>
+      <if test="Field == true">
+        pf.`name` as pname,pf.id as pfid,
+      </if>
+      <if test="Class == true">
+        cl.`name` as cname,cl.id as clid,
+      </if>
+      <if test="Employee == true">
+        us.user_name as uname,us.id as usid,
+      </if>
+      <if test="Course == true">
+        co.`name` as coname,co.id as coid,
+      </if>
+      <if test="Canlendar == false and Timetable == false and Field == false and Class == false and Employee == false and Course == false">
+        ca.the_date as ctd,ca.id as caid,ti.`name` as tname,ti.id as tiid, pf.`name` as pname,pf.id as pfid,
+        cl.`name` as cname,cl.id as clid,us.user_name as uname,us.id as usid,co.`name` as coname,co.id as coid,
+      </if>
+    </trim>
     FROM ea_curriculum as cu
     INNER JOIN ea_canlendar as ca ON cu.canlendar_id=ca.id
     INNER JOIN ea_time_table as ti ON cu.time_table_id=ti.id
     INNER JOIN p_field as pf ON cu.field_id=pf.id
     INNER JOIN class as cl ON cu.class_id=cl.id
-    INNER JOIN `user` as us ON cu.employee_id=us.id
+    INNER JOIN `user` as us ON us.id=(SELECT user_id FROM employee as em WHERE em.id=cu.employee_id)
     INNER JOIN course as co ON cu.course_id=co.id
-        WHERE 1=1
+    WHERE 1=1
     <trim suffixOverrides=",">
       <if test="universityId != null">
         AND university_id=#{universityId}
@@ -209,40 +162,40 @@
     </trim>
   </select>
   <resultMap id="test" type="edu.uni.educateAffair.VO.CurriculumVO">
-      <id property="id" column="cu.id"/>
-      <result property="canlendarId" column="caid"/>
-      <result property="timeTableId" column="tiid"/>
-      <result property="fieldId" column="pfid"/>
-      <result property="classId" column="clid"/>
-      <result property="employeeId" column="usid"/>
-      <result property="courseId" column="coid"/>
-<!--    <collection property="curriculumVOS" ofType="edu.uni.educateAffair.VO.CurriculumVO">-->
-      <result property="canlendarDate" column="ctd"/>
-      <result property="timeTableName" column="tname"/>
-      <result property="fieldName" column="pname"/>
-      <result property="className" column="cname"/>
-      <result property="employeeName" column="uname"/>
-      <result property="courseName" column="coname"/>
+    <id property="id" column="cu.id"/>
+    <result property="canlendarId" column="caid"/>
+    <result property="timeTableId" column="tiid"/>
+    <result property="fieldId" column="pfid"/>
+    <result property="classId" column="clid"/>
+    <result property="employeeId" column="usid"/>
+    <result property="courseId" column="coid"/>
+    <!--    <collection property="curriculumVOS" ofType="edu.uni.educateAffair.VO.CurriculumVO">-->
+    <result property="canlendarDate" column="ctd"/>
+    <result property="timeTableName" column="tname"/>
+    <result property="fieldName" column="pname"/>
+    <result property="className" column="cname"/>
+    <result property="employeeName" column="uname"/>
+    <result property="courseName" column="coname"/>
     <!--</collection>-->
   </resultMap>
 
   <select id="getCurriculumMsgList" parameterType="hashmap" resultMap="BaseResultMap">
-      SELECT * FROM ea_curriculum WHERE deleted=0
+    SELECT * FROM ea_curriculum WHERE deleted=0
     <trim suffixOverrides=",">
       <if test="semesterId != null and semesterId.size>0 ">
         AND canlendar_id IN
         (SELECT id FROM ea_canlendar WHERE 1=0 OR semester_id IN
         <foreach collection="semesterId" item="id" open="(" close=")" separator=",">
-                 #{id}
+          #{id}
         </foreach>
         )
       </if>
       <if test="employeeId != null and employeeId.size>0 ">
-      AND employee_id IN
-      <foreach collection="employeeId" item="id" open="(" close=")" separator=",">
-        #{id}
-      </foreach>
-    </if>
+        AND employee_id IN
+        <foreach collection="employeeId" item="id" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
+      </if>
       <if test="courseId != null and courseId.size>0 ">
         AND course_id IN
         <foreach collection="courseId" item="id" open="(" close=")" separator=",">
@@ -291,7 +244,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ea_curriculum
     where id = #{id,jdbcType=BIGINT}
@@ -310,14 +263,14 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ea_curriculum (university_id, canlendar_id, time_table_id, 
-      field_id, class_id, employee_id, 
-      course_id, status, datetime, 
-      by_who, deleted)
-    values (#{universityId,jdbcType=BIGINT}, #{canlendarId,jdbcType=BIGINT}, #{timeTableId,jdbcType=BIGINT}, 
-      #{fieldId,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT}, 
-      #{courseId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{datetime,jdbcType=TIMESTAMP}, 
-      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=INTEGER})
+    insert into ea_curriculum_copy1 (university_id, canlendar_id, time_table_id,
+    field_id, class_id, employee_id,
+    course_id, status, datetime,
+    by_who, deleted)
+    values (#{universityId,jdbcType=BIGINT}, #{canlendarId,jdbcType=BIGINT}, #{timeTableId,jdbcType=BIGINT},
+    #{fieldId,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT},
+    #{courseId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{datetime,jdbcType=TIMESTAMP},
+    #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.educateAffair.bean.Curriculum">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -448,17 +401,17 @@
   <update id="updateByExample" parameterType="map">
     update ea_curriculum
     set id = #{record.id,jdbcType=BIGINT},
-      university_id = #{record.universityId,jdbcType=BIGINT},
-      canlendar_id = #{record.canlendarId,jdbcType=BIGINT},
-      time_table_id = #{record.timeTableId,jdbcType=BIGINT},
-      field_id = #{record.fieldId,jdbcType=BIGINT},
-      class_id = #{record.classId,jdbcType=BIGINT},
-      employee_id = #{record.employeeId,jdbcType=BIGINT},
-      course_id = #{record.courseId,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=INTEGER},
-      datetime = #{record.datetime,jdbcType=TIMESTAMP},
-      by_who = #{record.byWho,jdbcType=BIGINT},
-      deleted = #{record.deleted,jdbcType=INTEGER}
+    university_id = #{record.universityId,jdbcType=BIGINT},
+    canlendar_id = #{record.canlendarId,jdbcType=BIGINT},
+    time_table_id = #{record.timeTableId,jdbcType=BIGINT},
+    field_id = #{record.fieldId,jdbcType=BIGINT},
+    class_id = #{record.classId,jdbcType=BIGINT},
+    employee_id = #{record.employeeId,jdbcType=BIGINT},
+    course_id = #{record.courseId,jdbcType=BIGINT},
+    status = #{record.status,jdbcType=INTEGER},
+    datetime = #{record.datetime,jdbcType=TIMESTAMP},
+    by_who = #{record.byWho,jdbcType=BIGINT},
+    deleted = #{record.deleted,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -517,4 +470,11 @@
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="insertCurriculumForCanlendar" parameterType="edu.uni.educateAffair.VO.InputCurriculumVO" resultType="Long">
+    SELECT ca.id
+    FROM ea_canlendar as ca
+           INNER JOIN ea_semester AS sm ON sm.id=ca.semester_id
+    WHERE sm.id=#{semesterId} AND ca.`week` BETWEEN #{sweek} AND #{eweek}
+      AND ca.`day`=#{dayId}
+  </select>
 </mapper>

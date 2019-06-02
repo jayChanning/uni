@@ -238,7 +238,7 @@ public class CourseItemController {
      * @throws IOException
      */
     @ApiOperation(value = "查询此教师用户本学期所教的课程",notes = "测试中...")
-    @GetMapping("/courseItem/aaaaa")
+    @GetMapping("/courseItem/findClass")
     public void searchFor(@RequestParam Long employeeId,HttpServletResponse response ) throws IOException {
         response.setContentType("application/json;charset=utf-8");
         String json = null;
@@ -248,6 +248,7 @@ public class CourseItemController {
         curriculumWithCondition.setEmployeeId(employeeId);
         curriculumWithCondition.setCourse(true);
         curriculumWithCondition.setClass(true);
+        curriculumWithCondition.setEmployee(true);
 
         List<CurriculumVO> curriculumList = curriculumService.Transform(curriculumWithCondition);
         System.out.println(curriculumList);

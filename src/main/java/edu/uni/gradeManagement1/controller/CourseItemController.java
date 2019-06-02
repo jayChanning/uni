@@ -3,7 +3,11 @@ package edu.uni.gradeManagement1.controller;
 import com.github.pagehelper.PageInfo;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
+import edu.uni.educateAffair.VO.CurriculumVO;
+import edu.uni.educateAffair.VO.CurriculumWithCondition;
+import edu.uni.educateAffair.bean.Curriculum;
 import edu.uni.educateAffair.bean.Semester;
+import edu.uni.educateAffair.service.CurriculumService;
 import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.bean.StuGradeMain;
@@ -23,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 蔡政堂
@@ -41,7 +46,8 @@ public class CourseItemController {
     private RedisCache cache;
     @Autowired
     private StuGradeMainService gradeMainService;
-
+    @Autowired
+    private CurriculumService curriculumService;
     @Autowired
     private SemesterService semesterService;
 
@@ -97,7 +103,7 @@ public class CourseItemController {
 
     /**
      * 根据id获取课程成绩评分组成项
-     * @param id
+     * @param id 评分项id
      * @param response
      * @throws IOException
      */
@@ -224,6 +230,34 @@ public class CourseItemController {
 
         response.getWriter().write(json);
 
+    }
+
+    /**
+     * TODO 查询此教师用户本学期所教的课程
+     * @param response
+     * @throws IOException
+     */
+    @ApiOperation(value = "查询此教师用户本学期所教的课程",notes = "测试中...")
+    @GetMapping("/courseItem/aaaaa")
+    public void searchFor(@RequestParam Long employeeId,HttpServletResponse response ) throws IOException {
+        response.setContentType("application/json;charset=utf-8");
+        String json = null;
+
+        //调用校历的service层
+        CurriculumWithCondition curriculumWithCondition = new CurriculumWithCondition();
+        curriculumWithCondition.setEmployeeId(employeeId);
+        curriculumWithCondition.setCourse(true);
+        curriculumWithCondition.setClass(true);
+
+        List<CurriculumVO> curriculumList = curriculumService.Transform(curriculumWithCondition);
+        System.out.println(curriculumList);
+        if (json == null) {
+            json = Result.build(ResultType.Success).appendData("item",curriculumService.Transform(curriculumWithCondition)).convertIntoJSON();
+
+        }
+
+        System.out.println(json);
+        response.getWriter().write(json);
     }
 
 

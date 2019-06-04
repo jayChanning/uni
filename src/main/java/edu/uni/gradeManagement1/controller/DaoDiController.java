@@ -28,7 +28,7 @@ public class DaoDiController {
             @RequestParam(value = "courseId", required = false) String courseId,
             @ApiParam(value = "教学班级")
             @RequestParam(value = "courseClass", required = false) String courseClass,
-            @ApiParam(value = "页码")
+            @ApiParam(value = "页码", required = true)
             @RequestParam(value = "pageNum") int pageNum
     ) {
         System.out.println(courseName + ":" + courseId + ":" + courseClass);

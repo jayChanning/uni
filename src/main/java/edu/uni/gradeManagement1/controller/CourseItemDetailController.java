@@ -219,7 +219,7 @@ public class CourseItemDetailController {
      * <p>
      *     获取树状数组
      * </p>
-     * @param id
+     * @param id 成绩主表Id
      * @return 成绩主表ID
      * @throws Exception
      * TODO 获取树状数组

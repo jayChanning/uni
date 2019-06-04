@@ -372,3 +372,11 @@ Error starting ApplicationContext. To display the conditions report re-run your 
 2019-06-04 21:07:26.184 WARN [http-nio-8080-exec-4]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
 2019-06-04 21:07:26.216 INFO [http-nio-8080-exec-4]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
 2019-06-04 21:07:26.238 INFO [http-nio-8080-exec-4]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 22ms. Found 0 repository interfaces.
+2019-06-04 22:00:56.347 WARN [http-nio-8080-exec-8]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-04 22:00:56.415 INFO [http-nio-8080-exec-8]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-04 22:00:56.452 INFO [http-nio-8080-exec-8]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 36ms. Found 0 repository interfaces.
+2019-06-04 23:22:25.212 WARN [http-nio-8080-exec-3]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-04 23:22:25.262 INFO [http-nio-8080-exec-3]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-04 23:22:25.291 INFO [http-nio-8080-exec-3]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 28ms. Found 0 repository interfaces.
+2019-06-04 23:57:16.337 INFO [http-nio-8080-exec-5]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-04 23:57:16.368 INFO [http-nio-8080-exec-5]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 28ms. Found 0 repository interfaces.

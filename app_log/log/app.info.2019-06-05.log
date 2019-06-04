@@ -1,0 +1,2 @@
+2019-06-05 00:01:54.545 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 00:01:54.579 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 32ms. Found 0 repository interfaces.

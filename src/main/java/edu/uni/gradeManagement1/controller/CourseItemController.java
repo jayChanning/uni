@@ -160,14 +160,16 @@ public class CourseItemController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation(value = "获取所有成绩评分组成项名称",notes = "伪分页传数据，已测试！")
+    @ApiOperation(value = "获取所有成绩评分组成项名称",notes = "分页传数据，已测试！")
    // @ApiImplicitParam(name = "pageNum", value = "请求的页码",required = true,dataType = "Integer",paramType = "path")
     @GetMapping("/courseItem/listInfo/")
     public void Display2F(@ApiParam(value = "请求的页码")
-                              @RequestParam(value = "pageNum") Integer pageNum,
+                          @RequestParam(value = "pageNum" ) Integer pageNum,
+                          @RequestParam(value = "courseId", required = false) Integer courseId,
+                          @RequestParam(value = "courseName", required = false ) Integer courseName,
+                          @RequestParam(value = "courseClass", required = false ) Integer courseClass,
                           HttpServletResponse response) throws IOException {
         response.setContentType("application/json;charset=utf-8");
-
         String json;
         if (pageNum < 1)
             pageNum = 1;
@@ -237,7 +239,7 @@ public class CourseItemController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation(value = "查询此教师用户本学期所教的课程",notes = "测试中...")
+    @ApiOperation(value = "查询此教师用户本学期所教的课程",notes = "Tested!")
     @GetMapping("/courseItem/findClass")
     public void searchFor(@RequestParam Long employeeId, HttpServletResponse response ) throws IOException {
         response.setContentType("application/json;charset=utf-8");
@@ -261,8 +263,8 @@ public class CourseItemController {
         response.getWriter().write(json);
     }
 
-    @ApiOperation(value = "给前端显示的组成项信息", notes = "Testing...")
-    @GetMapping("/courseItem/findItem")
+    @ApiOperation(value = "给前端显示的组成项信息", notes = "Testing...Could not use!")
+    @GetMapping("/courseItem/findItem/")
     public void findItem(@RequestParam Long courseId, String courseName, String courseClass,
                          HttpServletResponse response) throws IOException {
         response.setContentType("application/json;charset=utf-8");

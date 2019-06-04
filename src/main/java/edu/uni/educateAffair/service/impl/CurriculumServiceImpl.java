@@ -80,7 +80,7 @@ public class CurriculumServiceImpl implements CurriculumService {
         return success;
     }
 
-    //todo 根据教师ID获取教师某一天的课程
+    //TODO 根据教师ID获取教师某一天的课程
     public List<Curriculum> selectCurriculumByDateAndTeacherId(Long teacherId , Date date){
         CurriculumExample example = new CurriculumExample();
         CurriculumExample.Criteria criteria = example.createCriteria();
@@ -132,8 +132,8 @@ public class CurriculumServiceImpl implements CurriculumService {
         return cu ;
     }
 
-    // todo 学期Id集合，教师id集合，课程id集合， 班级id集合
-    // todo 返回eA_curriculum 实体集合，校历id换取学期id
+    // TODO 学期Id集合，教师id集合，课程id集合， 班级id集合
+    // TODO 返回eA_curriculum 实体集合，校历id换取学期id
     @Override
     public List<Curriculum> selectCurriculumByCondition(List<Long> semesterId ,List<Long> employeeId ,List<Long> courseId ,List<Long> classId){
         Map<String,List<Long>> curriculumMap = new HashMap<String,List<Long>>();
@@ -151,7 +151,7 @@ public class CurriculumServiceImpl implements CurriculumService {
         System.out.println(curriculumList);
         return curriculumList;
     }
-    // todo 根据学生ID和时间段获取该时间段该学生的授课安排表
+    // TODO 根据学生ID和时间段获取该时间段该学生的授课安排表
     @Override
     public List<Long> selectCurriculumByUserAndCanlendar(Long studentId, String start, String end) {
         Map<String,Object> SearchMap = new HashMap<>();

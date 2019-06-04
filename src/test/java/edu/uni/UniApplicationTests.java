@@ -1,11 +1,13 @@
 package edu.uni;
 
+import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
 import edu.uni.utils.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,6 +21,8 @@ public class UniApplicationTests {
 
     @Resource
     GradeManagementConfig gradeManagementConfig;
+    @Autowired
+    private SemesterService semesterService;
 
     @Resource
     public CourseItemMapper courseItemMapper;
@@ -47,8 +51,10 @@ public class UniApplicationTests {
     @Test
     public void fileUploads(){
 
+        Long testId = semesterService.getThisTimeSemesterId();
+        System.out.println("This is Tester: getThisTimeSemesterId()=" + testId);
 
-        Date date  = new Date();
+        /*Date date  = new Date();
         String filename = date.getTime() + CommonUtils.generateUUID() + ".txt";
         String filePath = gradeManagementConfig.getAbsoluteGmAttachmentDir() + filename;
 
@@ -59,8 +65,8 @@ public class UniApplicationTests {
         ){
             fos.write(123456);
         }catch (Exception e) {
-            e.printStackTrace();
-        }
-
+            e.printStackTrace();*/
     }
+
 }
+

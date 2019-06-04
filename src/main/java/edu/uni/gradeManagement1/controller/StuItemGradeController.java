@@ -2,6 +2,8 @@ package edu.uni.gradeManagement1.controller;
 
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
+import edu.uni.educateAffair.mapper.SemesterMapper;
+import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.StuItemGrade;
 import edu.uni.gradeManagement1.service.StuItemGradeService;
 import edu.uni.utils.RedisCache;
@@ -10,10 +12,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 蔡政堂
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * description TODO
  */
 
-@Api(description = "成绩管理：成绩项得分模块")
+@Api(description = "成绩管理：成绩项主表得分模块")
 @Controller
 @RequestMapping("json/gradeManagement1")
 public class StuItemGradeController {
@@ -30,6 +29,8 @@ public class StuItemGradeController {
     private StuItemGradeService stuItemGradeService;
     @Autowired
     private RedisCache cache;
+    @Autowired
+    private SemesterService semesterService;
 
     /**
      * 内部类，专门用来管理每个get方法所对应缓存的名称。
@@ -63,5 +64,6 @@ public class StuItemGradeController {
         }
         return Result.build(ResultType.ParamError);
     }
+
 
 }

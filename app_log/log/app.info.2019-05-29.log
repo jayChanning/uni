@@ -1,0 +1,4 @@
+2019-05-29 00:27:05.948 INFO [Thread-25]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-05-29 00:27:06.008 INFO [Thread-25]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 53ms. Found 0 repository interfaces.
+2019-05-29 00:27:06.088 WARN [Thread-25]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-05-29 00:27:07.091 INFO [Thread-25]o.s.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown:208 -Shutting down ExecutorService 'applicationTaskExecutor'

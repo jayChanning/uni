@@ -162,7 +162,7 @@ public class CourseItemController {
      */
     @ApiOperation(value = "获取所有成绩评分组成项名称",notes = "伪分页传数据，已测试！")
    // @ApiImplicitParam(name = "pageNum", value = "请求的页码",required = true,dataType = "Integer",paramType = "path")
-    @RequestMapping("/courseItem/listInfo/")
+    @GetMapping("/courseItem/listInfo/")
     public void Display2F(@ApiParam(value = "请求的页码")
                               @RequestParam(value = "pageNum") Integer pageNum,
                           HttpServletResponse response) throws IOException {

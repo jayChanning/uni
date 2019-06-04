@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
 import edu.uni.gradeManagement1.pojo.Item;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,8 +46,11 @@ public interface CourseItemDetailService {
 
     /**
      * 查询树型数组
+     * TODO 查询树型数组
      * @return
      */
-    //TODO 查询树型数组
     List<Item> selectTree(long id);
+
+//    //TODO
+//    PageInfo<HashMap>
 }

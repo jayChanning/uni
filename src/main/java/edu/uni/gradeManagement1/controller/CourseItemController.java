@@ -162,13 +162,13 @@ public class CourseItemController {
      */
     @ApiOperation(value = "获取所有成绩评分组成项名称",notes = "伪分页传数据，已测试！")
    // @ApiImplicitParam(name = "pageNum", value = "请求的页码",required = true,dataType = "Integer",paramType = "path")
-    @GetMapping("/courseItem/listInfo/")
-    public void Display2F(@ApiParam(value = "请求的页码") @RequestParam(value = "pageNum") Integer pageNum,
+    @RequestMapping("/courseItem/listInfo/")
+    public void Display2F(@ApiParam(value = "请求的页码")
+                              @RequestParam(value = "pageNum") Integer pageNum,
                           HttpServletResponse response) throws IOException {
         response.setContentType("application/json;charset=utf-8");
-//        String cacheName = CacheNameHelper.List_CacheNamePrefix+pageNum;
-       // String json = cache.get(cacheName);
-        String json = "";
+
+        String json;
         if (pageNum < 1)
             pageNum = 1;
         if (pageNum > 2)
@@ -239,7 +239,7 @@ public class CourseItemController {
      */
     @ApiOperation(value = "查询此教师用户本学期所教的课程",notes = "测试中...")
     @GetMapping("/courseItem/findClass")
-    public void searchFor(@RequestParam Long employeeId,HttpServletResponse response ) throws IOException {
+    public void searchFor(@RequestParam Long employeeId, HttpServletResponse response ) throws IOException {
         response.setContentType("application/json;charset=utf-8");
         String json = null;
 
@@ -261,5 +261,25 @@ public class CourseItemController {
         response.getWriter().write(json);
     }
 
+    @ApiOperation(value = "给前端显示的组成项信息", notes = "Testing...")
+    @GetMapping("/courseItem/findItem")
+    public void findItem(@RequestParam Long courseId, String courseName, String courseClass,
+                         HttpServletResponse response) throws IOException {
+        response.setContentType("application/json;charset=utf-8");
+        String json = null;
+        CurriculumWithCondition curriculum = new CurriculumWithCondition();
+        curriculum.setClass(true);
+        curriculum.setCourse(true);
+
+        List<CurriculumVO> curriculumVOList = curriculumService.Transform(curriculum);
+        //checkout curriculumVOList
+        System.out.println(curriculumVOList);
+
+        if (json == null) {
+            json = Result.build(ResultType.Success).appendData("data", curriculumVOList).convertIntoJSON();
+        }
+        System.out.println(json);
+        response.getWriter().write(json);
+    }
 
 }

@@ -16,4 +16,7 @@ public interface StuItemGradeService {
      * @return 是否成功（true or false）
      */
     boolean insert(StuItemGrade stuItemGrade);
+
+
 }
+

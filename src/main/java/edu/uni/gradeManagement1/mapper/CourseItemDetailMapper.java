@@ -49,22 +49,24 @@ public interface CourseItemDetailMapper {
     //    选择特定的学期 根据学期名称参数为 <semester>
     @Select("SELECT se.`name` AS semester, course.id AS courseId, course.`name` AS courseName,\tclass.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId, `user`.id AS '无用字段，请删，如果你需要添加自己的需要的字段参见上面的写法，有些字段可能在其他表里，参见下面的写法，使用inner join,参数为《user.id》《se.`name`》,mapper参见之前树状写法'\n" +
             " FROM\n" +
-            " ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = 1941 )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) WHERE se.`name` = '2018-2019第二学期'")
-    List<HashMap> selectSemester(@Param(value = "semester") String semester);
+            " ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id} )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) WHERE se.`name` = '2018-2019第二学期'")
+    List<HashMap> selectSemester(@Param(value = "id") Long id, @Param(value = "semester") String semester);
 
     //    选择特定的班级 根据班级名称 <courseClass>
-    @Select("SELECT se.`name` AS semester, course.id AS courseId, course.`name` AS courseName,\tclass.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId, `user`.id AS '无用字段，请删，如果你需要添加自己的需要的字段参见上面的写法，有些字段可能在其他表里，参见下面的写法，使用inner join,参数为《user.id》《class.`name`》,mapper参见之前树状写法'\n" +
+    @Select("SELECT se.`name` AS semester, course.id AS courseId, course.`name` AS courseName,\tclass.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, " +
+            "course.credit AS credit, class.id AS classId, `user`.id AS '无用字段，请删，如果你需要添加自己的需要的字段参见上面的写法，有些字段可能在其他表里，参见下面的写法，使用inner join,参数为《user.id》《class.`name`》,mapper参见之前树状写法'\n" +
             " FROM\n" +
-            " ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = 1941 )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) WHERE class.`name` = '16网络'")
-    List<HashMap> selectClass(@Param(value = "courseClass") String courseClass);
+            " ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id} ) " +
+            "INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) WHERE class.`name` = '16网络'")
+    List<HashMap> selectClass(@Param(value = "id") Long id, @Param(value = "courseClass") String courseClass);
 
     //    选择特定学期的特定班级 根据学期名称和班级名称
     @Select("SELECT se.`name` AS semester, course.id AS courseId, course.`name` AS courseName,\tclass.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId, `user`.id AS '无用字段，请删，如果你需要添加自己的需要的字段参见上面的写法，有些字段可能在其他表里，参见下面的写法，使用inner join,参数为《user.id》《se.`name`》《class.`name`》,mapper参见之前树状写法'\n" +
             " FROM\n" +
             " ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) " +
-            "INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = 1941 )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) " +
+            "INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = {id} )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) " +
             "INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) WHERE class.`name` = '16网络' AND se.`name` = '2018-2019第二学期'")
-    List<HashMap> selectSemesterANDClass(@Param(value = "semester, courseClass") String semester, String courseClass);
+    List<HashMap> selectSemesterANDClass(@Param(value = "id") Long id, @Param(value = "semester") String semester, @Param(value = "courseClass") String courseClass);  //user.id 暂使用1941
 
     //    子页面
     //    选择某个班级的学生记录

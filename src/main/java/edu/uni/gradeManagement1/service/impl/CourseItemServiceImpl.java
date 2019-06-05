@@ -1,13 +1,17 @@
 package edu.uni.gradeManagement1.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.bean.CourseItemExample;
+import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
 import edu.uni.gradeManagement1.pojo.Item;
 import edu.uni.gradeManagement1.service.CourseItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,6 +25,8 @@ import java.util.List;
 public class CourseItemServiceImpl implements CourseItemService {
     @Autowired
     private CourseItemMapper courseItemMapper;  //此处报错可忽略，编译后会自动生成
+    @Autowired
+    private GradeManagementConfig gmConfig;
 
     /**
      * 实现课程成绩评分组成项表的录入
@@ -57,6 +63,18 @@ public class CourseItemServiceImpl implements CourseItemService {
         criteria.andDeletedEqualTo((byte)0);
         List<CourseItem> allCourseItem = courseItemMapper.selectByExample(example);
         return allCourseItem;
+    }
+
+    /**
+     * 暂不可用
+     * @param id
+     * @param pageNum
+     * @return
+     */
+    @Override
+    public PageInfo<HashMap> findAll(long id, int pageNum) {
+        PageHelper.startPage(pageNum, gmConfig.getPageSize());
+        return null;
     }
 
 }

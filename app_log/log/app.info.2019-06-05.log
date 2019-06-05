@@ -181,3 +181,150 @@
 2019-06-05 16:21:09.576 WARN [rebel-change-detector-thread]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
 2019-06-05 16:21:09.810 INFO [rebel-change-detector-thread]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
 2019-06-05 16:21:10.060 INFO [rebel-change-detector-thread]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 249ms. Found 0 repository interfaces.
+2019-06-05 16:53:27.675 INFO [main]edu.uni.UniApplicationTests.logStarting:50 -Starting UniApplicationTests on Laptop-Jay with PID 13348 (started by Jay in D:\JayChoi\codes\Idea\uni)
+2019-06-05 16:53:27.681 INFO [main]edu.uni.UniApplicationTests.logStartupProfileInfo:675 -No active profile set, falling back to default profiles: default
+2019-06-05 16:53:32.210 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.multipleStoresDetected:244 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-05 16:53:32.242 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 16:53:32.735 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 470ms. Found 0 repository interfaces.
+2019-06-05 16:53:33.483 INFO [main]o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:330 -Bean 'druidConfiguration' of type [edu.uni.config.DruidConfiguration$$EnhancerBySpringCGLIB$$e8ea1b04] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-05 16:53:33.655 INFO [main]o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:330 -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$df072b5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-05 16:53:37.895 INFO [main]o.s.scheduling.concurrent.ThreadPoolTaskExecutor.initialize:171 -Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-05 16:53:38.737 INFO [main]s.d.spring.web.plugins.DocumentationPluginsBootstrapper.start:120 -Context refreshed
+2019-06-05 16:53:38.761 INFO [main]s.d.spring.web.plugins.DocumentationPluginsBootstrapper.start:123 -Found 1 custom documentation plugin(s)
+2019-06-05 16:53:38.779 INFO [main]s.d.spring.web.scanners.ApiListingReferenceScanner.scan:41 -Scanning for api listing references
+2019-06-05 16:53:39.160 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_1
+2019-06-05 16:53:39.177 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_1
+2019-06-05 16:53:39.193 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_1
+2019-06-05 16:53:39.229 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_2
+2019-06-05 16:53:39.240 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_3
+2019-06-05 16:53:39.249 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_4
+2019-06-05 16:53:39.285 INFO [main]edu.uni.UniApplicationTests.logStarted:59 -Started UniApplicationTests in 12.894 seconds (JVM running for 15.622)
+2019-06-05 16:53:40.308 INFO [Thread-1]o.s.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown:208 -Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-05 19:26:30.806 INFO [main]edu.uni.UniApplicationTests.logStarting:50 -Starting UniApplicationTests on Laptop-Jay with PID 8940 (started by Jay in D:\JayChoi\codes\Idea\uni)
+2019-06-05 19:26:30.831 INFO [main]edu.uni.UniApplicationTests.logStartupProfileInfo:675 -No active profile set, falling back to default profiles: default
+2019-06-05 19:26:37.893 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.multipleStoresDetected:244 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-05 19:26:37.902 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 19:26:38.386 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 445ms. Found 0 repository interfaces.
+2019-06-05 19:26:39.512 INFO [main]o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:330 -Bean 'druidConfiguration' of type [edu.uni.config.DruidConfiguration$$EnhancerBySpringCGLIB$$c5a674e0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-05 19:26:39.788 INFO [main]o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:330 -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$eaaccc91] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-05 19:26:46.252 INFO [main]o.s.scheduling.concurrent.ThreadPoolTaskExecutor.initialize:171 -Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-05 19:26:47.350 INFO [main]s.d.spring.web.plugins.DocumentationPluginsBootstrapper.start:120 -Context refreshed
+2019-06-05 19:26:47.414 INFO [main]s.d.spring.web.plugins.DocumentationPluginsBootstrapper.start:123 -Found 1 custom documentation plugin(s)
+2019-06-05 19:26:47.439 INFO [main]s.d.spring.web.scanners.ApiListingReferenceScanner.scan:41 -Scanning for api listing references
+2019-06-05 19:26:47.858 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_1
+2019-06-05 19:26:47.874 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_1
+2019-06-05 19:26:47.903 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_1
+2019-06-05 19:26:47.939 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_2
+2019-06-05 19:26:47.948 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_3
+2019-06-05 19:26:47.958 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_4
+2019-06-05 19:26:48.028 INFO [main]edu.uni.UniApplicationTests.logStarted:59 -Started UniApplicationTests in 18.505 seconds (JVM running for 51.617)
+2019-06-05 19:26:49.738 INFO [Thread-22]o.s.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown:208 -Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-05 19:27:11.857 INFO [main]edu.uni.UniApplication.logStarting:50 -Starting UniApplication on Laptop-Jay with PID 5632 (D:\JayChoi\codes\Idea\uni\target\classes started by Jay in D:\JayChoi\codes\Idea\uni)
+2019-06-05 19:27:11.861 INFO [main]edu.uni.UniApplication.logStartupProfileInfo:675 -No active profile set, falling back to default profiles: default
+2019-06-05 19:27:13.747 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.multipleStoresDetected:244 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-05 19:27:13.750 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 19:27:14.052 INFO [main]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 284ms. Found 0 repository interfaces.
+2019-06-05 19:27:14.559 INFO [main]o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:330 -Bean 'druidConfiguration' of type [edu.uni.config.DruidConfiguration$$EnhancerBySpringCGLIB$$980c664] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-05 19:27:14.683 INFO [main]o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:330 -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2e871e15] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-05 19:27:15.246 INFO [main]o.s.boot.web.embedded.tomcat.TomcatWebServer.initialize:90 -Tomcat initialized with port(s): 8080 (http)
+2019-06-05 19:27:15.271 INFO [main]org.apache.coyote.http11.Http11NioProtocol.log:173 -Initializing ProtocolHandler ["http-nio-8080"]
+2019-06-05 19:27:15.284 INFO [main]org.apache.catalina.core.StandardService.log:173 -Starting service [Tomcat]
+2019-06-05 19:27:15.285 INFO [main]org.apache.catalina.core.StandardEngine.log:173 -Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-06-05 19:27:15.294 INFO [main]org.apache.catalina.core.AprLifecycleListener.log:173 -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\app\OR\product\11.2.0\dbhome_1\bin;C:\Program Files\Java\jdk-11.0.2\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files (x86)\Windows Kits\10\Microsoft Application Virtualization\Sequencer\;D:\Program Files\apache-maven-3.6.0\bin;C:\Users\Jay\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Bandizip\;;.]
+2019-06-05 19:27:15.464 INFO [main]o.a.catalina.core.ContainerBase.[Tomcat].[localhost].[/].log:173 -Initializing Spring embedded WebApplicationContext
+2019-06-05 19:27:15.465 INFO [main]org.springframework.web.context.ContextLoader.prepareWebApplicationContext:296 -Root WebApplicationContext: initialization completed in 3519 ms
+2019-06-05 19:27:17.817 INFO [main]o.s.scheduling.concurrent.ThreadPoolTaskExecutor.initialize:171 -Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-05 19:27:18.302 INFO [main]s.d.spring.web.plugins.DocumentationPluginsBootstrapper.start:120 -Context refreshed
+2019-06-05 19:27:18.319 INFO [main]s.d.spring.web.plugins.DocumentationPluginsBootstrapper.start:123 -Found 1 custom documentation plugin(s)
+2019-06-05 19:27:18.335 INFO [main]s.d.spring.web.scanners.ApiListingReferenceScanner.scan:41 -Scanning for api listing references
+2019-06-05 19:27:18.575 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_1
+2019-06-05 19:27:18.587 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_1
+2019-06-05 19:27:18.603 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_1
+2019-06-05 19:27:18.629 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_2
+2019-06-05 19:27:18.636 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_3
+2019-06-05 19:27:18.643 INFO [main]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_4
+2019-06-05 19:27:18.667 INFO [main]org.apache.coyote.http11.Http11NioProtocol.log:173 -Starting ProtocolHandler ["http-nio-8080"]
+2019-06-05 19:27:18.713 INFO [main]o.s.boot.web.embedded.tomcat.TomcatWebServer.start:204 -Tomcat started on port(s): 8080 (http) with context path ''
+2019-06-05 19:27:18.717 INFO [main]edu.uni.UniApplication.logStarted:59 -Started UniApplication in 7.653 seconds (JVM running for 11.994)
+2019-06-05 19:27:19.077 INFO [http-nio-8080-exec-1]o.a.catalina.core.ContainerBase.[Tomcat].[localhost].[/].log:173 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-06-05 19:27:19.079 INFO [http-nio-8080-exec-1]org.springframework.web.servlet.DispatcherServlet.initServletBean:524 -Initializing Servlet 'dispatcherServlet'
+2019-06-05 19:27:19.092 INFO [http-nio-8080-exec-1]org.springframework.web.servlet.DispatcherServlet.initServletBean:546 -Completed initialization in 13 ms
+2019-06-05 20:04:48.083 WARN [http-nio-8080-exec-3]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 20:04:48.088 INFO [http-nio-8080-exec-3]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 20:04:48.258 INFO [http-nio-8080-exec-3]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 169ms. Found 0 repository interfaces.
+2019-06-05 20:04:50.493 INFO [http-nio-8080-exec-8]s.d.spring.web.scanners.ApiListingReferenceScanner.scan:41 -Scanning for api listing references
+2019-06-05 20:04:50.543 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: Display2FUsingGET_1
+2019-06-05 20:04:50.559 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_5
+2019-06-05 20:04:50.574 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: findItemUsingGET_1
+2019-06-05 20:04:50.588 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_2
+2019-06-05 20:04:50.605 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: searchForUsingGET_1
+2019-06-05 20:04:50.618 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: selectAllUsingGET_1
+2019-06-05 20:04:50.632 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: TreeList2FrontUsingGET_1
+2019-06-05 20:04:50.642 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_6
+2019-06-05 20:04:50.653 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_2
+2019-06-05 20:04:50.666 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_3
+2019-06-05 20:04:50.674 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: listUsingGET_1
+2019-06-05 20:04:50.688 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: listByCourseItemIdUsingGET_1
+2019-06-05 20:04:50.699 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_3
+2019-06-05 20:04:50.708 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: daodiUsingGET_1
+2019-06-05 20:04:50.719 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: weishenmeUsingGET_1
+2019-06-05 20:04:50.724 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: downloadUsingGET_1
+2019-06-05 20:04:50.734 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_7
+2019-06-05 20:04:50.739 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_8
+2019-06-05 20:04:50.746 INFO [http-nio-8080-exec-8]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_9
+2019-06-05 20:05:48.448 INFO [http-nio-8080-exec-7]com.alibaba.druid.pool.DruidDataSource.init:922 -{dataSource-1} inited
+2019-06-05 20:06:49.754 WARN [http-nio-8080-exec-6]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 20:06:49.756 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 20:06:49.902 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 145ms. Found 0 repository interfaces.
+2019-06-05 20:13:50.035 WARN [http-nio-8080-exec-1]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 20:13:50.038 INFO [http-nio-8080-exec-1]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 20:13:50.194 INFO [http-nio-8080-exec-1]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 156ms. Found 0 repository interfaces.
+2019-06-05 20:13:51.027 INFO [http-nio-8080-exec-7]s.d.spring.web.scanners.ApiListingReferenceScanner.scan:41 -Scanning for api listing references
+2019-06-05 20:13:51.042 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: Display2FUsingGET_2
+2019-06-05 20:13:51.050 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_10
+2019-06-05 20:13:51.058 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: findItemUsingGET_2
+2019-06-05 20:13:51.066 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_4
+2019-06-05 20:13:51.075 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: searchForUsingGET_2
+2019-06-05 20:13:51.081 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: selectAllUsingGET_2
+2019-06-05 20:13:51.088 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: TreeList2FrontUsingGET_2
+2019-06-05 20:13:51.095 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_11
+2019-06-05 20:13:51.103 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_4
+2019-06-05 20:13:51.111 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_5
+2019-06-05 20:13:51.116 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: listUsingGET_2
+2019-06-05 20:13:51.123 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: listByCourseItemIdUsingGET_2
+2019-06-05 20:13:51.129 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_5
+2019-06-05 20:13:51.135 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: daodiUsingGET_2
+2019-06-05 20:13:51.140 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: weishenmeUsingGET_2
+2019-06-05 20:13:51.144 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: downloadUsingGET_2
+2019-06-05 20:13:51.150 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_12
+2019-06-05 20:13:51.154 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_13
+2019-06-05 20:13:51.160 INFO [http-nio-8080-exec-7]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_14
+2019-06-05 20:30:42.844 WARN [http-nio-8080-exec-9]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 20:30:42.847 INFO [http-nio-8080-exec-9]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 20:30:42.988 INFO [http-nio-8080-exec-9]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 141ms. Found 0 repository interfaces.
+2019-06-05 20:30:43.844 INFO [http-nio-8080-exec-2]s.d.spring.web.scanners.ApiListingReferenceScanner.scan:41 -Scanning for api listing references
+2019-06-05 20:30:43.856 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: Display2FUsingGET_3
+2019-06-05 20:30:43.864 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_15
+2019-06-05 20:30:43.870 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: findItemUsingGET_3
+2019-06-05 20:30:43.878 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_6
+2019-06-05 20:30:43.885 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: searchForUsingGET_3
+2019-06-05 20:30:43.892 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: selectAllUsingGET_3
+2019-06-05 20:30:43.899 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: TreeList2FrontUsingGET_3
+2019-06-05 20:30:43.906 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_16
+2019-06-05 20:30:43.911 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_6
+2019-06-05 20:30:43.917 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: executeUploadUsingGET_7
+2019-06-05 20:30:43.923 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: listUsingGET_3
+2019-06-05 20:30:43.929 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: listByCourseItemIdUsingGET_3
+2019-06-05 20:30:43.935 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: receiveUsingGET_7
+2019-06-05 20:30:43.942 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: daodiUsingGET_3
+2019-06-05 20:30:43.947 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: weishenmeUsingGET_3
+2019-06-05 20:30:43.952 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: downloadUsingGET_3
+2019-06-05 20:30:43.960 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_17
+2019-06-05 20:30:43.966 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_18
+2019-06-05 20:30:43.971 INFO [http-nio-8080-exec-2]s.d.s.w.readers.operation.CachingOperationNameGenerator.startingWith:40 -Generating unique operation named: createUsingPOST_19
+2019-06-05 21:49:32.174 WARN [http-nio-8080-exec-8]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 21:49:32.177 INFO [http-nio-8080-exec-8]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 21:49:32.333 INFO [http-nio-8080-exec-8]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 155ms. Found 0 repository interfaces.
+2019-06-05 21:58:12.374 WARN [http-nio-8080-exec-6]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 21:58:12.377 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 21:58:12.549 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 172ms. Found 0 repository interfaces.

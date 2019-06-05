@@ -1,5 +1,6 @@
 package edu.uni.gradeManagement1.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
@@ -13,6 +14,7 @@ import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.bean.StuGradeMain;
 import edu.uni.gradeManagement1.pojo.CourseItemInfo;
 import edu.uni.gradeManagement1.service.CourseItemService;
+import edu.uni.gradeManagement1.service.DaoDiService;
 import edu.uni.gradeManagement1.service.StuGradeMainService;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
@@ -49,7 +51,7 @@ public class CourseItemController {
     @Autowired
     private CurriculumService curriculumService;
     @Autowired
-    private SemesterService semesterService;
+    private DaoDiService daoDiService;
 
     /**
      * 内部类，专门用来管理每个方法所对应缓存的名称。
@@ -121,7 +123,7 @@ public class CourseItemController {
 
         Long semesterId = stuGradeMain.getSemesterId();  //学期id
         System.out.println("courseItemController-test:"+semesterId);
-        semesterService.selectAll();
+//        semesterService.selectAll();
 
         String cacheName = CacheNameHelper.Receive_CacheNamePrefix + id;
         String json = cache.get(cacheName);
@@ -158,28 +160,61 @@ public class CourseItemController {
     /**
      * 获取所有评分组成项信息--test2---listInfo
      * @param response
-     * @throws IOException
      */
     @ApiOperation(value = "获取所有成绩评分组成项名称",notes = "分页传数据，已测试！")
    // @ApiImplicitParam(name = "pageNum", value = "请求的页码",required = true,dataType = "Integer",paramType = "path")
-    @GetMapping("/courseItem/listInfo/")
-    public void Display2F(@ApiParam(value = "请求的页码", required = true) @RequestParam(value = "pageNum") Integer pageNum,
-                          @ApiParam(value = "课程编号") @RequestParam(value = "courseId", required = false) Integer courseId,
+    @GetMapping("/courseItem/listInfo")
+    @ResponseBody
+    public Result Display2F(@ApiParam(value = "请求的页码", required = true) @RequestParam(value = "pageNum") int pageNum,
+                          @ApiParam(value = "课程编号") @RequestParam(value = "courseId", required = false) String courseId,
                           @ApiParam(value = "课程名称") @RequestParam(value = "courseName", required = false ) String courseName,
                           @ApiParam(value = "教学班级-如16软件1班") @RequestParam(value = "courseClass", required = false ) String courseClass,
-                          HttpServletResponse response) throws IOException {
+                          HttpServletResponse response) {
         response.setContentType("application/json;charset=utf-8");
-        String json = "";
-        System.out.println("courseItemController Tester:\n"+"courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
 
-        if (courseId == null) {
-            if (courseClass == null) {
-                if (courseName == null) {
-                    Result.build(ResultType.Success).convertIntoJSON();
+        System.out.println("pageNum="+pageNum);
+        System.out.println("courseItemController Tester:\n"+"courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
+        if (courseName == null) {
+            if (courseId == null) {
+                if (courseClass == null) {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFuAll(1941L, pageNum));
+                } else {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu3(1941L, courseClass, pageNum));
+                }
+            } else {
+                if (courseClass == null) {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu1(1941L, courseId, pageNum));
+                } else {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu5(1941L, courseId, courseClass, pageNum));
+                }
+            }
+        } else {
+            if (courseId == null) {
+                if (courseClass == null) {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu2(1941L, courseName, pageNum));
+                } else {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu4(1941L, courseName, courseClass, pageNum));
+                }
+            } else {
+                if (courseClass == null) {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu6(1941L, courseId, courseName, pageNum));
+                } else {
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu7(1941L, courseId, courseName, courseClass, pageNum));
                 }
             }
         }
 
+    }
+
+    /**
+     * 将分页单独出来，仅测试用，现在暂且不需要
+     * @param pageNum
+     * @param response
+     * date 2019/6/5
+     * @throws IOException
+     */
+    private void cutPage(Integer pageNum, HttpServletResponse response) throws IOException {
+        String json;
         if (pageNum < 1)
             pageNum = 1;
         if (pageNum > 2)
@@ -238,8 +273,8 @@ public class CourseItemController {
             json = Result.build(ResultType.Success).appendData("data", pageInfo).convertIntoJSON();
         }
         response.getWriter().write(json);
-
     }
+
 
     /**
      * TODO 查询此教师用户本学期所教的课程

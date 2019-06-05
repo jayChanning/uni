@@ -1,7 +1,9 @@
 package edu.uni.gradeManagement1.service;
 
+import com.github.pagehelper.PageInfo;
 import edu.uni.gradeManagement1.bean.CourseItem;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,5 +32,12 @@ public interface CourseItemService {
      * @return courseItem的List对象
      */
     List<CourseItem> selectAll();
+
+    /**
+     * TODO 只有pageNum，默认检索全部该教师教的课程
+     * @param pageNum
+     * @return
+     */
+    PageInfo<HashMap> findAll(long id, int pageNum);
 
 }

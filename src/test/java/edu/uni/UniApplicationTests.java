@@ -50,6 +50,11 @@ public class UniApplicationTests {
 
     }
 
+    /**
+     * test date: 2019/6/5
+     * description TODO 这里测试excel解析类，仍在测试，咱不可用
+     * @throws Exception
+     */
     @Test
     public void fff() throws Exception{
         //这个路径按实际需求  "D:\\program\\IdeaProjects\\uni\\src\\main\\resources\\excelTest\\exceldome.xlsx"

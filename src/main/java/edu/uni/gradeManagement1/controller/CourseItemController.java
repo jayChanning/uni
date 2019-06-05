@@ -170,10 +170,21 @@ public class CourseItemController {
                           @ApiParam(value = "课程名称") @RequestParam(value = "courseName", required = false ) String courseName,
                           @ApiParam(value = "教学班级-如16软件1班") @RequestParam(value = "courseClass", required = false ) String courseClass,
                           HttpServletResponse response) {
-        response.setContentType("application/json;charset=utf-8");
+       /* long usr = 0;
+        if (usr == 0) {
 
+        }*/
+        response.setContentType("application/json;charset=utf-8");
         System.out.println("pageNum="+pageNum);
         System.out.println("courseItemController Tester:\n"+"courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
+        //初始化空字符串为null. 如果查询条件为"".
+        if (courseClass == "")
+           courseClass = null;
+       if (courseId == "")
+           courseId = null;
+       if (courseName == "")
+           courseName = null;
+
         if (courseName == null) {
             if (courseId == null) {
                 if (courseClass == null) {
@@ -205,6 +216,7 @@ public class CourseItemController {
         }
 
     }
+
 
     /**
      * 将分页单独出来，仅测试用，现在暂且不需要

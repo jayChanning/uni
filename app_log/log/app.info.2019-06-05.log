@@ -328,3 +328,15 @@
 2019-06-05 21:58:12.374 WARN [http-nio-8080-exec-6]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
 2019-06-05 21:58:12.377 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
 2019-06-05 21:58:12.549 INFO [http-nio-8080-exec-6]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 172ms. Found 0 repository interfaces.
+2019-06-05 23:43:10.168 WARN [http-nio-8080-exec-10]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 23:43:10.174 INFO [http-nio-8080-exec-10]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 23:43:10.338 INFO [http-nio-8080-exec-10]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 162ms. Found 0 repository interfaces.
+2019-06-05 23:51:06.179 WARN [http-nio-8080-exec-7]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 23:51:06.181 INFO [http-nio-8080-exec-7]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 23:51:06.406 INFO [http-nio-8080-exec-7]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 224ms. Found 0 repository interfaces.
+2019-06-05 23:57:17.116 WARN [http-nio-8080-exec-1]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 23:57:17.122 INFO [http-nio-8080-exec-1]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 23:57:17.334 INFO [http-nio-8080-exec-1]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 212ms. Found 0 repository interfaces.
+2019-06-05 23:58:20.974 WARN [http-nio-8080-exec-3]org.mybatis.spring.mapper.ClassPathMapperScanner.warn:44 -No MyBatis mapper was found in '[edu.uni.*.mapper]' package. Please check your configuration.
+2019-06-05 23:58:20.977 INFO [http-nio-8080-exec-3]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:126 -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-05 23:58:21.142 INFO [http-nio-8080-exec-3]o.s.d.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:182 -Finished Spring Data repository scanning in 164ms. Found 0 repository interfaces.

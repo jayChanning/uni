@@ -32,6 +32,14 @@ public class DaoDiController {
             @RequestParam(value = "pageNum") int pageNum
     ) {
         System.out.println(courseName + ":" + courseId + ":" + courseClass);
+        //初始化空字符串为null
+        if (courseClass == "")
+            courseClass = null;
+        if (courseId == "")
+            courseId = null;
+        if (courseName == "")
+            courseName = null;
+
         if (courseName == null) {
             if (courseId == null) {
                 if (courseClass == null) {

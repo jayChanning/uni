@@ -170,67 +170,73 @@ public class CourseItemController {
                           HttpServletResponse response) throws IOException {
         response.setContentType("application/json;charset=utf-8");
         String json = "";
-        if (courseId == null && courseName == null && courseClass == null) {
-            if (pageNum < 1)
-                pageNum = 1;
-            if (pageNum > 2)
-                pageNum = 2;
-            if (pageNum == 1) {
-                //TEST DATA
-                ArrayList<CourseItemInfo> arrayList = new ArrayList<>();
-                arrayList.add(new CourseItemInfo("2017-2018-1", "3", "软件体系结构","16软件1班"));
-                arrayList.add(new CourseItemInfo("2017-2018-1", "2", "JAVA程序设计","16软件1班"));
-                arrayList.add(new CourseItemInfo("2017-2018-2", "4", "软件项目管理","16软件2班"));
-                arrayList.add(new CourseItemInfo("2018-2019-1", "5", "人工智能","16软件1班"));
-                arrayList.add(new CourseItemInfo("2018-2019-2", "6", "ASP.NET","16软件1班"));
+        System.out.println("courseItemController Tester:\n"+"courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
 
-                System.out.println("path:/courseItem/listInfo/page_1--"+arrayList);
-
-                PageInfo pageInfo = new PageInfo<>(arrayList);
-
-                pageInfo.setTotal(7);
-                pageInfo.setPageNum(1);
-                pageInfo.setPageSize(5);
-                pageInfo.setSize(5);
-                pageInfo.setPages(2);
-                pageInfo.setPrePage(0);
-                pageInfo.setNextPage(2);
-                pageInfo.setHasNextPage(true);
-                pageInfo.setHasPreviousPage(false);
-                pageInfo.setIsFirstPage(true);
-                pageInfo.setIsLastPage(false);
-                pageInfo.setLastPage(2);
-                pageInfo.setFirstPage(1);
-
-                json = Result.build(ResultType.Success).appendData("data",pageInfo).convertIntoJSON();
-
-            } else {
-                ArrayList<CourseItemInfo> arrayList = new ArrayList<>();
-                arrayList.add(new CourseItemInfo("2018-2019-2", "7", "C语言程序设计","16软件1班"));
-                arrayList.add(new CourseItemInfo("2018-2019-2", "8", "软件测试技术","16软件1班"));
-
-                System.out.println(new Date().getTime()+"path:/courseItem/listInfo/page_2--"+arrayList);
-
-                PageInfo pageInfo = new PageInfo<>(arrayList);
-
-                pageInfo.setTotal(7);
-                pageInfo.setPageNum(2);
-                pageInfo.setPageSize(5);
-                pageInfo.setSize(2);
-                pageInfo.setPages(2);
-                pageInfo.setPrePage(1);
-                pageInfo.setNextPage(0);
-                pageInfo.setHasNextPage(false);
-                pageInfo.setHasPreviousPage(true);
-                pageInfo.setIsFirstPage(false);
-                pageInfo.setIsLastPage(true);
-                pageInfo.setLastPage(2);
-                pageInfo.setFirstPage(1);
-
-                json = Result.build(ResultType.Success).appendData("data", pageInfo).convertIntoJSON();
+        if (courseId == null) {
+            if (courseClass == null) {
+                if (courseName == null) {
+                    Result.build(ResultType.Success).convertIntoJSON();
+                }
             }
         }
 
+        if (pageNum < 1)
+            pageNum = 1;
+        if (pageNum > 2)
+            pageNum = 2;
+        if (pageNum == 1) {
+            //TEST DATA
+            ArrayList<CourseItemInfo> arrayList = new ArrayList<>();
+            arrayList.add(new CourseItemInfo("2017-2018-1", "3", "软件体系结构","16软件1班"));
+            arrayList.add(new CourseItemInfo("2017-2018-1", "2", "JAVA程序设计","16软件1班"));
+            arrayList.add(new CourseItemInfo("2017-2018-2", "4", "软件项目管理","16软件2班"));
+            arrayList.add(new CourseItemInfo("2018-2019-1", "5", "人工智能","16软件1班"));
+            arrayList.add(new CourseItemInfo("2018-2019-2", "6", "ASP.NET","16软件1班"));
+
+            System.out.println("path:/courseItem/listInfo/page_1--"+arrayList);
+
+            PageInfo pageInfo = new PageInfo<>(arrayList);
+
+            pageInfo.setTotal(7);
+            pageInfo.setPageNum(1);
+            pageInfo.setPageSize(5);
+            pageInfo.setSize(5);
+            pageInfo.setPages(2);
+            pageInfo.setPrePage(0);
+            pageInfo.setNextPage(2);
+            pageInfo.setHasNextPage(true);
+            pageInfo.setHasPreviousPage(false);
+            pageInfo.setIsFirstPage(true);
+            pageInfo.setIsLastPage(false);
+            pageInfo.setLastPage(2);
+            pageInfo.setFirstPage(1);
+
+            json = Result.build(ResultType.Success).appendData("data",pageInfo).convertIntoJSON();
+
+        } else {
+            ArrayList<CourseItemInfo> arrayList = new ArrayList<>();
+            arrayList.add(new CourseItemInfo("2018-2019-2", "7", "C语言程序设计","16软件1班"));
+            arrayList.add(new CourseItemInfo("2018-2019-2", "8", "软件测试技术","16软件1班"));
+
+            System.out.println(new Date().getTime()+"path:/courseItem/listInfo/page_2--"+arrayList);
+            PageInfo pageInfo = new PageInfo<>(arrayList);
+
+            pageInfo.setTotal(7);
+            pageInfo.setPageNum(2);
+            pageInfo.setPageSize(5);
+            pageInfo.setSize(2);
+            pageInfo.setPages(2);
+            pageInfo.setPrePage(1);
+            pageInfo.setNextPage(0);
+            pageInfo.setHasNextPage(false);
+            pageInfo.setHasPreviousPage(true);
+            pageInfo.setIsFirstPage(false);
+            pageInfo.setIsLastPage(true);
+            pageInfo.setLastPage(2);
+            pageInfo.setFirstPage(1);
+
+            json = Result.build(ResultType.Success).appendData("data", pageInfo).convertIntoJSON();
+        }
         response.getWriter().write(json);
 
     }

@@ -4,7 +4,8 @@ import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
-import edu.uni.utils.CommonUtils;
+import edu.uni.gradeManagement1.pojo.ExcelDeal;
+import edu.uni.gradeManagement1.utils.ExcelUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.io.*;
-import java.util.Date;
+import java.io.IOException;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UniApplicationTests {
 
-    @Resource
+    @Autowired
     GradeManagementConfig gradeManagementConfig;
     @Autowired
     private SemesterService semesterService;
@@ -48,6 +49,22 @@ public class UniApplicationTests {
 
 
     }
+
+    @Test
+    public void fff() throws Exception{
+        //这个路径按实际需求  "D:\\program\\IdeaProjects\\uni\\src\\main\\resources\\excelTest\\exceldome.xlsx"
+        String filePath = "D://JayChoi//codes//uni//src//main//resources//excelTest//exceldome.xlsx";
+
+        //***以下代码可以复制黏贴，把filepath，ExcelDemoClass改为自定义的*******************************************************
+        List<Object> list = ExcelUtil.excelReadService(filePath, ExcelDeal.class);
+        for (int i = 0; i < list.size(); i++){
+            ExcelDeal excelDeal = (ExcelDeal)list.get(i);
+            //---- do you want to do
+            System.out.println(excelDeal.toString());
+        }
+        //*********结束***************************************************
+    }
+
     @Test
     public void fileUploads(){
 

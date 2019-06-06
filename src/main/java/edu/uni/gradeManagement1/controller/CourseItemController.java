@@ -176,7 +176,7 @@ public class CourseItemController {
         }*/
         response.setContentType("application/json;charset=utf-8");
         System.out.println("pageNum="+pageNum);
-        System.out.println("courseItemController Tester:\n"+"courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
+        System.out.println("courseItemController Tester: courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
         //初始化空字符串为null. 如果查询条件为"".
         if (courseClass == "")
            courseClass = null;

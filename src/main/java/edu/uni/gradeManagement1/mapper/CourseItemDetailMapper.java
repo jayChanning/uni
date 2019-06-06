@@ -37,6 +37,7 @@ public interface CourseItemDetailMapper {
     List<HashMap> choose(@Param(value = "id") long id);
 
 
+
     //TODO  selectALL-- 这是默认当前学期 classId我需要，不许删，不需显示
     @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id AND NOW() BETWEEN se.`start` AND se.`end` ) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) ")
     /**
@@ -49,49 +50,49 @@ public interface CourseItemDetailMapper {
     /**
      * 这是选择特定的课程 根据课程编号 classId我需要，不许删，不需显示
      */
-    List<HashMap> selectByCourseId(@Param(value = "id") long id, @Param(value = "courseId") String courseId);
+    List<HashMap> selectByCourseId(@Param(value = "id") long id, @Param(value = "courseId")String courseId);
 
     //TODO   getFu2 selectBykc-- 这是选择特定的课程 根据课程名称 classId我需要，不许删，不需显示
     @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  INNER JOIN course ON task.course_id = course.id AND course.`name` = '${courseName}')INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) ")
-    /**
-     * 这是选择特定的课程 根据课程名称 classId我需要，不许删，不需显示
-     */
+/**
+ * - 这是选择特定的课程 根据课程名称 classId我需要，不许删，不需显示
+ */
     List<HashMap> selectBykc(@Param(value = "id") long id, @Param(value = "courseName") String courseName);
 
     //TODO  getFu3 selectBybj -- 这是选择特定的班级 根据班级名称 classId我需要，不许删，不需显示
-    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId  FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE class.`name` = '${courseClass}' ")
+    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId  FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE class.`name` LIKE '%${courseClass}%' ")
     /**
      * 这是选择特定的班级 根据班级名称 classId我需要，不许删，不需显示
      */
-    List<HashMap> selectBybj(@Param(value = "id") long id, @Param(value = "courseClass") String courseClass);
+    List<HashMap> selectBybj(@Param(value = "id") long id,@Param(value = "courseClass") String courseClass);
 
     //TODO getFu4  selectBybjkc -- 这是选择特定课程名称的特定班级 根据课程名称 根据班级名称 classId我需要，不许删，不需显示
-    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE class.`name` = '${courseClass}' AND course.`name` = '${courseName}' ")
+    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE class.`name` LIKE '%${courseClass}%' AND course.`name` LIKE '%${courseName}%' ")
     /**
      * 这是选择特定课程名称的特定班级 根据课程名称 根据班级名称 classId我需要，不许删，不需显示
      */
-    List<HashMap> selectBybjkc(@Param(value = "id") long id, @Param(value = "courseClass") String courseClass, @Param(value = "courseName") String courseName);
+    List<HashMap> selectBybjkc(@Param(value = "id") long id,@Param(value = "courseClass") String courseClass,@Param(value = "courseName") String courseName);
 
     //TODO getFu5 selectBykecenomc-- 这是选择特定课程编号的特定班级 根据课程编号 根据班级名称 classId我需要，不许删，不需显示
-    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId  FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE class.`name` = '${courseClass}' AND course.number = '${courseId}' ")
+    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId  FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE class.`name` LIKE '%${courseClass}%' AND course.number LIKE '%${courseId}%' ")
     /**
      * 这是选择特定课程编号的特定班级 根据课程编号 根据班级名称 classId我需要，不许删，不需显示
      */
-    List<HashMap> selectBykecenomc(@Param(value = "id") long id, @Param(value = "courseClass") String courseClass, @Param(value = "courseId") String courseId);
+    List<HashMap> selectBykecenomc(@Param(value = "id") long id,@Param(value = "courseClass") String courseClass, @Param(value = "courseId")String courseId);
 
     //TODO  getFu6 selectBybjkcnomc-- 这是选择特定课程编号的特定课程名称 根据课程编号 根据课程名称 classId我需要，不许删，不需显示
-    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE course.`name` = '${courseName}' AND course.number = '${courseId}' ")
+    @Select(value = " SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE course.`name` LIKE '%${courseName}%' AND course.number LIKE '%${courseId}%' ")
     /**
      * 这是选择特定课程编号的特定课程名称 根据课程编号 根据课程名称 classId我需要，不许删，不需显示
      */
-    List<HashMap> selectBybjkcnomc(@Param(value = "id") long id, @Param(value = "courseId") String courseId, @Param(value = "courseName") String courseName);
+    List<HashMap> selectBybjkcnomc(@Param(value = "id") long id, @Param(value = "courseId")String courseId, @Param(value = "courseName") String courseName);
 
     //TODO getFu7 selectBy-- 这是选择特定课程编号的特定课程名称的特定班级名称 根据课程编号 根据课程名称 根据班级名称 classId我需要，不许删，不需显示
-    @Select(value = "SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE course.`name` = '${courseName}' AND course.number = '${courseId}'  AND class.`name` = '${courseClass}' ")
+    @Select(value = "SELECT se.`name` AS semester, course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  )  INNER JOIN course ON task.course_id = course.id)INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id WHERE course.`name` LIKE '%${courseName}%' AND course.number LIKE '%${courseId}%'  AND class.`name` LIKE '%${courseClass}%' ")
     /**
      * 这是选择特定课程编号的特定课程名称的特定班级名称 根据课程编号 根据课程名称 根据班级名称 classId我需要，不许删，不需显示
      */
-    List<HashMap> selectBy(@Param(value = "id") long id, @Param(value = "courseId") String courseId, @Param(value = "courseName") String courseName, @Param(value = "courseClass") String courseClass);
+    List<HashMap> selectBy(@Param(value = "id") long id,@Param(value = "courseId")String courseId, @Param(value = "courseName") String courseName,@Param(value = "courseClass") String courseClass);
 
 
     //TODO  selectByClassId-- 这是子页面 这是选择某个班级的学生记录

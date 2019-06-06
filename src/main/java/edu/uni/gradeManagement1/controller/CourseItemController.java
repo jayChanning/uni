@@ -168,7 +168,7 @@ public class CourseItemController {
     public Result Display2F(@ApiParam(value = "请求的页码", required = true) @RequestParam(value = "pageNum") int pageNum,
                           @ApiParam(value = "课程编号") @RequestParam(value = "courseId", required = false) String courseId,
                           @ApiParam(value = "课程名称") @RequestParam(value = "courseName", required = false ) String courseName,
-                          @ApiParam(value = "教学班级-如16软件1班") @RequestParam(value = "courseClass", required = false ) String courseClass,
+                          @ApiParam(value = "教学班级-如16软件1") @RequestParam(value = "courseClass", required = false ) String courseClass,
                           HttpServletResponse response) {
        /* long usr = 0;
         if (usr == 0) {
@@ -178,6 +178,9 @@ public class CourseItemController {
         System.out.println("pageNum="+pageNum);
         System.out.println("courseItemController Tester: courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
         //初始化空字符串为null. 如果查询条件为"".
+
+
+
         if (courseClass == "")
            courseClass = null;
        if (courseId == "")

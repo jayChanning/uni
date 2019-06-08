@@ -128,9 +128,9 @@ public class CourseItemDetailServiceImpl implements CourseItemDetailService {
                 item.setItemName(number);
             }
         }
-        for (Item itme :
+        for (Item item :
                 hashMap.values()) {
-            lists.add(itme);
+            lists.add(item);
         }
         System.out.println(lists);
         return lists;

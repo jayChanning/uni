@@ -32,7 +32,7 @@ public interface DaoDiService {
 
     PageInfo<HashMap> getFuAll(long id,int pageNum);
 
-    //TODO  getClass-- 这是子页面 这是选择某个班级的学生记录,参数为班级id
+    //TODO  getClass-- 这是子页面 这是选择某个班级的学生记录,参数为班级id,学期id(semesterId),课程id(cId)
 
     List<HashMap> getClass(long id, long semesterId, long cId);
 }

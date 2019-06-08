@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
 
 @Api(description = "录入成绩显示")
 @Controller
@@ -82,8 +84,9 @@ public class DaoDiController {
             @ApiParam(value = "课程Id")
             @RequestParam(value = "cId") long cId
     ) {
-        System.out.println("classId="+classId+"semesterId="+semesterId+"cId="+cId);
-        return Result.build(ResultType.Success).appendData("data", daoDiService.getClass(classId,semesterId,cId));
+        System.out.println("classId="+classId+":semesterId="+semesterId+":cId="+cId);
+        List<HashMap> dao =daoDiService.getClass(classId,semesterId,cId);
+        return Result.build(ResultType.Success).appendData("data", dao).appendData("total",dao.size());
 
     }
 }

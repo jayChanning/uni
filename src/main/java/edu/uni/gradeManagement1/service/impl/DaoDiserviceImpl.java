@@ -69,8 +69,9 @@ public class DaoDiserviceImpl implements DaoDiService {
         return new PageInfo<>(courseItemDetailMapper.selectALL(id));
     }
 
+
     @Override
-    public List<HashMap> getClass(long id) {
-        return courseItemDetailMapper.selectByClassId(id);
+    public List<HashMap> getClass(long id, long semesterId, long cId) {
+        return courseItemDetailMapper.selectByClassId(id, semesterId, cId);
     }
 }

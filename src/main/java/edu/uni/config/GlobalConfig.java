@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class GlobalConfig {
     // 上传资源的总文件夹，系统绝对路径，后面不带/
-    @Value("${uni.gm.gmAttachmentDir}")
-   // @Value("uni.gm.gmAttachmentDir")
+//    @Value("${uni.gm.gmAttachmentDir}")
+    @Value("${nui.uploadRootDir}")
     private String uploadRootDir;
 
     public String getUploadRootDir() {

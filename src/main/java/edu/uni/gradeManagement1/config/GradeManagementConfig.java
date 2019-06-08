@@ -32,9 +32,6 @@ public class GradeManagementConfig {
     public GradeManagementConfig() {
     }
 
-    //2019.5.29 21:31 on windows 10
-    //please delete this commit on another device!
-
     public Integer getPageSize() {
         return pageSize;
     }

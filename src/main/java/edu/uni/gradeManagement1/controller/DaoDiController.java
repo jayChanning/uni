@@ -31,7 +31,7 @@ public class DaoDiController {
             @ApiParam(value = "页码", required = true)
             @RequestParam(value = "pageNum") int pageNum
     ) {
-        System.out.println(courseName + ":" + courseId + ":" + courseClass);
+        System.out.println("DaoDiController--"+courseName + ":" + courseId + ":" + courseClass);
         //初始化空字符串为null
         if (courseClass == "")
             courseClass = null;
@@ -74,12 +74,16 @@ public class DaoDiController {
     @RequestMapping(value = "/zi", method = {RequestMethod.GET})
     @ResponseBody
     @ApiOperation(value = "子页面", notes = "已测试,参数名：classId")
-    public Result weishenme(
+    public Result childrenPg(
             @ApiParam(value = "班级Id")
-            @RequestParam(value = "classId") long classId
+            @RequestParam(value = "classId") long classId,
+            @ApiParam(value = "学期Id")
+            @RequestParam(value = "semesterId") long semesterId,
+            @ApiParam(value = "课程Id")
+            @RequestParam(value = "cId") long cId
     ) {
-        System.out.println(classId);
-        return Result.build(ResultType.Success).appendData("data", daoDiService.getClass(classId));
+        System.out.println("classId="+classId+"semesterId="+semesterId+"cId="+cId);
+        return Result.build(ResultType.Success).appendData("data", daoDiService.getClass(classId,semesterId,cId));
 
     }
 }

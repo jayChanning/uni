@@ -34,5 +34,5 @@ public interface DaoDiService {
 
     //TODO  getClass-- 这是子页面 这是选择某个班级的学生记录,参数为班级id
 
-    List<HashMap> getClass(long id);
+    List<HashMap> getClass(long id, long semesterId, long cId);
 }

@@ -3,7 +3,7 @@ package edu.uni.gradeManagement1.pojo;
 /**
  * @author 蔡政堂
  * create 2019/5/14
- * modified 2019/5/14
+ * modified 2019/6/10
  * description TODO 显示给前台显示的数据
  */
 public class ItemGradeInfo {
@@ -18,10 +18,10 @@ public class ItemGradeInfo {
 
     /**
      * 有参constructor
-     * @param content
-     * @param score
-     * @param note
-     * @param uploadURL
+     * @param content 内容说明
+     * @param score 成绩
+     * @param note 评语
+     * @param uploadURL 上传路径
      */
     public ItemGradeInfo(String content, String score, String note, String uploadURL) {
         this.content = content;
@@ -64,5 +64,19 @@ public class ItemGradeInfo {
 
     public void setUploadURL(String uploadURL) {
         this.uploadURL = uploadURL;
+    }
+
+    /**
+     * toString()方法，便于输出查看数据
+     * @return String data
+     */
+    @Override
+    public String toString() {
+        return "ItemGradeInfo{" +
+                "content='" + content + '\'' +
+                ", score='" + score + '\'' +
+                ", note='" + note + '\'' +
+                ", uploadURL='" + uploadURL + '\'' +
+                '}';
     }
 }

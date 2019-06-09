@@ -13,10 +13,12 @@ public class Item {
 
     private String name;  //组成项名称
     private int cout;   //组成项次数
+    private long itemGradeId;
+    private long itemDetailId;
    // private LinkedHashMap<String,Object> linkedMap;
     private ArrayList<ItemName> itemNames;
 
-    public Item(int name, int cout) {
+    public Item(int name, int cout, long itemGradeId, long itemDetailId) {
         String ss;
         // System.out.println(item);
         switch (name){
@@ -41,12 +43,30 @@ public class Item {
         }
         this.name = ss;
         this.cout = cout;
+        this.itemDetailId = itemDetailId;
+        this.itemGradeId = itemGradeId;
         itemNames = new ArrayList<>(cout+1);
         //linkedMap = new LinkedHashMap<>(cout);
-        for (int i = 1; i <= cout; i++) {
+        for (int i = 1; i <= cout; i++) {   //默认所有都已经未录入
            // linkedMap.put( this.name+i, new ItemName(this.name+i, false));
-            itemNames.add(new ItemName(this.name+i, false));
+            itemNames.add(new ItemName(this.name + i, false));
         }
+    }
+
+    public long getItemGradeId() {
+        return itemGradeId;
+    }
+
+    public void setItemGradeId(long itemGradeId) {
+        this.itemGradeId = itemGradeId;
+    }
+
+    public long getItemDetailId() {
+        return itemDetailId;
+    }
+
+    public void setItemDetailId(long itemDetailId) {
+        this.itemDetailId = itemDetailId;
     }
 
     public int getCout() {
@@ -61,6 +81,7 @@ public class Item {
        // linkedMap.put( name+i, new ItemName(name+i, true));
         itemNames.get(i-1).setIn(true);
     }
+
     public String getName() {
         return name;
     }
@@ -108,7 +129,8 @@ public class Item {
         return "Item{" +
                 "name='" + name + '\'' +
                 ", cout=" + cout +
-              //  ", linkedMap=" + linkedMap +
+                ", itemGradeId=" + itemGradeId +
+                ", itemDetailId=" + itemDetailId +
                 ", itemNames=" + itemNames +
                 '}';
     }

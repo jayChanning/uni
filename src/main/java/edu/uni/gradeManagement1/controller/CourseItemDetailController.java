@@ -74,7 +74,6 @@ public class CourseItemDetailController {
             }
         }
 
-        System.out.println("新增课程组成项，mac测试");
         return Result.build(ResultType.ParamError);
     }
 
@@ -220,14 +219,14 @@ public class CourseItemDetailController {
      *     获取树状数组
      * </p>
      * @param id 成绩主表Id
-     * @return 成绩主表ID
+     * @return 成绩主表Id
      * @throws Exception
      * TODO 获取树状数组
      */
     @ApiOperation(value = "获取树状数组", notes = "已实现")
     @GetMapping("/courseItemDetail/itemName")
     @ResponseBody
-    public Result executeUpload(@ApiParam(value = "成绩主表Id")
+    public Result getInfo(@ApiParam(value = "成绩主表Id")
                                 @RequestParam(name = "id") long id) throws Exception{
         //System.out.println(id);
         //System.out.println(courseItemDetailService.selectTree(id));

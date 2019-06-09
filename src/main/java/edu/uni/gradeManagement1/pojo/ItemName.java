@@ -10,7 +10,8 @@ public class ItemName {
         private String itemName;
         private boolean isIn;
 
-        ItemName(String itemName, boolean isIn) {
+
+    ItemName(String itemName, boolean isIn ) {
             this.itemName = itemName;
             this.isIn = isIn;
         }
@@ -31,12 +32,11 @@ public class ItemName {
             isIn = in;
         }
 
-        @Override
-        public String toString() {
-            return "ItemName{" +
-                    "itemName='" + itemName + '\'' +
-                    ", isIn=" + isIn +
-                    "}\n";
-        }
-
+    @Override
+    public String toString() {
+        return "ItemName{" +
+                "itemName='" + itemName + '\'' +
+                ", isIn=" + isIn +
+                '}';
+    }
 }

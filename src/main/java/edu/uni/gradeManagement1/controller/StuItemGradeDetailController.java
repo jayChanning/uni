@@ -10,10 +10,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @author 蔡政堂
@@ -43,24 +42,43 @@ public class StuItemGradeDetailController {
 
     /**
      * 新增成绩项明细记录
-     * @param stuItemGradeDetail
+     * @param
      * @return
      */
-    @ApiOperation(value = "新增成绩得分项明细记录",notes = "")
-    @ApiImplicitParam(name = "stuItemGradeDetail",value = "成绩明细表实体类",required = true,dataType = "StuItemGradeDetail")
+    @ApiOperation(value = "新增成绩得分项明细记录",notes = "测试中。。。")
+//    @ApiImplicitParam(name = "stuItemGradeDetail",value = "成绩明细表实体类",required = true,dataType = "StuItemGradeDetail")
     @PostMapping("/stuItemGradeDetail")
     @ResponseBody
-    public Result create(@RequestBody(required = false) StuItemGradeDetail stuItemGradeDetail) {
-        if (stuItemGradeDetail != null){
-            boolean success = stuItemGradeDetailService.insert(stuItemGradeDetail);
-            if (success){
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix+"*");
-                cache.deleteByPaterm(CacheNameHelper.ListByCid_CacheNamePrefix+"*");
-                return Result.build(ResultType.Success);
-            } else {
-                return Result.build(ResultType.Failed);
-            }
-        }
+    public Result create(@RequestBody Map<String,String> map) {
+        StuItemGradeDetail stuItemGradeDetail = new StuItemGradeDetail();
+        System.out.println("****----"+map+"----****");
+        /*  初始化数据 */
+        //教师ID暂无法获取，先固定
+        stuItemGradeDetail.setByWho((long) 1941);
+        stuItemGradeDetail.setUniversityId((long) 1);
+        // 默认0有效
+//        stuItemGradeDetail.setDelete((byte)0);
+
+        stuItemGradeDetail.setNote(map.get("note"));
+        stuItemGradeDetail.setScore(Double.valueOf(map.get("score")));
+        stuItemGradeDetail.setAttachment(map.get("uploadAddr"));
+        stuItemGradeDetail.setStuItemGradeId(Long.valueOf(map.get("itemGradeId")));
+        stuItemGradeDetail.setCourseItemDetailId(Long.valueOf(map.get("itemDetailId")));
+
+        System.out.println("injected-Object<stuItemGradeDetail> : " + stuItemGradeDetail.toString()+"***end print");
+
+//
+//
+//        if (stuItemGradeDetail != null){
+//            boolean success = stuItemGradeDetailService.insert(stuItemGradeDetail);
+//            if (success){
+//                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix+"*");
+//                cache.deleteByPaterm(CacheNameHelper.ListByCid_CacheNamePrefix+"*");
+//                return Result.build(ResultType.Success);
+//            } else {
+//                return Result.build(ResultType.Failed);
+//            }
+//        }
         return Result.build(ResultType.ParamError);
     }
 

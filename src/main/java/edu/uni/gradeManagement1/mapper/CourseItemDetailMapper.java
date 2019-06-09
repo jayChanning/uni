@@ -33,8 +33,21 @@ public interface CourseItemDetailMapper {
     int updateByPrimaryKey(CourseItemDetail record);
 
 //    树状结构数据
-    @Select(value = "SELECT course_item_one.`name`,course_item_one.count,course_item_detail_one.number FROM stu_grade_main_one,stu_item_grade_one,course_item_one,course_item_detail_one " +
-            "WHERE course_item_one.id = stu_item_grade_one.course_item_id AND stu_item_grade_one.stu_grade_main_id = stu_grade_main_one.id AND course_item_one.id = course_item_detail_one.course_item_id AND stu_grade_main_id = ${id} ORDER BY course_item_one.`name`,course_item_detail_one.number;")
+    @Select(value = "SELECT\n" +
+            "\tstu_item_grade_one.id AS itemGradeId,\n" +
+            "\tcourse_item_detail_one.id AS itemDetailId,\n" +
+            "\tcourse_item_one.`name`,\n" +
+            "\tcourse_item_one.`count`,\n" +
+            "\tcourse_item_detail_one.number,\n" +
+            "\tstu_item_grade_detail_one.stu_item_grade_id AS isIn \n" +
+            "FROM\n" +
+            "\t(((( stu_grade_main_one INNER JOIN stu_item_grade_one ON stu_item_grade_one.stu_grade_main_id = stu_grade_main_one.id AND stu_grade_main_id = ${id} ) \n" +
+            "\tINNER JOIN course_item_one ON course_item_one.id = stu_item_grade_one.course_item_id )\n" +
+            "\tINNER JOIN course_item_detail_one ON course_item_one.id = course_item_detail_one.course_item_id ) \n" +
+            "\tLEFT JOIN stu_item_grade_detail_one ON stu_item_grade_detail_one.stu_item_grade_id = stu_item_grade_one.id AND stu_item_grade_detail_one.course_item_detail_id = course_item_detail_one.id AND stu_item_grade_detail_one.`delete` = 0) \n" +
+            "ORDER BY\n" +
+            "\tcourse_item_one.`name`,\n" +
+            "\tcourse_item_detail_one.number")
     List<HashMap> choose(@Param(value = "id") long id);
 
 
@@ -46,7 +59,6 @@ public interface CourseItemDetailMapper {
      * 这是默认当前学期 classId我需要，不许删，不需显示
      */
     List<HashMap> selectALL(@Param(value = "id") long id);
-
     //TODO getFu1 selectByCourseId-- 这是选择特定的课程 根据课程编号 classId我需要，不许删，不需显示
     @Select(value = " SELECT se.`name` AS semester ,se.id AS semesterId,course.id AS cId , course.number AS courseId, course.`name` AS courseName, class.`name` AS courseClass,course_species.`name` AS courseType,course_category.`name` AS courseCategory, course.`hour` AS classHour, course.credit AS credit, class.id AS classId FROM ((((((ea_semester AS se INNER JOIN ea_teaching_task AS task ON se.id = task.semester_id) INNER JOIN `user` ON task.worker_id = `user`.id AND `user`.id = ${id})  INNER JOIN course ON task.course_id = course.id AND course.number = '${courseId}')INNER JOIN class ON task.class_id=class.id) INNER JOIN course_species ON course.species_id = course_species.id)INNER JOIN course_category ON course.category_id = course_category.id) ")
     /**
@@ -105,16 +117,20 @@ public interface CourseItemDetailMapper {
                            @Param(value = "courseName") String courseName,
                            @Param(value = "courseClass") String courseClass);
 
-    //    以下为子表
-    //TODO  selectByClassId-- 这是子页面 这是选择某个班级的学生记录
-    @Select(value = "SELECT student.stu_no AS stuNo,`user`.user_name AS stuName, monentClass.`name` AS stuClass, ecomm.content AS contact , stu_grade_main_one.id AS mainId" +
+    /**
+     * 以下为子表
+     * TODO  selectByClassId-- 这是子页面 这是选择某个班级的学生记录
+     */
+    /*@Select(value = "SELECT student.stu_no AS stuNo,`user`.user_name AS stuName, monentClass.`name` AS stuClass, ecomm.content AS contact , stu_grade_main_one.id AS mainId" +
             " FROM (((((classmate INNER JOIN student ON classmate.student_id = student.id  AND classmate.class_id = ${classId}) INNER JOIN `user` ON `user`.id = student.user_id) " +
             "INNER JOIN class AS monentClass ON student.class_id = monentClass.id)INNER JOIN stu_grade_main_one ON stu_grade_main_one.course_id = ${cId} AND stu_grade_main_one.semester_id = ${semesterId} " +
-            "AND stu_grade_main_one.student_id = student.id)LEFT JOIN ecomm ON student.phone_ecomm_id = ecomm.id) ORDER BY monentClass.`name`,student.stu_no")
-    /**
-     * 这是子页面 这是选择某个班级的学生记录
-     */
-//    List<HashMap> selectByClassId(@Param(value = "classId") long classId);
+            "AND stu_grade_main_one.student_id = student.id)LEFT JOIN ecomm ON student.phone_ecomm_id = ecomm.id) ORDER BY monentClass.`name`,student.stu_no")*/
+
+    @Select(value = "SELECT student.stu_no AS stuNo,`user`.user_name AS stuName, monentClass.`name` AS stuClass, ecomm.content AS contact , stu_grade_main_one.id AS mainId, " +
+            "student.id AS stuId FROM (((((classmate INNER JOIN student ON classmate.student_id = student.id  AND classmate.class_id = ${classId}) INNER JOIN `user` ON `user`.id = student.user_id) " +
+            "INNER JOIN class AS monentClass ON student.class_id = monentClass.id)INNER JOIN stu_grade_main_one ON stu_grade_main_one.course_id = ${cId} AND stu_grade_main_one.semester_id = ${semesterId} AND stu_grade_main_one.student_id = student.id)LEFT " +
+            "JOIN ecomm ON student.phone_ecomm_id = ecomm.id) ORDER BY monentClass.`name`,student.stu_no")
+
     List<HashMap> selectByClassId(@Param(value = "classId") long classId,
                                   @Param(value = "semesterId") long semesterId,
                                   @Param(value = "cId") long cId);

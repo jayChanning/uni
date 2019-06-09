@@ -119,13 +119,17 @@ public class CourseItemDetailServiceImpl implements CourseItemDetailService {
             int name = (int)hm.get("name");
             int number = (int)hm.get("number");
             int count = (int)hm.get("count");
+            long itemGradeId = (long)hm.get("itemGradeId");
+            long itemDetailId = (long)hm.get("itemDetailId");
             if (!hashSet.add(name)){
                 Item item = hashMap.get(name);
-                item.setItemName(number);
+                if (hm.get("isIn") != null)    //如果为空的话，表示为录入 其实这里和item的构造器的功能重复了。
+                    item.setItemName(number);  //如果已经录入，则置为false。默认true
             } else{
-                hashMap.put(name,new Item(name,count));
+                hashMap.put(name,new Item(name,count,itemGradeId,itemDetailId));//增加字段
                 Item item = hashMap.get(name);
-                item.setItemName(number);
+                if (hm.get("isIn") != null)
+                    item.setItemName(number);
             }
         }
         for (Item item :

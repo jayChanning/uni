@@ -102,4 +102,20 @@ public class StuItemGradeDetail {
     public void setDelete(Byte delete) {
         this.delete = delete;
     }
+
+    @Override
+    public String toString() {
+        return "StuItemGradeDetail{" +
+                "id=" + id +
+                ", universityId=" + universityId +
+                ", stuItemGradeId=" + stuItemGradeId +
+                ", courseItemDetailId=" + courseItemDetailId +
+                ", attachment='" + attachment + '\'' +
+                ", score=" + score +
+                ", note='" + note + '\'' +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", delete=" + delete +
+                '}';
+    }
 }

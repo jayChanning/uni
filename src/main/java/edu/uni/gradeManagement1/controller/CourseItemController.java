@@ -1,18 +1,15 @@
 package edu.uni.gradeManagement1.controller;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.educateAffair.VO.CurriculumVO;
 import edu.uni.educateAffair.VO.CurriculumWithCondition;
-import edu.uni.educateAffair.bean.Curriculum;
 import edu.uni.educateAffair.bean.Semester;
 import edu.uni.educateAffair.service.CurriculumService;
-import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.bean.StuGradeMain;
-import edu.uni.gradeManagement1.pojo.CourseItemInfo;
+import edu.uni.gradeManagement1.pojo.ItemGradeInfo;
 import edu.uni.gradeManagement1.service.CourseItemService;
 import edu.uni.gradeManagement1.service.DaoDiService;
 import edu.uni.gradeManagement1.service.StuGradeMainService;
@@ -223,102 +220,102 @@ public class CourseItemController {
 
     /**
      * 将分页单独出来，仅测试用，现在暂且不需要
-     * @param pageNum
+     //* @param pageNum
      * @param response
      * date 2019/6/5
      * @throws IOException
      */
-    private void cutPage(Integer pageNum, HttpServletResponse response) throws IOException {
-        String json;
-        if (pageNum < 1)
-            pageNum = 1;
-        if (pageNum > 2)
-            pageNum = 2;
-        if (pageNum == 1) {
-            //TEST DATA
-            ArrayList<CourseItemInfo> arrayList = new ArrayList<>();
-            arrayList.add(new CourseItemInfo("2017-2018-1", "3", "软件体系结构","16软件1班"));
-            arrayList.add(new CourseItemInfo("2017-2018-1", "2", "JAVA程序设计","16软件1班"));
-            arrayList.add(new CourseItemInfo("2017-2018-2", "4", "软件项目管理","16软件2班"));
-            arrayList.add(new CourseItemInfo("2018-2019-1", "5", "人工智能","16软件1班"));
-            arrayList.add(new CourseItemInfo("2018-2019-2", "6", "ASP.NET","16软件1班"));
-
-            System.out.println("path:/courseItem/listInfo/page_1--"+arrayList);
-
-            PageInfo pageInfo = new PageInfo<>(arrayList);
-
-            pageInfo.setTotal(7);
-            pageInfo.setPageNum(1);
-            pageInfo.setPageSize(5);
-            pageInfo.setSize(5);
-            pageInfo.setPages(2);
-            pageInfo.setPrePage(0);
-            pageInfo.setNextPage(2);
-            pageInfo.setHasNextPage(true);
-            pageInfo.setHasPreviousPage(false);
-            pageInfo.setIsFirstPage(true);
-            pageInfo.setIsLastPage(false);
-            pageInfo.setLastPage(2);
-            pageInfo.setFirstPage(1);
-
-            json = Result.build(ResultType.Success).appendData("data",pageInfo).convertIntoJSON();
-
-        } else {
-            ArrayList<CourseItemInfo> arrayList = new ArrayList<>();
-            arrayList.add(new CourseItemInfo("2018-2019-2", "7", "C语言程序设计","16软件1班"));
-            arrayList.add(new CourseItemInfo("2018-2019-2", "8", "软件测试技术","16软件1班"));
-
-            System.out.println(new Date().getTime()+"path:/courseItem/listInfo/page_2--"+arrayList);
-            PageInfo pageInfo = new PageInfo<>(arrayList);
-
-            pageInfo.setTotal(7);
-            pageInfo.setPageNum(2);
-            pageInfo.setPageSize(5);
-            pageInfo.setSize(2);
-            pageInfo.setPages(2);
-            pageInfo.setPrePage(1);
-            pageInfo.setNextPage(0);
-            pageInfo.setHasNextPage(false);
-            pageInfo.setHasPreviousPage(true);
-            pageInfo.setIsFirstPage(false);
-            pageInfo.setIsLastPage(true);
-            pageInfo.setLastPage(2);
-            pageInfo.setFirstPage(1);
-
-            json = Result.build(ResultType.Success).appendData("data", pageInfo).convertIntoJSON();
-        }
-        response.getWriter().write(json);
-    }
-
-
-    /**
-     * TODO 查询此教师用户本学期所教的课程
-     * @param response
-     * @throws IOException
-     */
-    @ApiOperation(value = "查询此教师用户本学期所教的课程",notes = "Tested!")
-    @GetMapping("/courseItem/findClass")
-    public void searchFor(@RequestParam Long employeeId, HttpServletResponse response ) throws IOException {
-        response.setContentType("application/json;charset=utf-8");
-        String json = null;
-
-        //调用校历的service层
-        CurriculumWithCondition curriculumWithCondition = new CurriculumWithCondition();
-        curriculumWithCondition.setEmployeeId(employeeId);
-        curriculumWithCondition.setCourse(true);
-        curriculumWithCondition.setClass(true);
-        curriculumWithCondition.setEmployee(true);
-
-        List<CurriculumVO> curriculumList = curriculumService.Transform(curriculumWithCondition);
-        System.out.println(curriculumList);
-        if (json == null) {
-            json = Result.build(ResultType.Success).appendData("item",curriculumService.Transform(curriculumWithCondition)).convertIntoJSON();
-
-        }
-
-        System.out.println(json);
-        response.getWriter().write(json);
-    }
+//    private void cutPage(Integer pageNum, HttpServletResponse response) throws IOException {
+//        String json;
+//        if (pageNum < 1)
+//            pageNum = 1;
+//        if (pageNum > 2)
+//            pageNum = 2;
+//        if (pageNum == 1) {
+//            //TEST DATA
+//            ArrayList<ItemGradeInfo> arrayList = new ArrayList<>();
+//            arrayList.add(new ItemGradeInfo("2017-2018-1", "3", "软件体系结构","16软件1班"));
+//            arrayList.add(new ItemGradeInfo("2017-2018-1", "2", "JAVA程序设计","16软件1班"));
+//            arrayList.add(new ItemGradeInfo("2017-2018-2", "4", "软件项目管理","16软件2班"));
+//            arrayList.add(new ItemGradeInfo("2018-2019-1", "5", "人工智能","16软件1班"));
+//            arrayList.add(new ItemGradeInfo("2018-2019-2", "6", "ASP.NET","16软件1班"));
+//
+//            System.out.println("path:/courseItem/listInfo/page_1--"+arrayList);
+//
+//            PageInfo pageInfo = new PageInfo<>(arrayList);
+//
+//            pageInfo.setTotal(7);
+//            pageInfo.setPageNum(1);
+//            pageInfo.setPageSize(5);
+//            pageInfo.setSize(5);
+//            pageInfo.setPages(2);
+//            pageInfo.setPrePage(0);
+//            pageInfo.setNextPage(2);
+//            pageInfo.setHasNextPage(true);
+//            pageInfo.setHasPreviousPage(false);
+//            pageInfo.setIsFirstPage(true);
+//            pageInfo.setIsLastPage(false);
+//            pageInfo.setLastPage(2);
+//            pageInfo.setFirstPage(1);
+//
+//            json = Result.build(ResultType.Success).appendData("data",pageInfo).convertIntoJSON();
+//
+//        } else {
+//            ArrayList<ItemGradeInfo> arrayList = new ArrayList<>();
+//            arrayList.add(new ItemGradeInfo("2018-2019-2", "7", "C语言程序设计","16软件1班"));
+//            arrayList.add(new ItemGradeInfo("2018-2019-2", "8", "软件测试技术","16软件1班"));
+//
+//            System.out.println(new Date().getTime()+"path:/courseItem/listInfo/page_2--"+arrayList);
+//            PageInfo pageInfo = new PageInfo<>(arrayList);
+//
+//            pageInfo.setTotal(7);
+//            pageInfo.setPageNum(2);
+//            pageInfo.setPageSize(5);
+//            pageInfo.setSize(2);
+//            pageInfo.setPages(2);
+//            pageInfo.setPrePage(1);
+//            pageInfo.setNextPage(0);
+//            pageInfo.setHasNextPage(false);
+//            pageInfo.setHasPreviousPage(true);
+//            pageInfo.setIsFirstPage(false);
+//            pageInfo.setIsLastPage(true);
+//            pageInfo.setLastPage(2);
+//            pageInfo.setFirstPage(1);
+//
+//            json = Result.build(ResultType.Success).appendData("data", pageInfo).convertIntoJSON();
+//        }
+//        response.getWriter().write(json);
+//    }
+//
+//
+//    /**
+//     * TODO 查询此教师用户本学期所教的课程
+//     * @param response
+//     * @throws IOException
+//     */
+//    @ApiOperation(value = "查询此教师用户本学期所教的课程",notes = "Tested!")
+//    @GetMapping("/courseItem/findClass")
+//    public void searchFor(@RequestParam Long employeeId, HttpServletResponse response ) throws IOException {
+//        response.setContentType("application/json;charset=utf-8");
+//        String json = null;
+//
+//        //调用校历的service层
+//        CurriculumWithCondition curriculumWithCondition = new CurriculumWithCondition();
+//        curriculumWithCondition.setEmployeeId(employeeId);
+//        curriculumWithCondition.setCourse(true);
+//        curriculumWithCondition.setClass(true);
+//        curriculumWithCondition.setEmployee(true);
+//
+//        List<CurriculumVO> curriculumList = curriculumService.Transform(curriculumWithCondition);
+//        System.out.println(curriculumList);
+//        if (json == null) {
+//            json = Result.build(ResultType.Success).appendData("item",curriculumService.Transform(curriculumWithCondition)).convertIntoJSON();
+//
+//        }
+//
+//        System.out.println(json);
+//        response.getWriter().write(json);
+//    }
 
     @ApiOperation(value = "给前端显示的组成项信息", notes = "Testing...Could not use!")
     @GetMapping("/courseItem/findItem/")

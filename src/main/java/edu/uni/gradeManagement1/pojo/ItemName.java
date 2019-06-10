@@ -7,36 +7,55 @@ package edu.uni.gradeManagement1.pojo;
  * description TODO 发给前台的数据封装类
  */
 public class ItemName {
-        private String itemName;
-        private boolean isIn;
+    private String itemName;
+    private boolean isIn;
+    private long ItemGradeId;
+    private long itemDetailId;
 
+    public long getItemGradeId() {
+        return ItemGradeId;
+    }
 
-    ItemName(String itemName, boolean isIn ) {
-            this.itemName = itemName;
-            this.isIn = isIn;
-        }
+    public void setItemGradeId(long itemGradeId) {
+        ItemGradeId = itemGradeId;
+    }
 
-        public String getItemName() {
-            return itemName;
-        }
+    public long getItemDetailId() {
+        return itemDetailId;
+    }
 
-        public void setItemName(String itemName) {
-            this.itemName = itemName;
-        }
+    public void setItemDetailId(long itemDetailId) {
+        this.itemDetailId = itemDetailId;
+    }
 
-        public boolean isIn() {
-            return isIn;
-        }
+    ItemName(String itemName, boolean isIn) {
+        this.itemName = itemName;
+        this.isIn = isIn;
+    }
 
-        public void setIn(boolean in) {
-            isIn = in;
-        }
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public boolean isIn() {
+        return isIn;
+    }
+
+    public void setIn(boolean in) {
+        isIn = in;
+    }
 
     @Override
     public String toString() {
         return "ItemName{" +
                 "itemName='" + itemName + '\'' +
                 ", isIn=" + isIn +
+                ", ItemGradeId=" + ItemGradeId +
+                ", itemDetailId=" + itemDetailId +
                 '}';
     }
 }

@@ -62,7 +62,6 @@ public class CourseItemDetailController {
     @PostMapping("/courseItemDetail")
     @ResponseBody
     public Result create(@RequestBody(required = false) CourseItemDetail courseItemDetail){
-
         if (courseItemDetail != null){
             boolean success = courseItemDetailService.insert(courseItemDetail);
             if (success){

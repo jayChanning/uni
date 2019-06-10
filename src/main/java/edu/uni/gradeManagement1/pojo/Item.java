@@ -13,8 +13,8 @@ public class Item {
 
     private String name;  //组成项名称
     private int cout;   //组成项次数
-    private long itemGradeId;
-    private long itemDetailId;
+    private long itemGradeId;  //对应stu_item_grade表的id
+    private long itemDetailId;   //对应course_item_detail表的id
    // private LinkedHashMap<String,Object> linkedMap;
     private ArrayList<ItemName> itemNames;
 
@@ -122,6 +122,11 @@ public class Item {
 
     public void setItemNames(ArrayList<ItemName> itemNames) {
         this.itemNames = itemNames;
+    }
+
+    public void setId(int i, long ItemGradeId,long ItemDetailId){
+        itemNames.get(i-1).setItemGradeId(ItemGradeId);
+        itemNames.get(i-1).setItemDetailId(ItemDetailId);
     }
 
     @Override

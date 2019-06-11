@@ -22,7 +22,7 @@ import java.io.*;
 
 @Api(description = "成绩模块：文件下载工具类")
 @Controller
-@RequestMapping(value = "/jsons/gradeManagement1")
+@RequestMapping(value = "/json/gradeManagement1")
 public class DownloadController {
 
     @ApiOperation(value = "处理文件下载的接口")

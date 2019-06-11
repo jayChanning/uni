@@ -82,11 +82,12 @@ public class CourseItemController {
 //        courseItem.setCourseId(Long.valueOf(3));
         courseItem.setCourseId((Long.valueOf(courseItem.getCourseId())));
         courseItem.setDeleted(Byte.valueOf("0"));
-        courseItem.setByWho(Long.valueOf(1));
+        courseItem.setByWho(Long.valueOf(1941));
 
         System.out.println("path: courseItem_post-- "+courseItem);
 
-        if (courseItem != null){
+
+        /*if (courseItem != null){
             boolean success = courseItemService.insert(courseItem);
             if (success){
                 cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix+"*");
@@ -96,7 +97,7 @@ public class CourseItemController {
                 return Result.build(ResultType.Failed);
 
             }
-        }
+        }*/
         return Result.build(ResultType.ParamError);
     }
 
@@ -167,23 +168,18 @@ public class CourseItemController {
                           @ApiParam(value = "课程名称") @RequestParam(value = "courseName", required = false ) String courseName,
                           @ApiParam(value = "教学班级-如16软件1") @RequestParam(value = "courseClass", required = false ) String courseClass,
                           HttpServletResponse response) {
-       /* long usr = 0;
-        if (usr == 0) {
 
-        }*/
         response.setContentType("application/json;charset=utf-8");
-        System.out.println("pageNum="+pageNum);
+//        System.out.println("pageNum="+pageNum);
         System.out.println("courseItemController Tester: courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
+
         //初始化空字符串为null. 如果查询条件为"".
-
-
-
         if (courseClass == "")
-           courseClass = null;
-       if (courseId == "")
-           courseId = null;
-       if (courseName == "")
-           courseName = null;
+            courseClass = null;
+        if (courseId == "")
+            courseId = null;
+        if (courseName == "")
+            courseName = null;
 
         if (courseName == null) {
             if (courseId == null) {

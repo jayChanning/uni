@@ -23,7 +23,7 @@ public class DaoDiController {
     @RequestMapping(value = "/fu", method = {RequestMethod.GET})
     @ResponseBody
     @ApiOperation(value = "父页面", notes = "已测试")
-    public Result daodi(
+    public Result parentPg(
             @ApiParam(value = "课程名称")
             @RequestParam(value = "courseName", required = false) String courseName,
             @ApiParam(value = "课程编号")
@@ -75,7 +75,7 @@ public class DaoDiController {
 
     @RequestMapping(value = "/zi", method = {RequestMethod.GET})
     @ResponseBody
-    @ApiOperation(value = "子页面", notes = "已测试,参数名：classId")
+    @ApiOperation(value = "子页面", notes = "已测试,参数名：classId,cId,semesterId")
     public Result childrenPg(
             @ApiParam(value = "班级Id")
             @RequestParam(value = "classId") long classId,

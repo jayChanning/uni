@@ -34,6 +34,8 @@ public class DaoDiController {
             @RequestParam(value = "pageNum") int pageNum
     ) {
         System.out.println("DaoDiController--"+courseName + ":" + courseId + ":" + courseClass);
+        //用户id，此处为教师id(employeeId)，对应user表id
+        long usrId = 1963;
         //初始化空字符串为null
         if (courseClass == "")
             courseClass = null;
@@ -45,29 +47,29 @@ public class DaoDiController {
         if (courseName == null) {
             if (courseId == null) {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFuAll(1941L, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFuAll(usrId, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu3(1941L, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu3(usrId, courseClass, pageNum));
                 }
             } else {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu1(1941L, courseId, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu1(usrId, courseId, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu5(1941L, courseId, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu5(usrId, courseId, courseClass, pageNum));
                 }
             }
         } else {
             if (courseId == null) {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu2(1941L, courseName, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu2(usrId, courseName, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu4(1941L, courseName, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu4(usrId, courseName, courseClass, pageNum));
                 }
             } else {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu6(1941L, courseId, courseName, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu6(usrId, courseId, courseName, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu7(1941L, courseId, courseName, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu7(usrId, courseId, courseName, courseClass, pageNum));
                 }
             }
         }

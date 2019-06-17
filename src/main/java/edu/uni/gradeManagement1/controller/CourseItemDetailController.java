@@ -1,24 +1,20 @@
 package edu.uni.gradeManagement1.controller;
 
-import com.github.pagehelper.PageInfo;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
-import edu.uni.gradeManagement1.pojo.TreeDataPOJO;
 import edu.uni.gradeManagement1.service.CourseItemDetailService;
 import edu.uni.gradeManagement1.utils.UploadUtil;
 import edu.uni.utils.RedisCache;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-
 
 /**
  * @author 蔡政堂
@@ -83,7 +79,7 @@ public class CourseItemDetailController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation(value = "根据id查询组成项明细",notes="Testing")
+    /*@ApiOperation(value = "根据id查询组成项明细",notes="Testing")
     @ApiImplicitParam(name = "id",value = "组成项明细id",required = true,dataType = "Long",paramType = "path")
     @GetMapping("/courseItemDetail/{id}")
     public void receive(@PathVariable Long id,
@@ -99,7 +95,7 @@ public class CourseItemDetailController {
             }
         }
         response.getWriter().write(json);
-    }
+    }*/
 
     /**
      * 根据页码分页查询所有的组成项明细记录
@@ -107,7 +103,7 @@ public class CourseItemDetailController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation(value = "根据页码分页查询所有的组成项明细记录",notes = "测试中，传入页码可查询")
+    /*@ApiOperation(value = "根据页码分页查询所有的组成项明细记录",notes = "测试中，传入页码可查询")
     @ApiImplicitParam(name = "pageNum",value = "页码",required = true,dataType = "Integer",paramType = "path")
     @GetMapping(value = "/courseItemDetail/list/{pageNum}")
     public void list(@PathVariable Integer pageNum,
@@ -123,7 +119,7 @@ public class CourseItemDetailController {
             }
         }
         response.getWriter().write(json);
-    }
+    }*/
 
     /**
      * 根据组成项id和页码来分页查询组成项明细
@@ -132,7 +128,7 @@ public class CourseItemDetailController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation(value = "根据组成项id和页码来分页查询组成项明细",notes = "测试中")
+    /*@ApiOperation(value = "根据组成项id和页码来分页查询组成项明细",notes = "测试中")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "courseItemId",value = "组成项id",required = true,dataType = "Long",paramType = "path"),
             @ApiImplicitParam(name = "pageNum",value = "页码",required = true,dataType = "Integer",paramType = "path")
@@ -152,18 +148,18 @@ public class CourseItemDetailController {
             }
         }
         response.getWriter().write(json);
-    }
+    }*/
 
 
-    @ApiOperation(value = "获得某个班级某门课的组成项明细", notes = "具体逻辑未实现，前台具体传入参数未确定")
+    /*@ApiOperation(value = "获得某个班级某门课的组成项明细", notes = "具体逻辑未实现，前台具体传入参数未确定")
     @GetMapping(value = "/TreeList2Front")
     @ResponseBody
     public Result TreeList2Front() {
 
-        /**
+        *//**
          * 还不知道可以通过什么参数能具体查到获得某个班级某门课的组成项明细
          * 先无参数提供一个假数据供前台测试
-         */
+         *//*
 
         ArrayList<LinkedHashMap<String, Object>> lists = new ArrayList<>();
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -182,16 +178,17 @@ public class CourseItemDetailController {
 
         System.out.println(lists);
         return Result.build(ResultType.Success).appendData("data", lists);
-    }
+    }*/
 
     /**
      * <p>
-     *     上传文件方法
+     *     上传文件方法,已独立到UploadController类中
+     *     此处已不再使用
      * </p>
      * @param file
      * @return 文件名
      * @throws Exception
-     */
+     *//*
     @ApiOperation(value = "上传附件", notes = "已实现")
     @GetMapping("/courseItemDetail/uploadAttach")
     public String executeUpload(MultipartFile file) throws Exception{
@@ -203,15 +200,15 @@ public class CourseItemDetailController {
         //服务端保存的文件对象
 //        File serverFile = new File(uploadDir + filename);
         //将上传的文件写入服务器端文件内
-        /*file.transferTo(serverFile);
-        return filename;*/
+        *//*file.transferTo(serverFile);
+        return filename;*//*
 
         //调用文件上传方法
         String filePath = uploadUtil.uploadFile(file);
 //        返回文件路径
         return filePath;
 
-    }
+    }*/
 
     /**
      * <p>

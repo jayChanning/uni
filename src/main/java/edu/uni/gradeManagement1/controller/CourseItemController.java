@@ -87,7 +87,7 @@ public class CourseItemController {
         System.out.println("path: courseItem_post-- "+courseItem);
 
 
-        /*if (courseItem != null){
+        if (courseItem != null){
             boolean success = courseItemService.insert(courseItem);
             if (success){
                 cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix+"*");
@@ -97,7 +97,7 @@ public class CourseItemController {
                 return Result.build(ResultType.Failed);
 
             }
-        }*/
+        }
         return Result.build(ResultType.ParamError);
     }
 
@@ -107,10 +107,10 @@ public class CourseItemController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation(value = "根据id获取成绩评分组成项",notes = "需要id")
-    @ApiImplicitParam(name = "id", value = "评分项id",required = true,dataType = "Long",paramType = "path")
-    @GetMapping("/courseItem/{id}")
-    public void receive(@PathVariable Long id,
+//    @ApiOperation(value = "根据id获取成绩评分组成项",notes = "需要id")
+//    @ApiImplicitParam(name = "id", value = "评分项id",required = true,dataType = "Long",paramType = "path")
+//    @GetMapping("/courseItem/{id}")
+    /*public void receive(@PathVariable Long id,
                         HttpServletResponse response ) throws IOException{
         response.setContentType("application/json;charset=utf-8");
 
@@ -133,14 +133,14 @@ public class CourseItemController {
             }
         }
         response.getWriter().write(json);
-    }
+    }*/
 
     /**
      * 获取所有评分组成项信息--test1--listAll(default)
      * @param response
      * @throws IOException
      */
-    @ApiOperation(value = "获取所有成绩评分组成项",notes = "暂时不使用")
+    /*@ApiOperation(value = "获取所有成绩评分组成项",notes = "暂时不使用")
     @GetMapping("/courseItem/listAll")
     public void selectAll(HttpServletResponse response ) throws IOException{
         response.setContentType("application/json;charset=utf-8");
@@ -153,13 +153,14 @@ public class CourseItemController {
             cache.set(cacheName,json);
         }
         response.getWriter().write(json);
-    }
+    }*/
 
     /**
-     * 获取所有评分组成项信息--test2---listInfo
+     * 录入成绩父页面数据 --/listInfo
+     * 包含搜索栏的处理也在这
      * @param response
      */
-    @ApiOperation(value = "获取所有成绩评分组成项名称",notes = "分页传数据，已测试！")
+    @ApiOperation(value = "录入成绩页面数据，搜索栏所用接口",notes = "可分页传数据，已测试！")
    // @ApiImplicitParam(name = "pageNum", value = "请求的页码",required = true,dataType = "Integer",paramType = "path")
     @GetMapping("/courseItem/listInfo")
     @ResponseBody
@@ -313,7 +314,7 @@ public class CourseItemController {
 //        response.getWriter().write(json);
 //    }
 
-    @ApiOperation(value = "给前端显示的组成项信息", notes = "Testing...Could not use!")
+    @ApiOperation(value = "查询学期、校历信息接口", notes = "测试中...")
     @GetMapping("/courseItem/findItem/")
     public void findItem(@RequestParam Long courseId, String courseName, String courseClass,
                          HttpServletResponse response) throws IOException {

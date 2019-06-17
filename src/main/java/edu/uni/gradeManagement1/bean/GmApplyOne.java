@@ -17,7 +17,7 @@ public class GmApplyOne {
 
     private Long stuGradeMainId;
 
-    private Long stuItemGradeDetailId;
+    private Long stuItemGradeDetailNewId;
 
     private String attachment;
 
@@ -30,6 +30,8 @@ public class GmApplyOne {
     private Date datatime;
 
     private Byte deleted;
+
+    private Long stuItemGradeDetailOldId;
 
     public Long getId() {
         return id;
@@ -49,6 +51,27 @@ public class GmApplyOne {
 
     public Long getUniversityId() {
         return universityId;
+    }
+
+    @Override
+    public String toString() {
+        return "GmApplyOne{" +
+                "id=" + id +
+                ", approvalMainId=" + approvalMainId +
+                ", universityId=" + universityId +
+                ", semesterId=" + semesterId +
+                ", studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", stuGradeMainId=" + stuGradeMainId +
+                ", stuItemGradeDetailNewId=" + stuItemGradeDetailNewId +
+                ", attachment='" + attachment + '\'' +
+                ", reason='" + reason + '\'' +
+                ", byWho=" + byWho +
+                ", bySend=" + bySend +
+                ", datatime=" + datatime +
+                ", deleted=" + deleted +
+                ", stuItemGradeDetailOldId=" + stuItemGradeDetailOldId +
+                '}';
     }
 
     public void setUniversityId(Long universityId) {
@@ -87,12 +110,12 @@ public class GmApplyOne {
         this.stuGradeMainId = stuGradeMainId;
     }
 
-    public Long getStuItemGradeDetailId() {
-        return stuItemGradeDetailId;
+    public Long getStuItemGradeDetailNewId() {
+        return stuItemGradeDetailNewId;
     }
 
-    public void setStuItemGradeDetailId(Long stuItemGradeDetailId) {
-        this.stuItemGradeDetailId = stuItemGradeDetailId;
+    public void setStuItemGradeDetailNewId(Long stuItemGradeDetailNewId) {
+        this.stuItemGradeDetailNewId = stuItemGradeDetailNewId;
     }
 
     public String getAttachment() {
@@ -141,5 +164,13 @@ public class GmApplyOne {
 
     public void setDeleted(Byte deleted) {
         this.deleted = deleted;
+    }
+
+    public Long getStuItemGradeDetailOldId() {
+        return stuItemGradeDetailOldId;
+    }
+
+    public void setStuItemGradeDetailOldId(Long stuItemGradeDetailOldId) {
+        this.stuItemGradeDetailOldId = stuItemGradeDetailOldId;
     }
 }

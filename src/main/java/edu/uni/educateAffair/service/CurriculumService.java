@@ -1,11 +1,12 @@
 package edu.uni.educateAffair.service;
 
-import edu.uni.educateAffair.VO.CurriculumWithCondition;
-import edu.uni.educateAffair.bean.Curriculum;
 import edu.uni.educateAffair.VO.CurriculumVO;
+import edu.uni.educateAffair.VO.CurriculumWithCondition;
+import edu.uni.educateAffair.VO.InputCurriculumVO;
+import edu.uni.educateAffair.VO.RegulateCurriculum;
+import edu.uni.educateAffair.bean.Curriculum;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -69,4 +70,18 @@ public interface CurriculumService {
      *@Date:Created in {16:35} {2019/5/28}
      */
     List<Integer> selectAllYear();
+    /**
+        *@Author:梁俊杰
+        *@Description:根据学期+开始结束星期+星期几筛选出CanlendarID
+        *@Date:Created in {14:48} {2019/6/1}
+    */
+    List<Long> insertCurriculumForCanlendar(InputCurriculumVO inputCurriculumVO);
+    /**
+        *@Author:梁俊杰
+        *@Description:调课
+        *@Date:Created in {11:18} {2019/6/3}
+    */
+    boolean updateForRegulateCurriculum(RegulateCurriculum regulateCurriculum);
+
+    List<CurriculumVO> selectCurriculumByClassAndSemesterAndWeek(Map<String, Object> map);
 }

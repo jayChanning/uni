@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
 import edu.uni.gradeManagement1.pojo.Item;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**

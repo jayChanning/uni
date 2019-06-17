@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * author：黄育林
  * create: 2019.4.20
- * modified: 2019.5.9
+ * modified: 2019.5.17
  * 功能：三级部门实现类
  */
 @Service
@@ -118,6 +118,16 @@ public class SubdepartmentServiceImpl implements SubdepartmentService {
     @Override
     public Subdepartment select(long id) {
         return subdepartmentMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Subdepartment> selectLikeName(String name) {
+        //筛选出有效记录
+        SubdepartmentExample example = new SubdepartmentExample();
+        SubdepartmentExample.Criteria criteria = example.createCriteria();
+        criteria.andNameLike("%"+name+"%").andDeletedEqualTo(false);
+        List<Subdepartment> subdepartments = subdepartmentMapper.selectByExample(example);
+        return subdepartments;
     }
 
     @Override

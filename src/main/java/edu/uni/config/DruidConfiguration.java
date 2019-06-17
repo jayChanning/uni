@@ -13,6 +13,10 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 
 import javax.sql.DataSource;
 
+/**
+ * @Author 何亮
+ * @date 2019/4/3
+ */
 @Configuration
 public class DruidConfiguration {
 

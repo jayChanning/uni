@@ -32,4 +32,6 @@ public interface CanlendarMapper {
     int updateByPrimaryKeySelective(Canlendar record);
 
     int updateByPrimaryKey(Canlendar record);
+
+    List<String> selectWeekBySemester(Long sid);
 }

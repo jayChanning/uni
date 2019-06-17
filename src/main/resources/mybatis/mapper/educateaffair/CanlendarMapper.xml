@@ -120,18 +120,18 @@
     #{deleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertBatch" parameterType="edu.uni.educateAffair.bean.Canlendar" useGeneratedKeys="true" keyProperty="id">
-    insert into ea_canlendar(university_id, semester_id, the_date,
-    week, `day`, holiday,
-    `describe`, datetime, by_who,
-    deleted)
-    values
-    <foreach collection="list" item="item" index="index" separator=",">
-      (#{item.universityId,jdbcType=BIGINT}, #{item.semesterId,jdbcType=BIGINT}, #{item.theDate,jdbcType=DATE},
-      #{item.week,jdbcType=VARCHAR}, #{item.day,jdbcType=VARCHAR}, #{item.holiday,jdbcType=INTEGER},
-      #{item.describe,jdbcType=VARCHAR}, #{item.datetime,jdbcType=TIMESTAMP}, #{item.byWho,jdbcType=BIGINT},
-      #{item.deleted,jdbcType=INTEGER})
-    </foreach>
-  </insert>
+  insert into ea_canlendar(university_id, semester_id, the_date,
+  week, `day`, holiday,
+  `describe`, datetime, by_who,
+  deleted)
+  values
+  <foreach collection="list" item="item" index="index" separator=",">
+    (#{item.universityId,jdbcType=BIGINT}, #{item.semesterId,jdbcType=BIGINT}, #{item.theDate,jdbcType=DATE},
+    #{item.week,jdbcType=VARCHAR}, #{item.day,jdbcType=VARCHAR}, #{item.holiday,jdbcType=INTEGER},
+    #{item.describe,jdbcType=VARCHAR}, #{item.datetime,jdbcType=TIMESTAMP}, #{item.byWho,jdbcType=BIGINT},
+    #{item.deleted,jdbcType=INTEGER})
+  </foreach>
+</insert>
   <insert id="insertSelective" parameterType="edu.uni.educateAffair.bean.Canlendar">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
@@ -316,4 +316,10 @@
         deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectWeekBySemester" parameterType="Long" resultType="String">
+    SELECT `week`
+    FROM ea_canlendar
+    WHERE semester_id=#{sid} AND deleted=0
+    GROUP BY `week`
+  </select>
 </mapper>

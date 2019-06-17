@@ -525,63 +525,63 @@ public class GmApplyOneExample {
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdIsNull() {
-            addCriterion("stu_item_grade_detail_id is null");
+        public Criteria andStuItemGradeDetailNewIdIsNull() {
+            addCriterion("stu_item_grade_detail_new_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdIsNotNull() {
-            addCriterion("stu_item_grade_detail_id is not null");
+        public Criteria andStuItemGradeDetailNewIdIsNotNull() {
+            addCriterion("stu_item_grade_detail_new_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdEqualTo(Long value) {
-            addCriterion("stu_item_grade_detail_id =", value, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_new_id =", value, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdNotEqualTo(Long value) {
-            addCriterion("stu_item_grade_detail_id <>", value, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdNotEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_new_id <>", value, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdGreaterThan(Long value) {
-            addCriterion("stu_item_grade_detail_id >", value, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdGreaterThan(Long value) {
+            addCriterion("stu_item_grade_detail_new_id >", value, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("stu_item_grade_detail_id >=", value, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_new_id >=", value, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdLessThan(Long value) {
-            addCriterion("stu_item_grade_detail_id <", value, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdLessThan(Long value) {
+            addCriterion("stu_item_grade_detail_new_id <", value, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdLessThanOrEqualTo(Long value) {
-            addCriterion("stu_item_grade_detail_id <=", value, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdLessThanOrEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_new_id <=", value, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdIn(List<Long> values) {
-            addCriterion("stu_item_grade_detail_id in", values, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdIn(List<Long> values) {
+            addCriterion("stu_item_grade_detail_new_id in", values, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdNotIn(List<Long> values) {
-            addCriterion("stu_item_grade_detail_id not in", values, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdNotIn(List<Long> values) {
+            addCriterion("stu_item_grade_detail_new_id not in", values, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdBetween(Long value1, Long value2) {
-            addCriterion("stu_item_grade_detail_id between", value1, value2, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdBetween(Long value1, Long value2) {
+            addCriterion("stu_item_grade_detail_new_id between", value1, value2, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
-        public Criteria andStuItemGradeDetailIdNotBetween(Long value1, Long value2) {
-            addCriterion("stu_item_grade_detail_id not between", value1, value2, "stuItemGradeDetailId");
+        public Criteria andStuItemGradeDetailNewIdNotBetween(Long value1, Long value2) {
+            addCriterion("stu_item_grade_detail_new_id not between", value1, value2, "stuItemGradeDetailNewId");
             return (Criteria) this;
         }
 
@@ -962,6 +962,66 @@ public class GmApplyOneExample {
 
         public Criteria andDeletedNotBetween(Byte value1, Byte value2) {
             addCriterion("deleted not between", value1, value2, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdIsNull() {
+            addCriterion("stu_item_grade_detail_old_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdIsNotNull() {
+            addCriterion("stu_item_grade_detail_old_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_old_id =", value, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdNotEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_old_id <>", value, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdGreaterThan(Long value) {
+            addCriterion("stu_item_grade_detail_old_id >", value, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_old_id >=", value, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdLessThan(Long value) {
+            addCriterion("stu_item_grade_detail_old_id <", value, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdLessThanOrEqualTo(Long value) {
+            addCriterion("stu_item_grade_detail_old_id <=", value, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdIn(List<Long> values) {
+            addCriterion("stu_item_grade_detail_old_id in", values, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdNotIn(List<Long> values) {
+            addCriterion("stu_item_grade_detail_old_id not in", values, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdBetween(Long value1, Long value2) {
+            addCriterion("stu_item_grade_detail_old_id between", value1, value2, "stuItemGradeDetailOldId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStuItemGradeDetailOldIdNotBetween(Long value1, Long value2) {
+            addCriterion("stu_item_grade_detail_old_id not between", value1, value2, "stuItemGradeDetailOldId");
             return (Criteria) this;
         }
     }

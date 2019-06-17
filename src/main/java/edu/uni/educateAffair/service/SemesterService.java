@@ -2,15 +2,12 @@ package edu.uni.educateAffair.service;
 
 import edu.uni.educateAffair.bean.Canlendar;
 import edu.uni.educateAffair.bean.Semester;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 /**
  * @Author:梁俊杰
- * @Description:
  * @Date:Created in 8:23 2019/4/29
  */
 public interface SemesterService {

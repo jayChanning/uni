@@ -7,7 +7,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -35,7 +38,7 @@ public class DaoDiController {
     ) {
         System.out.println("DaoDiController--"+courseName + ":" + courseId + ":" + courseClass);
         //用户id，此处为教师id(employeeId)，对应user表id
-        long usrId = 1963;
+        long usrId = 1941;
         //初始化空字符串为null
         if (courseClass == "")
             courseClass = null;

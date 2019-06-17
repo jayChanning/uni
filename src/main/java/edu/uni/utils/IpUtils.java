@@ -5,6 +5,11 @@ import java.net.UnknownHostException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 常用IP工具类
+ * @Author 何亮
+ * @date 2019/4/3
+ */
 public class IpUtils {
     public static String getIpAddr(HttpServletRequest request) {
         String ipAddress = null;

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * author：黄育林
  * create: 2019.4.20
- * modified: 2019.5.9
+ * modified: 2019.5.17
  * 功能：学校接口实现类
  */
 @Service
@@ -89,6 +89,20 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public University select(long id) {
         return universityMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 根据名称模糊查找学校
+     * @return
+     */
+    @Override
+    public List<University> selectLikeName(String name) {
+        //筛选出有效记录
+        UniversityExample example = new UniversityExample();
+        UniversityExample.Criteria criteria = example.createCriteria();
+        criteria.andNameLike("%"+name+"%").andDeletedEqualTo(false);
+        List<University> universities = universityMapper.selectByExample(example);
+        return universities;
     }
 
     /**

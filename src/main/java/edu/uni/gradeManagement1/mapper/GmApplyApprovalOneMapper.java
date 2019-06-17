@@ -2,8 +2,9 @@ package edu.uni.gradeManagement1.mapper;
 
 import edu.uni.gradeManagement1.bean.GmApplyApprovalOne;
 import edu.uni.gradeManagement1.bean.GmApplyApprovalOneExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface GmApplyApprovalOneMapper {
     int countByExample(GmApplyApprovalOneExample example);

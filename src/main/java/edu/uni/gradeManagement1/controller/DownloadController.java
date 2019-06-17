@@ -7,12 +7,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+
 /**
 * @author 陈少鑫
 * <p>@description :文件下载工具类</p>
@@ -20,10 +20,17 @@ import java.io.*;
 * @modified 19:40 2019-05-19
 */
 
-@Api(description = "成绩模块：文件下载工具类")
+/**
+* @author chenshaoxin
+* @description
+* @date 14:12 2019-06-16
+* @modified 14:12 2019-06-16
+*/
+@Api(description = "陈少鑫: 成绩管理模块：文件下载工具类")
 @Controller
 @RequestMapping(value = "/json/gradeManagement1")
 public class DownloadController {
+
 
     @ApiOperation(value = "处理文件下载的接口")
     @GetMapping(value = "download")

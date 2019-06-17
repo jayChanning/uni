@@ -32,6 +32,7 @@ public class GradeManagementConfig {
     public GradeManagementConfig() {
     }
 
+
     public Integer getPageSize() {
         return pageSize;
     }

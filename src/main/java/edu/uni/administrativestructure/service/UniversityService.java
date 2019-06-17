@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * author：黄育林
  * create: 2019.4.20
+ * modified:2019.5.17
  * 功能：学校接口
  */
 public interface UniversityService {
@@ -38,6 +39,13 @@ public interface UniversityService {
      * @return
      */
     University select(long id);
+
+    /**
+     * 根据名称模糊查找学校
+     * @param
+     * @return
+     */
+    List<University> selectLikeName(String name);
 
     /**
      * 查找所有学校

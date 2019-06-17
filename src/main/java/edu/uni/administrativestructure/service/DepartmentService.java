@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import edu.uni.administrativestructure.bean.Department;
 
 import java.util.List;
+
 /**
  author:黄永佳
  create:2019.4.19
@@ -48,15 +49,27 @@ public interface DepartmentService {
 
     /**
      * 分学校分页查询部门
-     * @param pageNum
      * @param universityId
      * @return
      */
-    PageInfo<Department> selectPageByUniversity(int pageNum, long universityId);
+    List<Department> selectPageByUniversity(long universityId);
 
     /**
      * 查找所有部门
      * @return
      */
     List<Department> selectAll();
+    /*
+    * 根据部门名称模糊查询记录
+    * */
+    List<Department> selectLikeName(String name);
+//查找学院
+    List<Department> selectLikeDepartmentName(String name);
+
+    /**
+     *@Author:梁俊杰
+     *@Description:查找所有学院
+     *@Date:Created in {1:47} {2019/6/4}
+     */
+    List<Department> selectAllInstitute();
 }

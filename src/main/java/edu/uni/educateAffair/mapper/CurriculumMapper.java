@@ -1,9 +1,10 @@
 package edu.uni.educateAffair.mapper;
 
+import edu.uni.educateAffair.VO.CurriculumVO;
 import edu.uni.educateAffair.VO.CurriculumWithCondition;
+import edu.uni.educateAffair.VO.InputCurriculumVO;
 import edu.uni.educateAffair.bean.Curriculum;
 import edu.uni.educateAffair.bean.CurriculumExample;
-import edu.uni.educateAffair.VO.CurriculumVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -40,7 +41,13 @@ public interface CurriculumMapper {
     List<Curriculum> getCurriculumMsgList(Map<String, List<Long>> curriculumMap);
 
     List<Long> getCurriculumIdByUserAndCanlendar(Map<String, Object> userandcanlenar);
+
     //根据学号或教师编号获取当前学期当前周的课程表
     List<Curriculum> getCurriculumByStudentOrEmployeeAndSemesterIDANDWeek(Map<String, Object> map);
+    //根据学期+开始结束星期+星期几筛选出CanlendarID
+    List<Long> insertCurriculumForCanlendar(InputCurriculumVO inputCurriculumVO);
+    //调课
+    int insertCurriculumBatch(List<Curriculum> curriculumList);
 
+    List<Curriculum> selectCurriculumByClassAndSemesterAndWeek(Map<String, Object> map);
 }

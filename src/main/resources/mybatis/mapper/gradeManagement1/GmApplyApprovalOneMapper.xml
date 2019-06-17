@@ -8,7 +8,6 @@
     <result column="application_status" property="applicationStatus" jdbcType="TINYINT" />
     <result column="reason" property="reason" jdbcType="VARCHAR" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
-    <result column="send_who" property="sendWho" jdbcType="BIGINT" />
     <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="deleted" property="deleted" jdbcType="TINYINT" />
   </resultMap>
@@ -71,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gm_apply_id, step, application_status, reason, by_who, send_who, datetime, deleted
+    id, gm_apply_id, step, application_status, reason, by_who, datetime, deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOneExample" >
     select
@@ -106,12 +105,10 @@
   <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOne" >
     insert into gm_apply_approval_one (id, gm_apply_id, step, 
       application_status, reason, by_who, 
-      send_who, datetime, deleted
-      )
+      datetime, deleted)
     values (#{id,jdbcType=BIGINT}, #{gmApplyId,jdbcType=BIGINT}, #{step,jdbcType=INTEGER}, 
       #{applicationStatus,jdbcType=TINYINT}, #{reason,jdbcType=VARCHAR}, #{byWho,jdbcType=BIGINT}, 
-      #{sendWho,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT}
-      )
+      #{datetime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="edu.uni.gradeManagement1.bean.GmApplyApprovalOne" >
     insert into gm_apply_approval_one
@@ -133,9 +130,6 @@
       </if>
       <if test="byWho != null" >
         by_who,
-      </if>
-      <if test="sendWho != null" >
-        send_who,
       </if>
       <if test="datetime != null" >
         datetime,
@@ -162,9 +156,6 @@
       </if>
       <if test="byWho != null" >
         #{byWho,jdbcType=BIGINT},
-      </if>
-      <if test="sendWho != null" >
-        #{sendWho,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
         #{datetime,jdbcType=TIMESTAMP},
@@ -201,9 +192,6 @@
       <if test="record.byWho != null" >
         by_who = #{record.byWho,jdbcType=BIGINT},
       </if>
-      <if test="record.sendWho != null" >
-        send_who = #{record.sendWho,jdbcType=BIGINT},
-      </if>
       <if test="record.datetime != null" >
         datetime = #{record.datetime,jdbcType=TIMESTAMP},
       </if>
@@ -223,7 +211,6 @@
       application_status = #{record.applicationStatus,jdbcType=TINYINT},
       reason = #{record.reason,jdbcType=VARCHAR},
       by_who = #{record.byWho,jdbcType=BIGINT},
-      send_who = #{record.sendWho,jdbcType=BIGINT},
       datetime = #{record.datetime,jdbcType=TIMESTAMP},
       deleted = #{record.deleted,jdbcType=TINYINT}
     <if test="_parameter != null" >
@@ -248,9 +235,6 @@
       <if test="byWho != null" >
         by_who = #{byWho,jdbcType=BIGINT},
       </if>
-      <if test="sendWho != null" >
-        send_who = #{sendWho,jdbcType=BIGINT},
-      </if>
       <if test="datetime != null" >
         datetime = #{datetime,jdbcType=TIMESTAMP},
       </if>
@@ -267,7 +251,6 @@
       application_status = #{applicationStatus,jdbcType=TINYINT},
       reason = #{reason,jdbcType=VARCHAR},
       by_who = #{byWho,jdbcType=BIGINT},
-      send_who = #{sendWho,jdbcType=BIGINT},
       datetime = #{datetime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}

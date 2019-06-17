@@ -74,4 +74,17 @@ public class Timetable {
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "Timetable{" +
+                "id=" + id +
+                ", universityId=" + universityId +
+                ", name='" + name + '\'' +
+                ", period='" + period + '\'' +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

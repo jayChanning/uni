@@ -2,7 +2,6 @@ package edu.uni.gradeManagement1.controller;
 
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
-import edu.uni.educateAffair.mapper.SemesterMapper;
 import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.StuItemGrade;
 import edu.uni.gradeManagement1.service.StuItemGradeService;
@@ -12,7 +11,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author 蔡政堂

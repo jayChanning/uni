@@ -31,8 +31,8 @@ public class CourseItemDetailController {
     private CourseItemDetailService courseItemDetailService;
     @Autowired
     private RedisCache cache;
-    @Autowired
-    private UploadUtil uploadUtil;
+//    @Autowired
+//    private UploadUtil uploadUtil;
 //    @Autowired
 //    private GradeManagementConfig gradeManagementConfig;
 

@@ -3,7 +3,6 @@ package edu.uni.educateAffair.bean;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
-import java.util.List;
 
 public class Curriculum {
     private Long id;

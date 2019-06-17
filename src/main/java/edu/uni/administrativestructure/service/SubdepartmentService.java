@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * author：黄育林
  * create: 2019.4.20
- * modified: 2019.4.24
+ * modified: 2019.5.17
  * 功能：三级部门接口
  */
 public interface SubdepartmentService {
@@ -39,6 +39,13 @@ public interface SubdepartmentService {
      * @return
      */
     Subdepartment select(long id);
+
+    /**
+     * 根据三级部门名称模糊查询三级部门
+     * @param name
+     * @return
+     */
+    List<Subdepartment> selectLikeName(String name);
 
     /**
      * 查找所有三级部门

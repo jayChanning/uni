@@ -9,6 +9,23 @@ public class StuGradeMain {
 
     private Long semesterId;
 
+    @Override
+    public String toString() {
+        return "StuGradeMain{" +
+                "id=" + id +
+                ", universityId=" + universityId +
+                ", semesterId=" + semesterId +
+                ", studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", score=" + score +
+                ", point=" + point +
+                ", state=" + state +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
+
     private Long studentId;
 
     private Long courseId;

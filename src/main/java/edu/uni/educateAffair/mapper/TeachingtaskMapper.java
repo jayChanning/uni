@@ -28,4 +28,6 @@ public interface TeachingtaskMapper {
     int updateByPrimaryKeySelective(Teachingtask record);
 
     int updateByPrimaryKey(Teachingtask record);
+
+    Long selectUserIdByEmployeeId(Long eid);
 }

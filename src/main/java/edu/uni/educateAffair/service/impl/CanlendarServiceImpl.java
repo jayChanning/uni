@@ -1,16 +1,13 @@
 package edu.uni.educateAffair.service.impl;
 
-import edu.uni.educateAffair.bean.Canlendar;
-import edu.uni.educateAffair.bean.CanlendarExample;
-import edu.uni.educateAffair.bean.Semester;
-import edu.uni.educateAffair.bean.SemesterExample;
+import edu.uni.educateAffair.bean.*;
 import edu.uni.educateAffair.mapper.CanlendarMapper;
+import edu.uni.educateAffair.mapper.CurriculumMapper;
 import edu.uni.educateAffair.mapper.SemesterMapper;
 import edu.uni.educateAffair.service.CanlendarService;
 import edu.uni.utils.DayInterval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +25,8 @@ public class CanlendarServiceImpl implements CanlendarService {
     private CanlendarMapper canlendarMapper;
     @Autowired
     private SemesterMapper semesterMapper;
+    @Autowired
+    private CurriculumMapper curriculumMapper;
 
     @Override
     public boolean insertCanlendar(List<Canlendar> canlendar) {
@@ -95,27 +94,9 @@ public class CanlendarServiceImpl implements CanlendarService {
         return sweek;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     //c为校历ID + 是否为假期holiday + 描述describe
     public boolean updateCanlendar(List<Canlendar> c) throws SQLException {
-/*        for (Canlendar canlendar : c){
-        CanlendarExample example = new CanlendarExample();
-        CanlendarExample.Criteria criteria = example.createCriteria();
-        criteria.andIdEqualTo(canlendar.getId());
-        Canlendar DeleteCanlendar = new Canlendar();
-        ////将delete字段改为1
-
-        DeleteCanlendar.setDeleted(notUse);
-        if (canlendarMapper.updateByExampleSelective(DeleteCanlendar,example) <= 0){
-            throw new SQLException();
-        }
-        //新建一条记录
-        if(canlendarMapper.insert(canlendar) <= 0){
-            throw new SQLException();
-        }
-        }
-        return true;*/
         List<Canlendar> NewCanlendarList = new ArrayList<Canlendar>();
         //创建数据副本并将delete设为notUse
         for(Canlendar canlendar : c){
@@ -129,6 +110,26 @@ public class CanlendarServiceImpl implements CanlendarService {
             System.out.println(c1.get(0));
             NewCanlendarList.add(c1.get(0));
         }
+        List<Curriculum> curriculumList = new ArrayList<Curriculum>();
+        for(Canlendar canlendar : c){
+            CurriculumExample example1 = new CurriculumExample();
+            CurriculumExample.Criteria criteria1 = example1.createCriteria();
+            criteria1.andCanlendarIdEqualTo(canlendar.getId());
+            curriculumList = curriculumMapper.selectByExample(example1);
+            if (curriculumList.size() > 0) {
+                //创建数据副本并置为notUse
+                for (Curriculum cu : curriculumList) {
+                    cu.setDeleted(notUse);
+                }
+                System.out.println("课表数据副本" + curriculumList);
+                curriculumMapper.insertCurriculumBatch(curriculumList);
+                Curriculum updateCurriculum = new Curriculum();
+                updateCurriculum.setStatus(1);
+                updateCurriculum.setDatetime(Calendar.getInstance().getTime());
+                criteria1.andDeletedEqualTo(isUse);
+                curriculumMapper.updateByExampleSelective(updateCurriculum, example1);
+            }
+        }
         if(canlendarMapper.insertBatch(NewCanlendarList) <= 0){
             throw new SQLException();
         }
@@ -137,6 +138,7 @@ public class CanlendarServiceImpl implements CanlendarService {
             CanlendarExample example = new CanlendarExample();
             CanlendarExample.Criteria criteria = example.createCriteria();
             criteria.andIdEqualTo(canlendar.getId());
+
             if(canlendarMapper.updateByExampleSelective(canlendar,example) <= 0){
                 throw new SQLException();
             }
@@ -160,7 +162,6 @@ public class CanlendarServiceImpl implements CanlendarService {
         criteria.andDeletedEqualTo(isUse);
         criteria.andSemesterIdEqualTo(sid);
         List<Canlendar> canlendarList = canlendarMapper.selectByExample(example);
-
         return canlendarList;
     }
 
@@ -180,6 +181,11 @@ public class CanlendarServiceImpl implements CanlendarService {
             success = false;
         }
         return success;
+    }
+
+    @Override
+    public List<String> selectWeekBySemester(Long sid) {
+        return canlendarMapper.selectWeekBySemester(sid);
     }
 }
 

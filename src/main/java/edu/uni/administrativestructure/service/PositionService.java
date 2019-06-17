@@ -8,9 +8,11 @@ import java.util.List;
 /**
  * author：黄育林
  * create: 2019.4.20
+ * modified:2019.5.17
  * 功能：岗位信息接口
  */
-public interface PositionService {    /**
+public interface PositionService {
+ /**
  * 保存岗位信息
  * @param position
  * @return
@@ -37,6 +39,12 @@ boolean insert(Position position);
      * @return
      */
     Position select(long id);
+
+    /**
+     * 根据岗位名称模糊查询岗位信息
+     * @return
+     */
+    List<Position> selectLikeName(String name);
 
     /**
      * 查找所有岗位信息

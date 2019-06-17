@@ -271,4 +271,9 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectUserIdByEmployeeId" parameterType="Long" resultType="Long">
+    SELECT user_id
+    FROM employee
+    WHERE id=#{eid}
+  </select>
 </mapper>

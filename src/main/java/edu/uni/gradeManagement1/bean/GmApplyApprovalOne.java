@@ -82,4 +82,18 @@ public class GmApplyApprovalOne {
     public void setDeleted(Byte deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "GmApplyApprovalOne{" +
+                "id=" + id +
+                ", gmApplyId=" + gmApplyId +
+                ", step=" + step +
+                ", applicationStatus=" + applicationStatus +
+                ", reason='" + reason + '\'' +
+                ", byWho=" + byWho +
+                ", datetime=" + datetime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

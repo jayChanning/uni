@@ -1,15 +1,13 @@
 package edu.uni.gradeManagement1.controller;
 
-import com.github.pagehelper.PageInfo;
+import edu.uni.auth.bean.User;
+import edu.uni.auth.service.AuthService;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.educateAffair.VO.CurriculumVO;
 import edu.uni.educateAffair.VO.CurriculumWithCondition;
-import edu.uni.educateAffair.bean.Semester;
 import edu.uni.educateAffair.service.CurriculumService;
 import edu.uni.gradeManagement1.bean.CourseItem;
-import edu.uni.gradeManagement1.bean.StuGradeMain;
-import edu.uni.gradeManagement1.pojo.ItemGradeInfo;
 import edu.uni.gradeManagement1.service.CourseItemService;
 import edu.uni.gradeManagement1.service.DaoDiService;
 import edu.uni.gradeManagement1.service.StuGradeMainService;
@@ -24,23 +22,34 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author 蔡政堂
- * create 2019/5/5
- * modified 2019/5/21
- * description TODO
+ * anthor:林晓锋
+ * create：2019-4-28
+ * modified:2019-5-7
+ * 功能：查询学生主表信息
  */
-
-@Api(description = "成绩管理：课程评分组成项模块")
+@Api(description = "林晓峰：成绩管理模块：查询成绩明细")
 @Controller
-@RequestMapping("json/gradeManagement1")
+@RequestMapping("/json/gradeManagement1")
 public class CourseItemController {
     @Autowired
     private CourseItemService courseItemService;
+    @Autowired
+    AuthService authService;
+//
+//    @Resource
+//    private CourseItem courseItem;
+
+
+    /**
+     * author 蔡政堂
+     */
+
+   // @Autowired
+   // private CourseItemService courseItemService;
     @Autowired
     private RedisCache cache;
     @Autowired
@@ -52,6 +61,8 @@ public class CourseItemController {
 
     /**
      * 内部类，专门用来管理每个方法所对应缓存的名称。
+     */  /**
+     * author 蔡政堂
      */
     static class CacheNameHelper{
         //gm_courseItem_{成绩主表id}
@@ -67,6 +78,8 @@ public class CourseItemController {
      * 新增课程成绩评分组成项的记录
      * @param courseItem
      * @return
+     */  /**
+     * author 蔡政堂
      */
     @ApiOperation(value = "新增课程成绩评分组成项的记录", notes = "已测试!")
     @ApiImplicitParam(name = "courseItem",value = "课程成绩评分组成项实体类",required = true,dataType = "CourseItem")
@@ -106,6 +119,8 @@ public class CourseItemController {
      * @param id 评分项id
      * @param response
      * @throws IOException
+     */  /**
+     * author 蔡政堂
      */
 //    @ApiOperation(value = "根据id获取成绩评分组成项",notes = "需要id")
 //    @ApiImplicitParam(name = "id", value = "评分项id",required = true,dataType = "Long",paramType = "path")
@@ -139,6 +154,8 @@ public class CourseItemController {
      * 获取所有评分组成项信息--test1--listAll(default)
      * @param response
      * @throws IOException
+     */  /**
+     * author 蔡政堂
      */
     /*@ApiOperation(value = "获取所有成绩评分组成项",notes = "暂时不使用")
     @GetMapping("/courseItem/listAll")
@@ -159,16 +176,18 @@ public class CourseItemController {
      * 录入成绩父页面数据 --/listInfo
      * 包含搜索栏的处理也在这
      * @param response
+     */  /**
+     * author 蔡政堂
      */
     @ApiOperation(value = "录入成绩页面数据，搜索栏所用接口",notes = "可分页传数据，已测试！")
-   // @ApiImplicitParam(name = "pageNum", value = "请求的页码",required = true,dataType = "Integer",paramType = "path")
+    // @ApiImplicitParam(name = "pageNum", value = "请求的页码",required = true,dataType = "Integer",paramType = "path")
     @GetMapping("/courseItem/listInfo")
     @ResponseBody
     public Result Display2F(@ApiParam(value = "请求的页码", required = true) @RequestParam(value = "pageNum") int pageNum,
-                          @ApiParam(value = "课程编号") @RequestParam(value = "courseId", required = false) String courseId,
-                          @ApiParam(value = "课程名称") @RequestParam(value = "courseName", required = false ) String courseName,
-                          @ApiParam(value = "教学班级-如16软件1") @RequestParam(value = "courseClass", required = false ) String courseClass,
-                          HttpServletResponse response) {
+                            @ApiParam(value = "课程编号") @RequestParam(value = "courseId", required = false) String courseId,
+                            @ApiParam(value = "课程名称") @RequestParam(value = "courseName", required = false ) String courseName,
+                            @ApiParam(value = "教学班级-如16软件1") @RequestParam(value = "courseClass", required = false ) String courseClass,
+                            HttpServletResponse response) {
 
         response.setContentType("application/json;charset=utf-8");
 //        System.out.println("pageNum="+pageNum);
@@ -221,6 +240,8 @@ public class CourseItemController {
      * @param response
      * date 2019/6/5
      * @throws IOException
+     */  /**
+     * author 蔡政堂
      */
 //    private void cutPage(Integer pageNum, HttpServletResponse response) throws IOException {
 //        String json;
@@ -313,7 +334,9 @@ public class CourseItemController {
 //        System.out.println(json);
 //        response.getWriter().write(json);
 //    }
-
+    /**
+     * author 蔡政堂
+     */
     @ApiOperation(value = "查询学期、校历信息接口", notes = "测试中...")
     @GetMapping("/courseItem/findItem/")
     public void findItem(@RequestParam Long courseId, String courseName, String courseClass,
@@ -333,6 +356,207 @@ public class CourseItemController {
         }
         System.out.println(json);
         response.getWriter().write(json);
+    }
+
+    /**
+     * 查询组成项得分
+     * @param id
+     * @return
+     */  /**
+     * author 林晓锋
+     */
+    @ApiOperation(value = "查询组成项得分", notes = "已测试")
+    @RequestMapping(value = "/selectCourseItem",method = RequestMethod.GET)
+    @ResponseBody
+    public Result getCourseItem(@ApiParam( name= "id",value ="主表id", required = true )
+                                    @RequestParam(name="id", required =true) Long id){
+        System.out.println(authService.getUser());
+        User user = authService.getUser();
+        if (user == null)
+            return Result.build(ResultType.Failed, "你沒有登錄");
+        List<HashMap> list = courseItemService.selectCourseItem(id);
+
+       return Result.build(ResultType.Success).appendData("data", list);
+
+    }
+
+    /**
+     * 查询组成项名称为作业的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     *//**
+     * author 林晓锋
+     */
+    @ApiOperation(value ="查询组成项名称为作业的内容及得分",notes = "正在测试")
+    @RequestMapping(value = "/selectCourseItemDetail1",method = RequestMethod.GET)
+    @ResponseBody
+
+    public Result selectCourseItemDetail1(
+            @ApiParam( name= "course_item_id",value ="课程组成项id", required = true )
+            @RequestParam(name="course_item_id")
+            Long course_item_id,
+            @ApiParam( name= "stu_item_grade_id",value ="组成项得分id", required = true )
+            @RequestParam(name="stu_item_grade_id")
+            Long stu_item_grade_id ) {
+
+        System.out.println(authService.getUser());
+        User user = authService.getUser();
+        if (user == null)
+            return Result.build(ResultType.Failed, "你沒有登錄");
+        List<HashMap> list1 = courseItemService.selectCourseItemDetail1( course_item_id,stu_item_grade_id );
+
+        return Result.build(ResultType.Success).appendData("data",list1);
+    }
+
+    /**
+     * 查询组成项名称为考勤的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     *//**
+     * author 林晓锋
+     */
+    @ApiOperation(value ="查询组成项名称为考勤的内容及得分",notes = "正在测试")
+    @RequestMapping(value = "/selectCourseItemDetail2",method = RequestMethod.GET)
+    @ResponseBody
+
+    public Result selectCourseItemDetail2(
+            @ApiParam( name= "course_item_id",value ="课程组成项id", required = true )
+            @RequestParam(name="course_item_id")
+                    Long course_item_id,
+            @ApiParam( name= "stu_item_grade_id",value ="组成项得分id", required = true )
+            @RequestParam(name="stu_item_grade_id")
+                    Long stu_item_grade_id ) {
+
+        System.out.println(authService.getUser());
+        User user = authService.getUser();
+        if (user == null)
+            return Result.build(ResultType.Failed, "你沒有登錄");
+
+        List<HashMap> list2 = courseItemService.selectCourseItemDetail2( course_item_id,stu_item_grade_id );
+
+        return Result.build(ResultType.Success).appendData("data",list2);
+    }
+
+    /**
+     * 查询组成项名称为期中考试的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     *//**
+     * author 林晓锋
+     */
+    @ApiOperation(value ="查询组成项名称为期中的内容及得分",notes = "正在测试")
+    @RequestMapping(value = "/selectCourseItemDetail3",method = RequestMethod.GET)
+    @ResponseBody
+
+    public Result selectCourseItemDetail3(
+            @ApiParam( name= "course_item_id",value ="课程组成项id", required = true )
+            @RequestParam(name="course_item_id")
+                    Long course_item_id,
+            @ApiParam( name= "stu_item_grade_id",value ="组成项得分id", required = true )
+            @RequestParam(name="stu_item_grade_id")
+                    Long stu_item_grade_id ) {
+
+        System.out.println(authService.getUser());
+        User user = authService.getUser();
+        if (user == null)
+            return Result.build(ResultType.Failed, "你沒有登錄");
+
+        List<HashMap> list3 = courseItemService.selectCourseItemDetail3(course_item_id,stu_item_grade_id );
+
+        return Result.build(ResultType.Success).appendData("data",list3);
+    }
+
+    /**
+     * 查询组成项名称为实验的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     *//**
+     * author 林晓锋
+     */
+    @ApiOperation(value ="查询组成项名称为实验的内容及得分",notes = "正在测试")
+    @RequestMapping(value = "/selectCourseItemDetail4",method = RequestMethod.GET)
+    @ResponseBody
+
+    public Result selectCourseItemDetail4(
+            @ApiParam( name= "course_item_id",value ="课程组成项id", required = true )
+            @RequestParam(name="course_item_id")
+                    Long course_item_id,
+            @ApiParam( name= "stu_item_grade_id",value ="组成项得分id", required = true )
+            @RequestParam(name="stu_item_grade_id")
+                    Long stu_item_grade_id ) {
+
+        System.out.println(authService.getUser());
+        User user = authService.getUser();
+        if (user == null)
+            return Result.build(ResultType.Failed, "你沒有登錄");
+
+        List<HashMap> list4 = courseItemService.selectCourseItemDetail4( course_item_id,stu_item_grade_id );
+
+        return Result.build(ResultType.Success).appendData("data",list4);
+    }
+
+    /**
+     * 查询组成项名称为期末考试的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     *//**
+     * author 林晓锋
+     */
+    @ApiOperation(value ="查询组成项名称为期末考试的内容及得分",notes = "正在测试")
+    @RequestMapping(value = "/selectCourseItemDetail5",method = RequestMethod.GET)
+    @ResponseBody
+
+    public Result selectCourseItemDetail5(
+            @ApiParam( name= "course_item_id",value ="课程组成项id", required = true )
+            @RequestParam(name="course_item_id")
+                    Long course_item_id,
+            @ApiParam( name= "stu_item_grade_id",value ="组成项得分id", required = true )
+            @RequestParam(name="stu_item_grade_id")
+                    Long stu_item_grade_id ) {
+
+        System.out.println(authService.getUser());
+        User user = authService.getUser();
+        if (user == null)
+            return Result.build(ResultType.Failed, "你沒有登錄");
+
+        List<HashMap> list5 = courseItemService.selectCourseItemDetail5( course_item_id,stu_item_grade_id);
+
+        return Result.build(ResultType.Success).appendData("data",list5);
+    }
+
+    /**
+     * 查询组成项名称为其他的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     *//**
+     * author 林晓锋
+     */
+    @ApiOperation(value ="查询组成项名称为其他的内容及得分",notes = "正在测试")
+    @RequestMapping(value = "/selectCourseItemDetail6",method = RequestMethod.GET)
+    @ResponseBody
+
+    public Result selectCourseItemDetail6(
+            @ApiParam( name= "course_item_id",value ="课程组成项id", required = true )
+            @RequestParam(name="course_item_id")
+                    Long course_item_id,
+            @ApiParam( name= "stu_item_grade_id",value ="组成项得分id", required = true )
+            @RequestParam(name="stu_item_grade_id")
+                    Long stu_item_grade_id ) {
+
+        System.out.println(authService.getUser());
+        User user = authService.getUser();
+        if (user == null)
+            return Result.build(ResultType.Failed, "你沒有登錄");
+
+        List<HashMap> list6 = courseItemService.selectCourseItemDetail6( course_item_id,stu_item_grade_id);
+
+        return Result.build(ResultType.Success).appendData("data",list6);
     }
 
 }

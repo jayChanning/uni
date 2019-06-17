@@ -6,10 +6,14 @@ import edu.uni.utils.JsonUtils;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * @author 何亮
+ * @date 2019/4/3
+ */
 public class Result extends HashMap<String, Object>{
 
 
-    private Result(int code, String msg) {
+    private Result(int code, String msg) {    
         this.put("code", code);    this.put("msg", msg);   
     }
 

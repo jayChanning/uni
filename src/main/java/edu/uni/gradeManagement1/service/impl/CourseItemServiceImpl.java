@@ -6,30 +6,32 @@ import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.bean.CourseItemExample;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
-import edu.uni.gradeManagement1.pojo.Item;
 import edu.uni.gradeManagement1.service.CourseItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author 蔡政堂
- * create 2019/4/29
- * modified 2019/4/29
- * description TODO
+ * @author 蔡政堂，林晓峰，陈少鑫
+ * create: 2019.4.26
+ * modified: 2019.4.26
+ * 功能：此实现类实现接口CourseItemService
  */
 
 @Service
 public class CourseItemServiceImpl implements CourseItemService {
-    @Autowired
-    private CourseItemMapper courseItemMapper;  //此处报错可忽略，编译后会自动生成
+
+    @Resource
+    private CourseItemMapper courseItemMapper;
     @Autowired
     private GradeManagementConfig gmConfig;
 
     /**
      * 实现课程成绩评分组成项表的录入
+     * author 蔡政堂
      * @param courseItem
      * @return
      */
@@ -43,7 +45,7 @@ public class CourseItemServiceImpl implements CourseItemService {
     }
 
     /**
-     * 根据id查询课程成绩评分组成项
+     * 根据id查询课程成绩评分组成项 author 蔡政堂
      * @param id
      * @return
      */
@@ -53,7 +55,7 @@ public class CourseItemServiceImpl implements CourseItemService {
     }
 
     /**
-     * 查询所有的课程成绩评分组成项
+     * 查询所有的课程成绩评分组成项 author 蔡政堂
      * @return
      */
     @Override
@@ -66,7 +68,7 @@ public class CourseItemServiceImpl implements CourseItemService {
     }
 
     /**
-     * 暂不可用
+     * 暂不可用 author 蔡政堂
      * @param id
      * @param pageNum
      * @return
@@ -77,4 +79,104 @@ public class CourseItemServiceImpl implements CourseItemService {
         return null;
     }
 
+
+    /**
+     * 查找指定id的记录
+     * author 陈少鑫
+     * @param id course_item主键id
+     * @return 返回CourseIterm实例
+     */
+
+
+    @Override
+    public CourseItem selectById(Long id) {
+       return courseItemMapper.selectByPrimaryKey(id);
+    }
+
+
+    /**
+     * author 林晓锋
+     * 查询组成项及其得分
+     * @param id
+     * @return
+     */
+    @Override
+    public List<HashMap> selectCourseItem (Long id) {
+
+        return courseItemMapper.selectCourseItem( id ) ;
+    }
+
+    /**author 林晓锋
+     * 查询组成项名称为作业的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     */
+    @Override
+    public List<HashMap> selectCourseItemDetail1(Long course_item_id,Long stu_item_grade_id ) {
+
+        return courseItemMapper.selectCourseItemDetail1(course_item_id,stu_item_grade_id );
+    }
+
+    /**author 林晓锋
+     * 查询组成项名称为考勤的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     */
+    @Override
+    public List<HashMap> selectCourseItemDetail2(Long course_item_id,Long stu_item_grade_id) {
+
+        return courseItemMapper.selectCourseItemDetail2(course_item_id,stu_item_grade_id);
+    }
+
+
+    /**author 林晓锋
+     * 查询组成项名称为期中考试的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     */
+    @Override
+    public List<HashMap> selectCourseItemDetail3(Long course_item_id,Long stu_item_grade_id) {
+
+        return courseItemMapper.selectCourseItemDetail3(course_item_id,stu_item_grade_id);
+    }
+
+    /**author 林晓锋
+     * 查询组成项名称为实验的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     */
+    @Override
+    public List<HashMap> selectCourseItemDetail4(Long course_item_id,Long stu_item_grade_id) {
+
+        return courseItemMapper.selectCourseItemDetail4(course_item_id,stu_item_grade_id);
+    }
+
+    /**author 林晓锋
+     * 查询组成项名称为期末考试的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     */
+    @Override
+    public List<HashMap> selectCourseItemDetail5(Long course_item_id,Long stu_item_grade_id) {
+
+        return courseItemMapper.selectCourseItemDetail5(course_item_id,stu_item_grade_id);
+    }
+
+    /**author 林晓锋
+     * author 林晓锋
+     * 查询组成项名称为其他的内容及得分
+     * @param course_item_id
+     * @param stu_item_grade_id
+     * @return
+     */
+    @Override
+    public List<HashMap> selectCourseItemDetail6(Long course_item_id,Long stu_item_grade_id) {
+
+        return courseItemMapper.selectCourseItemDetail6(course_item_id,stu_item_grade_id);
+    }
 }

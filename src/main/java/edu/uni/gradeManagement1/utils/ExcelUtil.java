@@ -6,7 +6,6 @@ import com.alibaba.excel.metadata.Sheet;
 import edu.uni.bean.ResultType;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;

@@ -1,10 +1,6 @@
 package edu.uni.educateAffair.service;
 
-import edu.uni.bean.Result;
 import edu.uni.educateAffair.bean.Canlendar;
-import edu.uni.educateAffair.bean.Semester;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -58,4 +54,6 @@ public interface CanlendarService {
         *@Date:Created in {8:46} {2019/5/9}
     */
     List<Canlendar> selectBySemesterId(Long sid);
+
+    List<String> selectWeekBySemester(Long sid);
 }

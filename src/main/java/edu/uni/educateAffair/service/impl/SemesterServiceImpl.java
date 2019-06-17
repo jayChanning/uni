@@ -171,7 +171,7 @@ public class SemesterServiceImpl implements SemesterService {
     }
 
     //
-    // todo 学期id集合 学期区间前端
+    // todo  晓锋修改过，要使用或修改跟晓锋说下 学期id集合 学期区间前端(输入开始学期和结束学期返回中间学期集合)
     @Override
     public List<Long> selectByfromtoEnd(Long from, Long to) {
         //设置起始时间和结束时间区间
@@ -184,13 +184,22 @@ public class SemesterServiceImpl implements SemesterService {
         List<Semester> AllSemester = semesterMapper.selectByExample(example);
         //添加符合区间条件的学期ID集合
         List<Long> semesterIdList = new ArrayList<Long>();
-        for (Semester s : AllSemester){
-            if(startDate.before(s.getStart()) && endDate.after(s.getEnd())){
-                semesterIdList.add(s.getId());
+        semesterIdList.add(from);
+        if( AllSemester!=null )
+        {
+            for (Semester s : AllSemester){
+                if(startDate.before(s.getStart()) && endDate.after(s.getEnd())){
+                    semesterIdList.add(s.getId());
+                }
             }
+        }
+        if( from != to )
+        {
+            semesterIdList.add(to);
         }
         return semesterIdList;
     }
+
 
     // todo 学期id加个数 该学期加上前几个学年的学期 成绩模块需要
     @Override

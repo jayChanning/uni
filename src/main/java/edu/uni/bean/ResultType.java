@@ -1,5 +1,8 @@
 package edu.uni.bean;
-
+/**
+ * @author 何亮
+ * @date 2019/4/3
+ */
 public enum ResultType {
     Exception(-3, "抛出异常"),
     Disallow(-2,"服务器不允许"),

@@ -1,12 +1,8 @@
 package edu.uni.educateAffair.mapper;
 
-
-
-
 import edu.uni.educateAffair.bean.Semester;
 import edu.uni.educateAffair.bean.SemesterExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

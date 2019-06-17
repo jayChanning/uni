@@ -1,5 +1,9 @@
 package edu.uni.educateAffair.service;
 
+import edu.uni.professionalcourses.bean.Course;
+
+import java.util.List;
+
 /**
  * @Author:梁俊杰
  * @Description:
@@ -7,4 +11,5 @@ package edu.uni.educateAffair.service;
  */
 public interface TeachingtaskService {
 
+    List<Course> selectCourseBySidCidEid(Long sid, Long cid, Long eid);
 }

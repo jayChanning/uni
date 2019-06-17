@@ -4,7 +4,6 @@ import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;

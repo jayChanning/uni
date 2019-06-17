@@ -2,13 +2,19 @@ package edu.uni.educateAffair.service.impl;
 
 import edu.uni.educateAffair.VO.CurriculumVO;
 import edu.uni.educateAffair.VO.CurriculumWithCondition;
-import edu.uni.educateAffair.bean.*;
+import edu.uni.educateAffair.VO.InputCurriculumVO;
+import edu.uni.educateAffair.VO.RegulateCurriculum;
+import edu.uni.educateAffair.bean.Canlendar;
+import edu.uni.educateAffair.bean.CanlendarExample;
+import edu.uni.educateAffair.bean.Curriculum;
+import edu.uni.educateAffair.bean.CurriculumExample;
 import edu.uni.educateAffair.mapper.CanlendarMapper;
 import edu.uni.educateAffair.mapper.CurriculumMapper;
 import edu.uni.educateAffair.mapper.SemesterMapper;
 import edu.uni.educateAffair.service.CurriculumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -80,7 +86,7 @@ public class CurriculumServiceImpl implements CurriculumService {
         return success;
     }
 
-    //TODO 根据教师ID获取教师某一天的课程
+    //todo 根据教师ID获取教师某一天的课程
     public List<Curriculum> selectCurriculumByDateAndTeacherId(Long teacherId , Date date){
         CurriculumExample example = new CurriculumExample();
         CurriculumExample.Criteria criteria = example.createCriteria();
@@ -132,10 +138,10 @@ public class CurriculumServiceImpl implements CurriculumService {
         return cu ;
     }
 
-    // TODO 学期Id集合，教师id集合，课程id集合， 班级id集合
-    // TODO 返回eA_curriculum 实体集合，校历id换取学期id
+    // todo 学期Id集合，教师id集合，课程id集合， 班级id集合
+    // todo 返回eA_curriculum 实体集合，校历id换取学期id
     @Override
-    public List<Curriculum> selectCurriculumByCondition(List<Long> semesterId ,List<Long> employeeId ,List<Long> courseId ,List<Long> classId){
+    public List<Curriculum> selectCurriculumByCondition(List<Long> semesterId , List<Long> employeeId , List<Long> courseId , List<Long> classId){
         Map<String,List<Long>> curriculumMap = new HashMap<String,List<Long>>();
         curriculumMap.put("semesterId",semesterId);
         curriculumMap.put("employeeId",employeeId);
@@ -151,7 +157,7 @@ public class CurriculumServiceImpl implements CurriculumService {
         System.out.println(curriculumList);
         return curriculumList;
     }
-    // TODO 根据学生ID和时间段获取该时间段该学生的授课安排表
+    // todo 根据学生ID和时间段获取该时间段该学生的授课安排表
     @Override
     public List<Long> selectCurriculumByUserAndCanlendar(Long studentId, String start, String end) {
         Map<String,Object> SearchMap = new HashMap<>();
@@ -202,5 +208,103 @@ public class CurriculumServiceImpl implements CurriculumService {
     @Override
     public List<Integer> selectAllYear() {
         return curriculumMapper.selectAllYear();
+    }
+
+    @Override
+    public List<Long> insertCurriculumForCanlendar(InputCurriculumVO inputCurriculumVO) {
+        return curriculumMapper.insertCurriculumForCanlendar(inputCurriculumVO);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean updateForRegulateCurriculum(RegulateCurriculum regulateCurriculum) {
+        CanlendarExample example1 = new CanlendarExample();
+        CanlendarExample.Criteria criteria1 = example1.createCriteria();
+        criteria1.andDeletedEqualTo(isUse);
+        criteria1.andIdEqualTo(regulateCurriculum.getOriginCanlendar());
+        List<Canlendar> startCanlendarList = canlendarMapper.selectByExample(example1);
+        //创建校历原数据副本
+        for(Canlendar c : startCanlendarList){
+            c.setDeleted(notUse);
+            canlendarMapper.insert(c);
+        }
+        //修改校历为补课
+        Canlendar canlendar = new Canlendar();
+        canlendar.setId(regulateCurriculum.getOriginCanlendar());
+        canlendar.setHoliday(0);
+        canlendar.setDescribe(regulateCurriculum.getDescribe());
+        canlendar.setDatetime(Calendar.getInstance().getTime());
+        canlendarMapper.updateByPrimaryKeySelective(canlendar);
+
+        //修改课程表deleted
+        CurriculumExample example = new CurriculumExample();
+        CurriculumExample.Criteria criteria = example.createCriteria();
+        criteria.andCanlendarIdEqualTo(regulateCurriculum.getOriginCanlendar());
+        List<Curriculum> curriculumList = curriculumMapper.selectByExample(example);
+        if(curriculumList.size() > 0){
+            for(Curriculum cu : curriculumList){
+                cu.setDeleted(notUse);
+                curriculumMapper.updateByPrimaryKeySelective(cu);
+            }
+        }
+        //插入课程表
+        CurriculumExample example4 = new CurriculumExample();
+        CurriculumExample.Criteria criteria4 = example4.createCriteria();
+        criteria4.andCanlendarIdEqualTo(regulateCurriculum.getCompensateCanlendar());
+        System.out.println(regulateCurriculum.getCompensateCanlendar());
+        List<Curriculum> compensateCurriculum = curriculumMapper.selectByExample(example4);
+        for (Curriculum cu : compensateCurriculum){
+            cu.setCanlendarId(regulateCurriculum.getOriginCanlendar());
+        }
+        System.out.println("compensate" + compensateCurriculum);
+        int num = 0;
+            num = curriculumMapper.insertCurriculumBatch(compensateCurriculum);
+        /*CurriculumExample example = new CurriculumExample();
+        CurriculumExample.Criteria criteria = example.createCriteria();
+        criteria.andCanlendarIdEqualTo(regulateCurriculum.getOriginCanlendar());
+        List<Curriculum> curriculumList = curriculumMapper.selectByExample(example);
+        for (Curriculum cu : curriculumList){
+            cu.setStatus(3);
+            cu.setCanlendarId(regulateCurriculum.getCompensateCanlendar());
+            cu.setDatetime(Calendar.getInstance().getTime());
+        }
+
+        System.out.println(curriculumList);
+        int num = 0;
+        if(curriculumList.size() > 0){
+            num = curriculumMapper.insertCurriculumBatch(curriculumList);
+        }*/
+        if(num > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<CurriculumVO> selectCurriculumByClassAndSemesterAndWeek(Map<String, Object> map) {
+        List<Curriculum> curriculumList = curriculumMapper.selectCurriculumByClassAndSemesterAndWeek(map);
+        System.out.println(curriculumList.toString());
+        List<CurriculumVO> curriculumVOList = new ArrayList<>();
+        for(Curriculum cu : curriculumList){
+            CurriculumWithCondition curriculumWithCondition = new CurriculumWithCondition();
+            curriculumWithCondition.setId(cu.getId());
+            curriculumWithCondition.setCanlendarId(cu.getCanlendarId());
+            curriculumWithCondition.setTimeTableId(cu.getTimeTableId());
+            curriculumWithCondition.setFieldId(cu.getFieldId());
+            curriculumWithCondition.setClassId(cu.getClassId());
+            curriculumWithCondition.setEmployeeId(cu.getEmployeeId());
+            curriculumWithCondition.setCourseId(cu.getCourseId());
+            curriculumWithCondition.setCanlendar(true);
+            curriculumWithCondition.setTimetable(true);
+            curriculumWithCondition.setField(true);
+            curriculumWithCondition.setClass(true);
+            curriculumWithCondition.setEmployee(true);
+            curriculumWithCondition.setCourse(true);
+            List<CurriculumVO> curriculumVO1 = curriculumMapper.selectCurriculumNameByCondition(curriculumWithCondition);
+            for (CurriculumVO cv : curriculumVO1){
+                curriculumVOList.add(cv);
+            }
+        }
+        return curriculumVOList;
     }
 }

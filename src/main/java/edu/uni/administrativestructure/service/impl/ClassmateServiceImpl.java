@@ -38,15 +38,18 @@ public class ClassmateServiceImpl implements ClassmateService {
             return false;
         }
         //插入关系表
-        ClassmatePosition classmatePosition =new ClassmatePosition();
-        classmatePosition.setUniversityId(classmate.getUniversityId());
-        classmatePosition.setByWho(classmate.getByWho());
-        classmatePosition.setClassmateId(classmate.getId());
-        classmatePosition.setDatetime(classmate.getDatetime());
-        classmatePosition.setDeleted(classmate.getDeleted());
-        if(classmatePositionMapper.insert(classmatePosition)<=0){
-            return false;
-        } else
+//        long positionid=24;
+//        ClassmatePosition classmatePosition =new ClassmatePosition();
+//        classmatePosition.setUniversityId(classmate.getUniversityId());
+//        classmatePosition.setByWho(classmate.getByWho());
+//        classmatePosition.setClassmateId(classmate.getId());
+//        classmatePosition.setDatetime(classmate.getDatetime());
+//        classmatePosition.setDeleted(classmate.getDeleted());
+//        classmatePosition.setPositionId(positionid);
+//        if(classmatePositionMapper.insert(classmatePosition)<=0){
+//            return false;
+//        }
+        else
             return true;
     }
 

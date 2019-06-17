@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * author：黄育林
  * create: 2019.4.20
- * modified: 2019.5.9
+ * modified: 2019.5.17
  * 功能：岗位信息实现类
  */
 @Service
@@ -69,6 +69,16 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public Position select(long id) {
         return positionMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Position> selectLikeName(String name) {
+        //筛选出有效记录
+        PositionExample example = new PositionExample();
+        PositionExample.Criteria criteria = example.createCriteria();
+        criteria.andNameLike("%"+name+"%").andDeletedEqualTo(false);
+        List<Position> positions = positionMapper.selectByExample(example);
+        return positions;
     }
 
     @Override

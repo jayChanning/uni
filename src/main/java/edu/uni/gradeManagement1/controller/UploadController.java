@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 * @date 23:24 2019-06-05
 * @modified 23:24 2019-06-05
 */
-@Api(description = "成绩管理： 文件上传，适用于所有文件类型")
+@Api(description = "陈少鑫： 成绩管理模块： 文件上传，适用于所有文件类型")
 @Controller
 @RequestMapping(value = "/json/gradeManagement1")
 public class UploadController {
@@ -37,7 +37,8 @@ public class UploadController {
                          @ApiParam(value = "附件", required = true)
                          @RequestParam(value = "file") MultipartFile file
                          ) throws Exception {
-        return Result.build(ResultType.Success).appendData("data",uploadUtil.uploadFile(file));
-
+        String data = uploadUtil.uploadFile(file);
+        System.out.println(data);
+        return Result.build(ResultType.Success).appendData("data",data);
     }
 }

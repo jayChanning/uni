@@ -55,7 +55,7 @@ public class MyDataUtil {
      * @date 11:10 2019-05-12
      */
 
-    public static String getFormatYMDHateTime(Date date){
+    public static String getFormatYMDDateTime(Date date){
         return YMDsdf.format(date);
     }
 }

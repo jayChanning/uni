@@ -89,7 +89,7 @@ public interface CourseItemDetailMapper {
     List<HashMap> selectBy(@Param(value = "id") long id, @Param(value = "courseId") String courseId, @Param(value = "courseName") String courseName, @Param(value = "courseClass") String courseClass);
 
 
-    //todo  selectByClassId-- 这是子页面 这是选择某个班级的学生记录
+    //TODO  selectByClassId-- 这是子页面 这是选择某个班级的学生记录
     @Select(value = " SELECT  student.stu_no AS stuNo,`user`.user_name AS stuName, monentClass.`name` AS stuClass, ecomm.content AS contact  FROM ((((classmate INNER JOIN student ON classmate.student_id = student.id  AND classmate.class_id = ${classId}) INNER JOIN `user` ON `user`.id = student.user_id) INNER JOIN class AS monentClass ON student.class_id = monentClass.id)LEFT JOIN ecomm ON student.phone_ecomm_id = ecomm.id) ORDER BY monentClass.`name`,student.stu_no ")
     *//**
      * 这是子页面 这是选择某个班级的学生记录
@@ -112,7 +112,7 @@ public interface CourseItemDetailMapper {
             "ORDER BY\n" +
             "\tcourse_item_one.`name`,\n" +
             "\tcourse_item_detail_one.number")
-    List<HashMap> choose(@Param(value = "id") long id);
+    List<HashMap> choose(@Param(value = "id") long id);  //id为成绩主表的id
 
 
     //    搜索功能

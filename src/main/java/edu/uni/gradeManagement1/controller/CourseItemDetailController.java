@@ -180,35 +180,6 @@ public class CourseItemDetailController {
         return Result.build(ResultType.Success).appendData("data", lists);
     }*/
 
-    /**
-     * <p>
-     *     上传文件方法,已独立到UploadController类中
-     *     此处已不再使用
-     * </p>
-     * @param file
-     * @return 文件名
-     * @throws Exception
-     *//*
-    @ApiOperation(value = "上传附件", notes = "已实现")
-    @GetMapping("/courseItemDetail/uploadAttach")
-    public String executeUpload(MultipartFile file) throws Exception{
-        //获取文件后缀名
-//        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-        //上传文件名
-//        String filename = CommonUtils.generateUUID() + suffix;
-//        String filename = LocalDateTime.now() + "-" + file.getOriginalFilename();
-        //服务端保存的文件对象
-//        File serverFile = new File(uploadDir + filename);
-        //将上传的文件写入服务器端文件内
-        *//*file.transferTo(serverFile);
-        return filename;*//*
-
-        //调用文件上传方法
-        String filePath = uploadUtil.uploadFile(file);
-//        返回文件路径
-        return filePath;
-
-    }*/
 
     /**
      * <p>

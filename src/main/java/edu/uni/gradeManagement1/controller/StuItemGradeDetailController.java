@@ -50,7 +50,7 @@ public class StuItemGradeDetailController {
      *  map对应InsertGradeDetail对象，map.get("前端规定的参数名")
      * @return ResultType
      */
-    @ApiOperation(value = "新增成绩得分项明细记录",notes = "测试中。。。")
+    @ApiOperation(value = "新增成绩得分项明细记录",notes = "已测试！")
     @ApiImplicitParam(name = "gradeDetail",value = "新增成绩得分项明细记录",required = true,dataType = "InsertGradeDetail")
     @PostMapping("/stuItemGradeDetail")
     @ResponseBody

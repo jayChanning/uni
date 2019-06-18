@@ -1,11 +1,14 @@
 package edu.uni.gradeManagement1.controller;
 
+import edu.uni.auth.bean.User;
+import edu.uni.auth.service.AuthService;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.gradeManagement1.service.DaoDiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +25,8 @@ import java.util.List;
 public class DaoDiController {
     @Resource
     private DaoDiService daoDiService;
+    @Autowired
+    private AuthService authService;
 
     @RequestMapping(value = "/fu", method = {RequestMethod.GET})
     @ResponseBody
@@ -37,8 +42,10 @@ public class DaoDiController {
             @RequestParam(value = "pageNum") int pageNum
     ) {
         System.out.println("DaoDiController--"+courseName + ":" + courseId + ":" + courseClass);
-        //用户id，此处为教师id(employeeId)，对应user表id
-        long usrId = 1941;
+        /* 从session中获取userId */
+        User user = authService.getUser();
+        long usrId = user.getId();
+        System.out.println("auth get userId="+usrId);
         //初始化空字符串为null
         if (courseClass == "")
             courseClass = null;

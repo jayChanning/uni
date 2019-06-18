@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * anthor:林晓锋
+ * @author 林晓锋, 蔡政堂
  * create：2019-4-28
  * modified:2019-5-7
  * 功能：查询学生主表信息
@@ -47,9 +47,6 @@ public class CourseItemController {
     /**
      * author 蔡政堂
      */
-
-   // @Autowired
-   // private CourseItemService courseItemService;
     @Autowired
     private RedisCache cache;
     @Autowired
@@ -61,7 +58,6 @@ public class CourseItemController {
 
     /**
      * 内部类，专门用来管理每个方法所对应缓存的名称。
-     */  /**
      * author 蔡政堂
      */
     static class CacheNameHelper{
@@ -78,7 +74,6 @@ public class CourseItemController {
      * 新增课程成绩评分组成项的记录
      * @param courseItem
      * @return
-     */  /**
      * author 蔡政堂
      */
     @ApiOperation(value = "新增课程成绩评分组成项的记录", notes = "已测试!")
@@ -88,14 +83,14 @@ public class CourseItemController {
     public Result create(@RequestBody(required = false) CourseItem courseItem) {
         //注入测试数据到Bean类
         //对前端传来的rate格式化换算
-        courseItem.setRate(courseItem.getRate() /100);
-
+        courseItem.setRate(courseItem.getRate() / 100);
+        User user = authService.getUser();
         //初始化前台传来的数据
-        courseItem.setUniversityId(Long.valueOf(1));
-//        courseItem.setCourseId(Long.valueOf(3));
+        courseItem.setUniversityId(user.getUniversityId());
         courseItem.setCourseId((Long.valueOf(courseItem.getCourseId())));
         courseItem.setDeleted(Byte.valueOf("0"));
-        courseItem.setByWho(Long.valueOf(1941));
+        /* ByWho id 从session中获取 */
+        courseItem.setByWho(user.getId());
 
         System.out.println("path: courseItem_post-- "+courseItem);
 
@@ -176,7 +171,6 @@ public class CourseItemController {
      * 录入成绩父页面数据 --/listInfo
      * 包含搜索栏的处理也在这
      * @param response
-     */  /**
      * author 蔡政堂
      */
     @ApiOperation(value = "录入成绩页面数据，搜索栏所用接口",notes = "可分页传数据，已测试！")
@@ -190,9 +184,12 @@ public class CourseItemController {
                             HttpServletResponse response) {
 
         response.setContentType("application/json;charset=utf-8");
-//        System.out.println("pageNum="+pageNum);
         System.out.println("courseItemController Tester: courseId="+courseId+"**courseName="+courseName+"**courseClass="+courseClass);
 
+        //通过session获取userId
+        User user = authService.getUser();
+        long usrId = user.getId();
+        
         //初始化空字符串为null. 如果查询条件为"".
         if (courseClass == "")
             courseClass = null;
@@ -204,29 +201,29 @@ public class CourseItemController {
         if (courseName == null) {
             if (courseId == null) {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFuAll(1941L, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFuAll(usrId, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu3(1941L, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu3(usrId, courseClass, pageNum));
                 }
             } else {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu1(1941L, courseId, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu1(usrId, courseId, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu5(1941L, courseId, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu5(usrId, courseId, courseClass, pageNum));
                 }
             }
         } else {
             if (courseId == null) {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu2(1941L, courseName, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu2(usrId, courseName, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu4(1941L, courseName, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu4(usrId, courseName, courseClass, pageNum));
                 }
             } else {
                 if (courseClass == null) {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu6(1941L, courseId, courseName, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu6(usrId, courseId, courseName, pageNum));
                 } else {
-                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu7(1941L, courseId, courseName, courseClass, pageNum));
+                    return Result.build(ResultType.Success).appendData("data", daoDiService.getFu7(usrId, courseId, courseName, courseClass, pageNum));
                 }
             }
         }

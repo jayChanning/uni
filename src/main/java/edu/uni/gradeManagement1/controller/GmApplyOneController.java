@@ -90,6 +90,7 @@ public class GmApplyOneController {
             return Result.build(ResultType.Failed, "你沒有登錄");
         return Result.build(ResultType.Success).appendData("data",gmApplyOneService.selectBySend(user.getId(),pageNum,7));
     }
+
     @ApiOperation(value = "学生角色查看我的申请", notes = "已测试")
     // @ApiImplicitParam(name = "id", value = "用户id", dataType = "Long")
     @RequestMapping(value = "/stulook/", method = RequestMethod.GET)

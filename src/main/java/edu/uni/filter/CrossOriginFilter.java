@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 前后端分离，允许跨域请求的过滤器
- * @Author 何亮
+ * @author 何亮
  * @date 2019/4/3
  */
 @Component

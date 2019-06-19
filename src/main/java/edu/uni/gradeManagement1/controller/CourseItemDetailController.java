@@ -1,8 +1,10 @@
 package edu.uni.gradeManagement1.controller;
 
+import edu.uni.auth.service.AuthService;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
+import edu.uni.gradeManagement1.bean.StuItemGrade;
 import edu.uni.gradeManagement1.service.CourseItemDetailService;
 import edu.uni.gradeManagement1.utils.UploadUtil;
 import edu.uni.utils.RedisCache;
@@ -31,10 +33,8 @@ public class CourseItemDetailController {
     private CourseItemDetailService courseItemDetailService;
     @Autowired
     private RedisCache cache;
-//    @Autowired
-//    private UploadUtil uploadUtil;
-//    @Autowired
-//    private GradeManagementConfig gradeManagementConfig;
+    @Autowired
+    private AuthService authService;
 
     /**
      * 内部类，专门用来管理每个方法所对应缓存的名称。
@@ -151,52 +151,25 @@ public class CourseItemDetailController {
     }*/
 
 
-    /*@ApiOperation(value = "获得某个班级某门课的组成项明细", notes = "具体逻辑未实现，前台具体传入参数未确定")
-    @GetMapping(value = "/TreeList2Front")
-    @ResponseBody
-    public Result TreeList2Front() {
-
-        *//**
-         * 还不知道可以通过什么参数能具体查到获得某个班级某门课的组成项明细
-         * 先无参数提供一个假数据供前台测试
-         *//*
-
-        ArrayList<LinkedHashMap<String, Object>> lists = new ArrayList<>();
-        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        map.put("homework","作业");
-        ArrayList<TreeDataPOJO> arrayList = new ArrayList<>();
-        arrayList.add(new TreeDataPOJO("作业1", false));
-        arrayList.add(new TreeDataPOJO("作业2", true));
-        map.put("homeworkCount",arrayList);
-
-        map.put("attendance","考勤");
-        ArrayList<TreeDataPOJO> arrayList1 = new ArrayList<>();
-        arrayList1.add(new TreeDataPOJO("考勤1", true));
-        arrayList1.add(new TreeDataPOJO("考勤2", false));
-        map.put("attendanceCount",arrayList1);
-        lists.add(map);
-
-        System.out.println(lists);
-        return Result.build(ResultType.Success).appendData("data", lists);
-    }*/
-
-
     /**
      * <p>
      *     获取树状数组
      * </p>
      * @param id 成绩主表Id
      * @return 成绩主表Id
-     * @throws Exception
-     * TODO 获取树状数组
      */
     @ApiOperation(value = "获取树状数组", notes = "已实现")
     @GetMapping("/courseItemDetail/itemName")
     @ResponseBody
     public Result getInfo(@ApiParam(value = "成绩主表Id")
-                                @RequestParam(name = "id") long id) throws Exception{
+                                @RequestParam(name = "id") long id) {
+        /* 从session中获取当前user id */
+        long usrId = authService.getUser().getId();
         //System.out.println(id);
         //System.out.println(courseItemDetailService.selectTree(id));
+        StuItemGrade stuItemGrade = new StuItemGrade();
+        stuItemGrade.setStuGradeMainId(id);
+        stuItemGrade.setByWho(usrId);
 
         return Result.build(ResultType.Success).appendData("data", courseItemDetailService.selectTree(id));
 

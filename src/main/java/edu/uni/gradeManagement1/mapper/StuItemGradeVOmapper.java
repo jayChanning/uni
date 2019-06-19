@@ -216,14 +216,14 @@ public interface StuItemGradeVOmapper {
      */
     @Select( value = "SELECT" +
             "`a`.`stu_no` AS stuNo," +
-            "`b`.`name` AS `studentName`," +
+            "`b`.`user_name` AS `studentName`," +
             "`a`.`begin_learn_date` AS `begin_learn_date`," +
             "`a`.`grade` AS `grade`," +
             "`c`.`name` AS `specialtyName`," +
             "`d`.`name` AS `className`," +
             "`e`.`political` AS `political`," +
             "`f`.`detail` AS `address`," +
-            "`g`.`content` AS `commuication` " +
+            "`g`.`content` AS `communication` " +
             "FROM" +
             "(" +
             "(" +

@@ -2,9 +2,12 @@ package edu.uni;
 
 import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.CourseItem;
+import edu.uni.gradeManagement1.bean.CourseItemDetail;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
+import edu.uni.gradeManagement1.mapper.CourseItemDetailMapper;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
 import edu.uni.gradeManagement1.pojo.ExcelDeal;
+import edu.uni.gradeManagement1.service.DaoDiService;
 import edu.uni.gradeManagement1.utils.ExcelUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -28,6 +32,10 @@ public class UniApplicationTests {
     @Resource
     public CourseItemMapper courseItemMapper;
 
+    @Resource
+    DaoDiService daoDiService;
+    @Resource
+    public CourseItemDetailMapper courseItemDetailMapper;
     @Test
     public void contextLoads() throws IOException {
         //n年前的成绩
@@ -73,9 +81,11 @@ public class UniApplicationTests {
 
     @Test
     public void fileUploads(){
-
-        Long testId = semesterService.getThisTimeSemesterId();
-        System.out.println("This is Tester: getThisTimeSemesterId()=" + testId);
+        List<HashMap> dao =daoDiService.getClass(22,40,25);
+        System.out.println(dao);
+       // System.out.println(courseItemDetailMapper.selectByClassId(22,40,25));
+        //Long testId = semesterService.getThisTimeSemesterId();
+       // System.out.println("This is Tester: getThisTimeSemesterId()=" + testId);
 
         /*Date date  = new Date();
         String filename = date.getTime() + CommonUtils.generateUUID() + ".txt";

@@ -51,7 +51,7 @@ public class StuItemGradeController {
      */
     @ApiOperation(value = "新增成绩项得分", notes = "")
     @ApiImplicitParam(name = "StuItemGrade",value = "成绩得分项实体",required = true,dataType = "StuItemGrade")
-    @PostMapping("/StuItemGrade")
+    @PostMapping("/stuItemGrade")
     @ResponseBody
     public Result create(@RequestBody(required = false) StuItemGrade stuItemGrade){
         if (stuItemGrade != null){

@@ -82,4 +82,21 @@ public class CourseItemDetail {
     public void setDeleted(Byte deleted) {
         this.deleted = deleted;
     }
+
+    /**
+     * toString()方法
+     */
+    @Override
+    public String toString() {
+        return "CourseItemDetail{" +
+                "id=" + id +
+                ", universityId=" + universityId +
+                ", courseItemId=" + courseItemId +
+                ", number=" + number +
+                ", content='" + content + '\'' +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

@@ -97,7 +97,9 @@ public class DaoDiController {
             @RequestParam(value = "cId") long cId
     ) {
         System.out.println("classId="+classId+":semesterId="+semesterId+":cId="+cId);
+
         List<HashMap> dao =daoDiService.getClass(classId,semesterId,cId);
+//        System.out.println(dao);
         return Result.build(ResultType.Success).appendData("data", dao).appendData("total",dao.size());
 
     }

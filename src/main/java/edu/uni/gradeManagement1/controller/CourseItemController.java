@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * @author 林晓锋, 蔡政堂
  * create：2019-4-28
- * modified:2019-5-7
+ * modified:2019-6-19
  * 功能：查询学生主表信息
  */
 @Api(description = "林晓峰：成绩管理模块：查询成绩明细,插入课程组成项")

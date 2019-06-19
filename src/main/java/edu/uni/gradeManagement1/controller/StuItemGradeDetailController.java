@@ -1,9 +1,13 @@
 package edu.uni.gradeManagement1.controller;
 
+import edu.uni.auth.bean.User;
+import edu.uni.auth.service.AuthService;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
+import edu.uni.gradeManagement1.bean.CourseItemDetail;
 import edu.uni.gradeManagement1.bean.StuItemGradeDetail;
 import edu.uni.gradeManagement1.pojo.InsertGradeDetail;
+import edu.uni.gradeManagement1.service.CourseItemDetailService;
 import edu.uni.gradeManagement1.service.StuItemGradeDetailService;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
@@ -33,7 +37,11 @@ public class StuItemGradeDetailController {
     @Autowired
     private StuItemGradeDetailService stuItemGradeDetailService;
     @Autowired
+    private CourseItemDetailService courseItemDetailService;
+    @Autowired
     private RedisCache cache;
+    @Autowired
+    private AuthService authService;
 
     static class CacheNameHelper {
         //gm_stuItemGradeDetail_{成绩明细项id}
@@ -56,14 +64,17 @@ public class StuItemGradeDetailController {
     @ResponseBody
     public Result create(@RequestBody Map<String,InsertGradeDetail> map) {
         InsertGradeDetail gradeDetail = map.get("params");
+        User user = authService.getUser();
+        long usrId = user.getId();
+        long universityId = user.getUniversityId();
         StuItemGradeDetail stuItemGradeDetail = new StuItemGradeDetail();
         System.out.println("****----"+map+"----****");
         /*  初始化数据 */
-        //教师ID暂无法获取,先固定
-        stuItemGradeDetail.setByWho((long) 1941);
-        stuItemGradeDetail.setUniversityId((long) 1);
+        //教师ID从session中获取，即对应userId
+        stuItemGradeDetail.setByWho(usrId);
+        stuItemGradeDetail.setUniversityId(universityId);
         // 默认0有效,亦暂且固定
-        stuItemGradeDetail.setDelete((byte)0);
+//        stuItemGradeDetail.setDelete((byte)0);
         /* inject detail data into Object StuItemGradeDetail */
         stuItemGradeDetail.setNote(gradeDetail.getNote());
         stuItemGradeDetail.setScore(gradeDetail.getScore());
@@ -78,7 +89,16 @@ public class StuItemGradeDetailController {
             if (success){
                 cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix+"*");
                 cache.deleteByPaterm(CacheNameHelper.ListByCid_CacheNamePrefix+"*");
-                return Result.build(ResultType.Success);
+                CourseItemDetail courseItemDetail = new CourseItemDetail();
+                courseItemDetail.setContent(gradeDetail.getContent());
+                courseItemDetail.setId(gradeDetail.getItemDetailId());
+                boolean update_success = courseItemDetailService.updateContent(courseItemDetail);
+                if (update_success) {
+                    return Result.build(ResultType.Success);
+                } else {
+                    return Result.build(ResultType.Failed);
+                }
+
             } else {
                 return Result.build(ResultType.Failed);
             }

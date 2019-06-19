@@ -9,10 +9,8 @@ import edu.uni.educateAffair.VO.CurriculumWithCondition;
 import edu.uni.educateAffair.service.CurriculumService;
 import edu.uni.gradeManagement1.bean.CourseItem;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
-import edu.uni.gradeManagement1.service.CourseItemDetailService;
-import edu.uni.gradeManagement1.service.CourseItemService;
-import edu.uni.gradeManagement1.service.DaoDiService;
-import edu.uni.gradeManagement1.service.StuGradeMainService;
+import edu.uni.gradeManagement1.bean.StuItemGrade;
+import edu.uni.gradeManagement1.service.*;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -26,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 林晓锋, 蔡政堂
@@ -33,7 +32,7 @@ import java.util.List;
  * modified:2019-5-7
  * 功能：查询学生主表信息
  */
-@Api(description = "林晓峰：成绩管理模块：查询成绩明细")
+@Api(description = "林晓峰：成绩管理模块：查询成绩明细,插入课程组成项")
 @Controller
 @RequestMapping("/json/gradeManagement1")
 public class CourseItemController {
@@ -41,10 +40,6 @@ public class CourseItemController {
     private CourseItemService courseItemService;
     @Autowired
     AuthService authService;
-//
-//    @Resource
-//    private CourseItem courseItem;
-
 
     /**
      * author 蔡政堂
@@ -57,6 +52,8 @@ public class CourseItemController {
     private CurriculumService curriculumService;
     @Autowired
     private DaoDiService daoDiService;
+    @Autowired
+    private StuItemGradeService stuItemGradeService;
 
     /**
      * 内部类，专门用来管理每个方法所对应缓存的名称。
@@ -75,27 +72,36 @@ public class CourseItemController {
     /**
      * 新增课程成绩评分组成项的记录
      *
-     * @param courseItem
+     * @param
      * @return author 蔡政堂
      */
     @ApiOperation(value = "新增课程成绩评分组成项的记录", notes = "已测试!")
     @ApiImplicitParam(name = "courseItem", value = "课程成绩评分组成项实体类", required = true, dataType = "CourseItem")
     @PostMapping("/courseItem")
     @ResponseBody
-    public Result create(@RequestBody(required = false) CourseItem courseItem) {
-        //注入测试数据到Bean类
-        //对前端传来的rate格式化换算
-        courseItem.setRate(courseItem.getRate() / 100);
+//    public Result create(@RequestBody(required = false) CourseItem courseItem) {
+    public Result create(@RequestBody(required = false)Map<String,String> map) {
+        System.out.println(map);
+        /* 从session中获取user信息 */
         User user = authService.getUser();
+        /* 注入测试数据到Bean类 */
+        CourseItem courseItem = new CourseItem();
+        //对前端传来的rate换算
+        courseItem.setRate(Double.valueOf(map.get("rate")) / 100);
         //初始化前台传来的数据
         courseItem.setUniversityId(user.getUniversityId());
-        courseItem.setCourseId((Long.valueOf(courseItem.getCourseId())));
-        courseItem.setDeleted(Byte.valueOf("0"));
-        /* ByWho id 从session中获取 */
+        courseItem.setCourseId((Long.valueOf(map.get("courseId"))));
+        courseItem.setName(Byte.valueOf(map.get("name")));
+        courseItem.setCount(Integer.valueOf(map.get("count")));
+//        courseItem.setDeleted(Byte.valueOf("0"));
+
+        // ByWho 从session中获取user.id
         courseItem.setByWho(user.getId());
-
         System.out.println("path: courseItem_post-- " + courseItem);
-
+        //用于查询成绩主表id的两个id值
+        long taskId = Long.valueOf(map.get("taskId"));
+        long semesterId = Long.valueOf(map.get("semesterId"));
+        long cId = courseItem.getCourseId();
 
         if (courseItem != null) {
             boolean success = courseItemService.insert(courseItem);
@@ -105,31 +111,31 @@ public class CourseItemController {
                 /**
                  * 自动生成course_item对应的course_item_detail项
                  */
-                Long courseItemId = courseItem.getId();
-                Integer itemCount = courseItem.getCount();
-                Byte name = courseItem.getName();
-                String detailName;
+                long courseItemId = courseItem.getId();
+                int itemCount = courseItem.getCount();
+                byte name = courseItem.getName();
+                String courseItemDetailName;
                 switch (name) {
                     case 1:
-                        detailName = "作业";
+                        courseItemDetailName = "作业";
                         break;
                     case 2:
-                        detailName = "考勤";
+                        courseItemDetailName = "考勤";
                         break;
                     case 3:
-                        detailName = "期中测试";
+                        courseItemDetailName = "期中测试";
                         break;
                     case 4:
-                        detailName = "实验";
+                        courseItemDetailName = "实验";
                         break;
                     case 5:
-                        detailName = "期末考试";
+                        courseItemDetailName = "期末考试";
                         break;
                     case 6:
-                        detailName = "其他";
+                        courseItemDetailName = "其他";
                         break;
                     default:
-                        detailName = "无效的课程组成项明细名！!";
+                        courseItemDetailName = "无效的课程组成项明细名！!";
                         break;
                 }
                 for (int i = 1; i <= itemCount; i++) {
@@ -137,11 +143,29 @@ public class CourseItemController {
                     itemDetail.setUniversityId(courseItem.getUniversityId());
                     itemDetail.setCourseItemId(courseItemId);
                     itemDetail.setNumber(i);
-                    itemDetail.setContent("第" + i + "次" + detailName);
+                    itemDetail.setContent("第" + i + "次" + courseItemDetailName);
                     itemDetail.setByWho(courseItem.getByWho());
+                    itemDetail.setDeleted(Byte.valueOf("0"));
                     courseItemDetailService.insert(itemDetail);
-                    System.out.println("courseItemDetail=" + itemDetail);
+//                    System.out.println("courseItemDetail=" + itemDetail);
                 }
+                /**
+                 * 自动生成stu_item_grade表的学生对应的成绩组成项
+                 */
+                List<Long> list = courseItemDetailService.autoCreateCItemDetail(semesterId, taskId, cId);
+                for (int j = 0; j < list.size();j++){
+//                    System.out.println("list["+j+"]="+list.get(j));
+                    StuItemGrade stuItemGrade = new StuItemGrade();
+                    stuItemGrade.setUniversityId(user.getUniversityId());
+                    stuItemGrade.setStuGradeMainId(list.get(j));
+                    stuItemGrade.setCourseItemId(courseItemId);
+                    stuItemGrade.setScore(0.00);
+                    stuItemGrade.setNote("");
+                    stuItemGrade.setByWho(user.getId());
+                    stuItemGrade.setDeleted(Byte.valueOf("0"));
+                    stuItemGradeService.insert(stuItemGrade);
+                }
+
                 return Result.build(ResultType.Success);
             } else {
                 return Result.build(ResultType.Failed);

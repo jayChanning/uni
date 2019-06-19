@@ -21,7 +21,7 @@ import java.io.IOException;
 /**
  * @author 蔡政堂
  * create 2019/5/5
- * modified 2019/5/5
+ * modified 2019/6/19
  * description TODO 课程组成项明细模块Controller
  */
 
@@ -33,8 +33,6 @@ public class CourseItemDetailController {
     private CourseItemDetailService courseItemDetailService;
     @Autowired
     private RedisCache cache;
-    @Autowired
-    private AuthService authService;
 
     /**
      * 内部类，专门用来管理每个方法所对应缓存的名称。
@@ -163,13 +161,9 @@ public class CourseItemDetailController {
     @ResponseBody
     public Result getInfo(@ApiParam(value = "成绩主表Id")
                                 @RequestParam(name = "id") long id) {
-        /* 从session中获取当前user id */
-        long usrId = authService.getUser().getId();
+
         //System.out.println(id);
         //System.out.println(courseItemDetailService.selectTree(id));
-        StuItemGrade stuItemGrade = new StuItemGrade();
-        stuItemGrade.setStuGradeMainId(id);
-        stuItemGrade.setByWho(usrId);
 
         return Result.build(ResultType.Success).appendData("data", courseItemDetailService.selectTree(id));
 

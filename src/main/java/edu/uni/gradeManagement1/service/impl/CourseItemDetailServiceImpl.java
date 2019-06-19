@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @author 蔡政堂
  * create 2019/5/2
- * modified 2019/5/11
+ * modified 2019/6/19
  * description TODO
  */
 @Service
@@ -146,5 +146,30 @@ public class CourseItemDetailServiceImpl implements CourseItemDetailService {
         }
         System.out.println(lists);
         return lists;
+    }
+
+    /**
+     * TODO 此处仅更新courseItemDetail的Content
+     * 根据course_item_detail表(课程组成项明细表)的id更新
+     * @param courseItemDetail
+     * @return boolean 0/1
+     */
+    @Override
+    public boolean updateContent(CourseItemDetail courseItemDetail) {
+        int result = courseItemDetailMapper.updateByPrimaryKeySelective(courseItemDetail);
+        return result > 0;
+    }
+
+    /**
+     * TODO 根据授课安排表id，课程编号course.id，学期id查询出成绩主表的id
+     * 然后自动生成一个班的成绩组成项
+     * @param semesterId 学期id semester.id
+     * @param taskId 授课安排表id ea_teaching_task.id
+     * @param cId 课程编号course.id
+     * @return 返回main表的id Long类型List集合
+     */
+    @Override
+    public List<Long> autoCreateCItemDetail(long semesterId, long taskId, long cId) {
+        return courseItemDetailMapper.autoCreateStuItemGrade(taskId, cId, semesterId);
     }
 }

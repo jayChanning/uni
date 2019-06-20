@@ -88,4 +88,26 @@ public class StuItemGradeDetailServiceImpl implements StuItemGradeDetailService 
     public List<StuItemGradeDetail> selectByStuGId(Long id) {
         return stuItemGradeDetailMapper.selectBy(id);
     }
+
+    /**
+     * 根据excel表中的学生学号查询获得学生id
+     * @param stuNo 学生学号
+     * @return stuId 学生id
+     */
+    @Override
+    public long findStuId(String stuNo) {
+        return stuItemGradeDetailMapper.findStuIdByStuNo(stuNo);
+    }
+
+    /**
+     * TODO 查找课程组成项明细id和成绩组成项id-imlp
+     * @param mainId 主表id
+     * @param courseItemName 课程项name
+     * @param itemDetailNumber 课程项序号number
+     * @return 返回查询到的组成项明细id和成绩项id
+     */
+    @Override
+    public List<Long> findItemGradeANDItemDetailId(Long mainId, int courseItemName, int itemDetailNumber) {
+        return stuItemGradeDetailMapper.getItemDetailANDItemGradeID(mainId,courseItemName,itemDetailNumber);
+    }
 }

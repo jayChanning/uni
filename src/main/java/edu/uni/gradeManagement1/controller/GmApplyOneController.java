@@ -4,6 +4,7 @@ import edu.uni.auth.bean.User;
 import edu.uni.auth.service.AuthService;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
+import edu.uni.gradeManagement1.bean.GmApplyOne;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.GmApplyOneMapper;
 import edu.uni.gradeManagement1.service.GmApplyOneService;
@@ -136,9 +137,8 @@ public class GmApplyOneController {
     @ResponseBody
     public Result putAppl(
             @RequestBody Map<String, String> map
-           /* HttpServletRequest request,
-                          @ApiParam(value = "附件", required = true)
-                          @RequestParam(value = "file") String filePath,
+  /*                        @ApiParam(value = "附件", required = true)
+                          @RequestParam(value = "filePath") String filePath,
                        //   @ApiParam(value = "收件人id", required = true)
                         //  @RequestParam(value = "bySend",required = true) long bySend,
                           @ApiParam(value = "课程id", required = true)
@@ -160,24 +160,24 @@ public class GmApplyOneController {
         User user = authService.getUser();
         if (user == null)
             return Result.build(ResultType.Failed, "你沒有登錄");
-//     //   System.out.println(file == null);
-//        GmApplyOne gmApplyOne = new GmApplyOne();
-//       // gmApplyOne.setBySend(bySend);
-//        gmApplyOne.setCourseId(courseId);
-//        gmApplyOne.setReason(reason);
-//        gmApplyOne.setStuGradeMainId(stuGradeMainId);
-//        gmApplyOne.setStuItemGradeDetailOldId(stuItemGradeDetailOldId);
-//        gmApplyOne.setUniversityId(universityId);
-//        gmApplyOne.setStudentId(studentId);
-//        gmApplyOne.setSemesterId(semesterId);
-//        gmApplyOne.setAttachment(filePath);
-//        System.out.println(gmApplyOne.toString());
-//        try {
-//            gmApplyOneService.insertApplyByOne(gmApplyOne);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return Result.build(ResultType.ParamError);
-//        }
+     //   System.out.println(file == null);
+        GmApplyOne gmApplyOne = new GmApplyOne();
+       // gmApplyOne.setBySend(bySend);
+        gmApplyOne.setCourseId(Long.valueOf(map.get("courseId")));
+        gmApplyOne.setReason(map.get("reason"));
+        gmApplyOne.setStuGradeMainId(Long.valueOf(map.get("stuGradeMainId")));
+        gmApplyOne.setStuItemGradeDetailOldId(Long.valueOf(map.get("stuItemGradeDetailOldId")));
+        gmApplyOne.setUniversityId(Long.valueOf(map.get("universityId")));
+        gmApplyOne.setStudentId(Long.valueOf(map.get("studentId")));
+        gmApplyOne.setSemesterId(Long.valueOf(map.get("semesterId")));
+        gmApplyOne.setAttachment(map.get("filePath"));
+        System.out.println(gmApplyOne.toString());
+        try {
+            gmApplyOneService.insertApplyByOne(gmApplyOne);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.build(ResultType.ParamError);
+        }
 
         return Result.build(ResultType.Success);
     }

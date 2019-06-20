@@ -45,4 +45,20 @@ public interface StuItemGradeDetailService {
      * @return List<StuItemGradeDetail>
      */
     List<StuItemGradeDetail> selectByStuGId(Long id);
+
+    /**
+     * 根据excel表中的学生学号查询获得学生id
+     * @param stuNo 学生学号
+     * @return stuId 学生id
+     */
+    long findStuId(String stuNo);
+
+    /**
+     * TODO 查找课程组成项明细id和成绩组成项id--service
+     * @param mainId 主表id
+     * @param courseItemName 课程项name
+     * @param itemDetailNumber 课程项序号number
+     * @return 返回查询到的组成项明细id和成绩项id
+     */
+    List<Long> findItemGradeANDItemDetailId(Long mainId, int courseItemName, int itemDetailNumber);
 }

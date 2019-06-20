@@ -43,7 +43,6 @@ public class UploadUtil {
      * @return 如果文件的扩展名==extension 返回true，否则返回false
      *
      */
-
     private static boolean IsFileExtension(MultipartFile file, String extension) {
 
         return file.getOriginalFilename().endsWith(extension);

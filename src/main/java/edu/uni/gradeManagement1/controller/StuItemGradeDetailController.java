@@ -6,13 +6,16 @@ import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
 import edu.uni.gradeManagement1.bean.StuItemGradeDetail;
+import edu.uni.gradeManagement1.pojo.ExcelDeal;
 import edu.uni.gradeManagement1.pojo.InsertGradeDetail;
 import edu.uni.gradeManagement1.service.CourseItemDetailService;
 import edu.uni.gradeManagement1.service.StuItemGradeDetailService;
+import edu.uni.gradeManagement1.utils.ExcelUtil;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -89,9 +93,13 @@ public class StuItemGradeDetailController {
             if (success){
                 cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix+"*");
                 cache.deleteByPaterm(CacheNameHelper.ListByCid_CacheNamePrefix+"*");
+
+                /*  根据courseItemDetail的id更新课程组成项明细表的描述(content)  */
                 CourseItemDetail courseItemDetail = new CourseItemDetail();
-                courseItemDetail.setContent(gradeDetail.getContent());
+                //根据id查找到当前记录
                 courseItemDetail.setId(gradeDetail.getItemDetailId());
+                //更新课程组成项明细表的content
+                courseItemDetail.setContent(gradeDetail.getContent());
                 boolean update_success = courseItemDetailService.updateContent(courseItemDetail);
                 if (update_success) {
                     return Result.build(ResultType.Success);
@@ -105,5 +113,33 @@ public class StuItemGradeDetailController {
         }
         return Result.build(ResultType.ParamError);
     }
+
+
+    @ApiOperation(value = "Excel导入功能，自动解析", notes = "测试中。。。")
+    @ApiImplicitParam(name = "excelUpload",value = "Excel批量导入",required = true)
+    @PostMapping("/stuExcelUpload")
+    @ResponseBody
+    public Result excelUpload(@RequestBody Map<String, String> map) throws Exception {
+        long semesterId = Long.valueOf(map.get("semesterId"));  //学期id
+        long courseId = Long.valueOf(map.get("courseId"));   //课程id
+        long classId = Long.valueOf(map.get("classId"));   //班级id
+//        excel的上传路径(绝对路径, 且是存在的)
+//        String filePath = "D:\\JayChoi\\codes\\Idea\\uni\\src\\main\\resources\\excelTest\\excelInsert1.xlsx";
+        String filePath = map.get("excelAddr").replace("%3A", ":").replace("%2F", "/");
+        System.out.println(filePath);
+        List<Object> list = ExcelUtil.excelReadService(filePath, ExcelDeal.class);
+        for (int i = 0; i < list.size(); i++) {
+            ExcelDeal excelDeal = (ExcelDeal) list.get(i);
+            System.out.println(excelDeal.toString());
+            //根据excel表的学生学号查询获得学生id
+            String stuNo = ((ExcelDeal) list.get(i)).getStuNo();
+            long stuId = stuItemGradeDetailService.findStuId(stuNo);
+            //已经获得了学生id，接下来写获取组成项明细和成绩项id，早上加班！！！！！！！！！
+
+        }
+
+        return Result.build(ResultType.ParamError);
+    }
+
 
 }

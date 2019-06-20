@@ -2,11 +2,12 @@ package edu.uni;
 
 import edu.uni.educateAffair.service.SemesterService;
 import edu.uni.gradeManagement1.bean.CourseItem;
-import edu.uni.gradeManagement1.bean.CourseItemDetail;
+import edu.uni.gradeManagement1.bean.StuItemGradeDetail;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.CourseItemDetailMapper;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
 import edu.uni.gradeManagement1.pojo.ExcelDeal;
+import edu.uni.gradeManagement1.pojo.ExcelDemoClass;
 import edu.uni.gradeManagement1.service.DaoDiService;
 import edu.uni.gradeManagement1.utils.ExcelUtil;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -50,7 +52,7 @@ public class UniApplicationTests {
             courseItem.setByWho(Long.valueOf("1"));
             courseItem.setDeleted(Byte.valueOf(String.valueOf(i )));
 
-            courseItemMapper.insertSelective(courseItem);
+//            courseItemMapper.insertSelective(courseItem);
             System.out.println("insert：course ID:"+courseItem.getId());
 
         }
@@ -64,17 +66,22 @@ public class UniApplicationTests {
      * @throws Exception
      */
     @Test
-    public void fff() throws Exception{
-        //这个路径按实际需求  "D:\\program\\IdeaProjects\\uni\\src\\main\\resources\\excelTest\\exceldome.xlsx"
-        String filePath = "D://JayChoi//codes//uni//src//main//resources//excelTest//exceldome.xlsx";
+    public void excelAnalyse() throws Exception{
+        //这个路径按实际需求，路径分隔符需要为双发斜杠
+//        String filePath = "D:\\JayChoi\\codes\\Idea\\uni\\src\\main\\resources\\excelTest\\exceldemo.xlsx";
+        String filePath = "D:\\JayChoi\\codes\\Idea\\uni\\src\\main\\resources\\excelTest\\excelInsert1.xlsx";
+        //MultipartFile multiplePartfile = ;
 
         //***以下代码可以复制黏贴，把filepath，ExcelDemoClass改为自定义的*******************************************************
-
-        List<Object> list = ExcelUtil.excelReadService(filePath, ExcelDeal.class);
+        List<Object> list = ExcelUtil.excelReadService(filePath,ExcelDeal.class);
+//        List<Object> list = ExcelUtil.excelReadService(multiplePartfile, ExcelDeal.class);
         for (int i = 0; i < list.size(); i++){
             ExcelDeal excelDeal = (ExcelDeal)list.get(i);
-            //---- do you want to do
+            //---- do what you want to do
+            StuItemGradeDetail stuItemGradeDetail = new StuItemGradeDetail();
+            stuItemGradeDetail.setScore(((ExcelDeal) list.get(i)).getScore());
             System.out.println(excelDeal.toString());
+            System.out.println(((ExcelDeal) list.get(i)).getStuName()+"的成绩是："+stuItemGradeDetail.getScore());
         }
         //*********结束***************************************************
     }

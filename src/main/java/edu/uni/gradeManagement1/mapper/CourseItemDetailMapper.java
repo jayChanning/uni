@@ -139,7 +139,6 @@ public interface CourseItemDetailMapper {
             "student.id AS stuId FROM (((((classmate INNER JOIN student ON classmate.student_id = student.id  AND classmate.class_id = ${classId}) INNER JOIN `user` ON `user`.id = student.user_id) " +
             "INNER JOIN class AS monentClass ON student.class_id = monentClass.id)INNER JOIN stu_grade_main_one ON stu_grade_main_one.course_id = ${cId} AND stu_grade_main_one.semester_id = ${semesterId} AND stu_grade_main_one.student_id = student.id)LEFT " +
             "JOIN ecomm ON student.phone_ecomm_id = ecomm.id) ORDER BY monentClass.`name`,student.stu_no")
-
     List<HashMap> selectByClassId(@Param(value = "classId") long classId,
                                   @Param(value = "semesterId") long semesterId,
                                   @Param(value = "cId") long cId);

@@ -6,35 +6,38 @@ import com.alibaba.excel.metadata.BaseRowModel;
 //必须extends BaseRowModel
 public class ExcelDeal extends BaseRowModel {
     //excel 的列数 从0开始
-    //必须有
+    //必须有  学号
     @ExcelProperty(index = 0)
     private String stuNo;
-    //必须有
+    //必须有  姓名
     @ExcelProperty(index = 1)
     private String stuName;
-    //必须有
+    //必须有  课程组成项代号 (1作业, 2考勤.....)
     @ExcelProperty(index = 2)
-    private String courseItem;
-    //必须有
+    private int courseItem;
+    //必须有  组成项序号
     @ExcelProperty(index = 3)
     private int itemNo;
-    //必须有
+    //必须有  作业内容描述
     @ExcelProperty(index = 4)
-    private double score;
-    //必须有
+    private String detailContent;
+    //必须有  成绩
     @ExcelProperty(index = 5)
-    private String notes;
-    //必须有
+    private double score;
+    //必须有  评语
     @ExcelProperty(index = 6)
-    private int courseNo;
-    //必须有
+    private String notes;
+    //必须有  课程编号
     @ExcelProperty(index = 7)
-    private String courseName;
-    //必须有
+    private int courseNo;
+    //必须有  课程名称
     @ExcelProperty(index = 8)
-    private String classNo;
-    //必须有
+    private String courseName;
+    //必须有  班级号(班级代码)
     @ExcelProperty(index = 9)
+    private String classNo;
+    //必须有  班级名称
+    @ExcelProperty(index = 10)
     private String className;
 
     /* 必须有无参构造器 */
@@ -42,6 +45,7 @@ public class ExcelDeal extends BaseRowModel {
     }
 
     /* 必须有getter和setter方法 */
+
     public String getStuNo() {
         return stuNo;
     }
@@ -58,11 +62,11 @@ public class ExcelDeal extends BaseRowModel {
         this.stuName = stuName;
     }
 
-    public String getCourseItem() {
+    public int getCourseItem() {
         return courseItem;
     }
 
-    public void setCourseItem(String courseItem) {
+    public void setCourseItem(int courseItem) {
         this.courseItem = courseItem;
     }
 
@@ -72,6 +76,14 @@ public class ExcelDeal extends BaseRowModel {
 
     public void setItemNo(int itemNo) {
         this.itemNo = itemNo;
+    }
+
+    public String getDetailContent() {
+        return detailContent;
+    }
+
+    public void setDetailContent(String detailContent) {
+        this.detailContent = detailContent;
     }
 
     public double getScore() {
@@ -128,11 +140,12 @@ public class ExcelDeal extends BaseRowModel {
         return "ExcelDeal{" +
                 "stuNo='" + stuNo + '\'' +
                 ", stuName='" + stuName + '\'' +
-                ", courseItem='" + courseItem + '\'' +
-                ", itemNo='" + itemNo + '\'' +
-                ", score='" + score + '\'' +
+                ", courseItem=" + courseItem +
+                ", itemNo=" + itemNo +
+                ", detailContent='" + detailContent + '\'' +
+                ", score=" + score +
                 ", notes='" + notes + '\'' +
-                ", courseNo='" + courseNo + '\'' +
+                ", courseNo=" + courseNo +
                 ", courseName='" + courseName + '\'' +
                 ", classNo='" + classNo + '\'' +
                 ", className='" + className + '\'' +

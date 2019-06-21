@@ -37,6 +37,7 @@ public class UploadController {
                          @ApiParam(value = "附件", required = true)
                          @RequestParam(value = "file") MultipartFile file
                          ) throws Exception {
+        System.out.println("访问到了");
         String data = uploadUtil.uploadFile(file);
         System.out.println(data);
         return Result.build(ResultType.Success).appendData("data",data);

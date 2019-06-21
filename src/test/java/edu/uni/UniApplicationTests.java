@@ -6,21 +6,23 @@ import edu.uni.gradeManagement1.bean.StuItemGradeDetail;
 import edu.uni.gradeManagement1.config.GradeManagementConfig;
 import edu.uni.gradeManagement1.mapper.CourseItemDetailMapper;
 import edu.uni.gradeManagement1.mapper.CourseItemMapper;
+import edu.uni.gradeManagement1.mapper.StuItemGradeDetailMapper;
 import edu.uni.gradeManagement1.pojo.ExcelDeal;
-import edu.uni.gradeManagement1.pojo.ExcelDemoClass;
 import edu.uni.gradeManagement1.service.DaoDiService;
+import edu.uni.gradeManagement1.service.StuItemGradeDetailService;
 import edu.uni.gradeManagement1.utils.ExcelUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,48 +30,56 @@ public class UniApplicationTests {
 
     @Autowired
     GradeManagementConfig gradeManagementConfig;
-    @Autowired
-    private SemesterService semesterService;
-
-    @Resource
-    public CourseItemMapper courseItemMapper;
-
     @Resource
     DaoDiService daoDiService;
-    @Resource
-    public CourseItemDetailMapper courseItemDetailMapper;
+    @Autowired
+    StuItemGradeDetailService itemGradeDetailService;
+    @Autowired
+    StuItemGradeDetailMapper stuItemGradeDetailMapper;
+    @Autowired
+    StuItemGradeDetailService stuItemGradeDetailService;
+
     @Test
-    public void contextLoads() throws IOException {
-        //n年前的成绩
-        for (int i = 1; i < 16; i++){
-            CourseItem courseItem = new CourseItem();
-            courseItem.setRate(0.5);
-            courseItem.setCount(i);
-            //courseItem.setDatetime(Date.valueOf(LocalDate.now()));
-            courseItem.setUniversityId(Long.valueOf(200+i));
-            courseItem.setName(Byte.valueOf("2"));
-            courseItem.setCourseId(Long.valueOf(20190+i));
-            courseItem.setByWho(Long.valueOf("1"));
-            courseItem.setDeleted(Byte.valueOf(String.valueOf(i )));
+    public void ddd() {
+        //service
+        System.out.println(stuItemGradeDetailMapper.getItemGradeANDItemDetailID(116, 1, 1));
+        System.out.println(stuItemGradeDetailService.findItemGradeANDItemDetailId((long) 116, 1, 1));
 
-//            courseItemMapper.insertSelective(courseItem);
-            System.out.println("insert：course ID:"+courseItem.getId());
+    }
 
-        }
+    @Test
+    public void demo_1() {
+        ArrayList<Long> list = new ArrayList<>();
+        list.add((long) 384);
+        list.add((long) 44);
+        list.add((long) 1);
+        list.add((long) 5);
+        list.add((long) 1);
+        System.out.println("list: " + list);
+        System.out.println(list.get(0) + "/" + list.get(1));
+//        List<Long> list2 = itemGradeDetailService.findItemGradeANDItemDetailId((long) 116, 1, 1);
+//        System.out.println("list2: " + list2);
+//        System.out.println("list2: " + list2.get(0) + "/toString():" + list2.get(0).toString());
+        list.clear();
+        List<HashMap> maps = itemGradeDetailService.findItemGradeANDItemDetailId((long) 116, 1, 1);
+//        maps.listIterator().next();
 
+        System.out.println("maps: " + maps.size() + "//" + maps);
+        System.out.println("itemDetailId = " + maps.get(0).get("itemDetailId"));
+        System.out.println("itemGradeId = " + maps.get(0).get("itemGradeId"));
 
     }
 
     /**
-     * test date: 2019/6/5
-     * description TODO 这里测试excel解析类，仍在测试，咱不可用
+     * test date: 2019/6/19
+     * description TODO 这里测试excel解析类，已测试！可用！！
      * @throws Exception
      */
     @Test
     public void excelAnalyse() throws Exception{
         //这个路径按实际需求，路径分隔符需要为双发斜杠
 //        String filePath = "D:\\JayChoi\\codes\\Idea\\uni\\src\\main\\resources\\excelTest\\exceldemo.xlsx";
-        String filePath = "D:\\JayChoi\\codes\\Idea\\uni\\src\\main\\resources\\excelTest\\excelInsert1.xlsx";
+        String filePath = "D:\\JayChoi\\codes\\Idea\\uni\\src\\main\\resources\\excelTest\\excelInsert1_1.xlsx";
         //MultipartFile multiplePartfile = ;
 
         //***以下代码可以复制黏贴，把filepath，ExcelDemoClass改为自定义的*******************************************************

@@ -5,7 +5,10 @@ import edu.uni.gradeManagement1.bean.StuItemGradeDetailExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface StuItemGradeDetailMapper {
     int countByExample(StuItemGradeDetailExample example);
@@ -63,6 +66,19 @@ public interface StuItemGradeDetailMapper {
             "ORDER BY\n" +
             "\tcourse_item_one.`name`,\n" +
             "\tcourse_item_detail_one.number")
-    List<Long> getItemDetailANDItemGradeID(@Param("id") long id, @Param("courseName") int courseName, @Param("itemNo") int itemNo);
+    List<HashMap> getItemGradeANDItemDetailID(@Param("id") long id, @Param("courseName") int courseName, @Param("itemNo") int itemNo);
+//    List<Map<String,Long>> getItemGradeANDItemDetailID(@Param("id") long id, @Param("courseName") int courseName, @Param("itemNo") int itemNo);
+
+    /**
+     * 通过学生id，学期id，课程id在成绩主表中查询出主表id
+     * @param semesterId 当前学期id
+     * @param stuId 当前学生id
+     * @param courseId 当前课程id
+     * @return 返回成绩主表id
+     */
+    @Select(value = "SELECT stu_grade_main_one.id AS mainId FROM stu_grade_main_one WHERE semester_id = ${semesterId} AND course_id = ${courseId} AND student_id = ${stuId};")
+    Long getMainIdByStuANDSmtIdAndCsId(@Param("semesterId") long semesterId,
+                                       @Param("stuId") long stuId,
+                                       @Param("courseId") long courseId);
 
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -27,8 +29,8 @@ public class StuItemGradeDetailServiceImpl implements StuItemGradeDetailService 
 
     /**
      * 录入成绩到成绩项明细表
-     * 蔡政堂
-     * @param sigd
+     * @author 蔡政堂
+     * @param sigd StuItemGradeDetail对象
      * @return 是否成功（true or false）
      */
 
@@ -42,7 +44,7 @@ public class StuItemGradeDetailServiceImpl implements StuItemGradeDetailService 
     }
     /**
      * 插入stuItemGradeDetail到表stu_item_grade_detail
-     * auchor 陈少鑫
+     * @author 陈少鑫
      * @param stuItemGradeDetail StuItemGradeDetail对象
      * @return 如果成功返回stu_item_grade_detail自增主键id
      */
@@ -59,7 +61,7 @@ public class StuItemGradeDetailServiceImpl implements StuItemGradeDetailService 
 
     /**
      * 修改表stu_item_grade_detail的指定id的deleted字段
-     * author 陈少鑫
+     * @author 陈少鑫
      * @param effective true-有效 false-无效
      * @param id stu_item_grade_detail.id
      * @return 如果成功返回true
@@ -80,7 +82,7 @@ public class StuItemGradeDetailServiceImpl implements StuItemGradeDetailService 
     }
     /**
      * 获取表stu_item_grade_detail所有stu_item_grade_id字段值为id的记录
-     * author 陈少鑫
+     * @author 陈少鑫
      * @param id stu_item_grade_id
      * @return List<StuItemGradeDetail>
      */
@@ -91,6 +93,7 @@ public class StuItemGradeDetailServiceImpl implements StuItemGradeDetailService 
 
     /**
      * 根据excel表中的学生学号查询获得学生id
+     * @author 蔡政堂
      * @param stuNo 学生学号
      * @return stuId 学生id
      */
@@ -101,13 +104,27 @@ public class StuItemGradeDetailServiceImpl implements StuItemGradeDetailService 
 
     /**
      * TODO 查找课程组成项明细id和成绩组成项id-imlp
+     * @author 蔡政堂
      * @param mainId 主表id
      * @param courseItemName 课程项name
      * @param itemDetailNumber 课程项序号number
      * @return 返回查询到的组成项明细id和成绩项id
      */
     @Override
-    public List<Long> findItemGradeANDItemDetailId(Long mainId, int courseItemName, int itemDetailNumber) {
-        return stuItemGradeDetailMapper.getItemDetailANDItemGradeID(mainId,courseItemName,itemDetailNumber);
+    public List<HashMap> findItemGradeANDItemDetailId(Long mainId, int courseItemName, int itemDetailNumber) {
+        return stuItemGradeDetailMapper.getItemGradeANDItemDetailID(mainId,courseItemName,itemDetailNumber);
+    }
+
+    /**
+     * 通过学生id，学期id，课程id在成绩主表中查询出主表id
+     * @author 蔡政堂
+     * @param semesterId 当前学期id
+     * @param stuId 当前学生id
+     * @param courseId 当前课程id
+     * @return 返回成绩主表id
+     */
+    @Override
+    public Long getMainIdByStuId(long semesterId, long courseId, long stuId) {
+        return stuItemGradeDetailMapper.getMainIdByStuANDSmtIdAndCsId(semesterId, stuId, courseId);
     }
 }

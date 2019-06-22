@@ -19,7 +19,13 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 
-@Api(description = "录入成绩显示")
+/**
+ * @author 蔡政堂
+ * create：2019/5/9
+ * modified:2019/6/21
+ * 功能：录入成绩时显示相关信息
+ */
+@Api(description = "蔡政堂: 录入成绩显示")
 @Controller
 @RequestMapping(value = "/json/gradeManagement1")
 public class DaoDiController {

@@ -10,10 +10,12 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -69,7 +71,7 @@ public class AuthController {
     }
 
     @RequestMapping("login")
-    public Result login(String uname, String pwd){
+    public Result login(String uname, String pwd, HttpServletRequest httpRequest){
         if(!StringUtils.isEmpty(uname) && !StringUtils.isEmpty(pwd)){
             UsernamePasswordToken token = new UsernamePasswordToken(uname, pwd);
             Subject currentUser = SecurityUtils.getSubject();

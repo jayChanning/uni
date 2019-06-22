@@ -1,12 +1,11 @@
 package edu.uni.gradeManagement1.controller;
 
+import edu.uni.auth.bean.User;
 import edu.uni.auth.service.AuthService;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.gradeManagement1.bean.CourseItemDetail;
-import edu.uni.gradeManagement1.bean.StuItemGrade;
 import edu.uni.gradeManagement1.service.CourseItemDetailService;
-import edu.uni.gradeManagement1.utils.UploadUtil;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -21,11 +20,11 @@ import java.io.IOException;
 /**
  * @author 蔡政堂
  * create 2019/5/5
- * modified 2019/6/19
+ * modified 2019/6/20
  * description TODO 课程组成项明细模块Controller
  */
 
-@Api(description = "成绩管理：课程组成项明细模块")
+@Api(description = "蔡政堂: 成绩管理：课程组成项明细模块")
 @Controller
 @RequestMapping("json/gradeManagement1")
 public class CourseItemDetailController {
@@ -33,6 +32,8 @@ public class CourseItemDetailController {
     private CourseItemDetailService courseItemDetailService;
     @Autowired
     private RedisCache cache;
+    @Autowired
+    private AuthService authService;
 
     /**
      * 内部类，专门用来管理每个方法所对应缓存的名称。
@@ -51,49 +52,51 @@ public class CourseItemDetailController {
      * @param courseItemDetail
      * @return
      */
-    @ApiOperation(value = "新增课程组成项明细表记录",notes = "")
+    @ApiOperation(value = "新增课程组成项明细表记录",notes = "已测试！")
     @ApiImplicitParam(name = "courseItemDetail",value = "课程组成项明细表实体类",required = true,dataType = "CourseItemDetail")
     @PostMapping("/courseItemDetail")
     @ResponseBody
     public Result create(@RequestBody(required = false) CourseItemDetail courseItemDetail){
-        if (courseItemDetail != null){
-            boolean success = courseItemDetailService.insert(courseItemDetail);
-            if (success){
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
-                cache.deleteByPaterm(CacheNameHelper.ListByCid_CacheNamePrefix + "*");
-                return Result.build(ResultType.Success);
-            } else{
-                return Result.build(ResultType.Failed);
+        User user = authService.getUser();
+        if (user == null) {
+            System.out.println("您没有登录！没有权限录入组成项明细！");
+            ResultType.Failed.setMSG("您没有登录！没有权限录入组成项明细！");
+            return Result.build(ResultType.Failed);
+        } else {
+            if (courseItemDetail != null){
+                boolean success = courseItemDetailService.insert(courseItemDetail);
+                if (success){
+                    cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                    cache.deleteByPaterm(CacheNameHelper.ListByCid_CacheNamePrefix + "*");
+                    return Result.build(ResultType.Success);
+                } else{
+                    return Result.build(ResultType.Failed);
+                }
             }
+            return Result.build(ResultType.ParamError);
         }
 
-        return Result.build(ResultType.ParamError);
     }
 
-
     /**
-     * 根据id查询组成项明细
-     * @param id
-     * @param response
-     * @throws IOException
+     * <p>
+     *     获取树状数组
+     * </p>
+     * @param id 成绩主表Id
+     * @return 成绩主表Id
      */
-    /*@ApiOperation(value = "根据id查询组成项明细",notes="Testing")
-    @ApiImplicitParam(name = "id",value = "组成项明细id",required = true,dataType = "Long",paramType = "path")
-    @GetMapping("/courseItemDetail/{id}")
-    public void receive(@PathVariable Long id,
-                        HttpServletResponse response) throws IOException {
-        response.setContentType("application/json;charset=utf-8");
-        String cacheName = CacheNameHelper.Receive_CacheNamePrefix + id;
-        String json = cache.get(cacheName);
-        if (json == null) {
-            CourseItemDetail courseItemDetail = courseItemDetailService.select(id);
-            json = Result.build(ResultType.Success).appendData("courseItemDetail",courseItemDetail).convertIntoJSON();
-            if (courseItemDetail != null){
-                cache.set(cacheName,json);
-            }
-        }
-        response.getWriter().write(json);
-    }*/
+    @ApiOperation(value = "获取树状数组", notes = "已实现")
+    @GetMapping("/courseItemDetail/itemName")
+    @ResponseBody
+    public Result getInfo(@ApiParam(value = "成绩主表Id")
+                          @RequestParam(name = "id") long id) {
+
+        //System.out.println(id);
+        //System.out.println(courseItemDetailService.selectTree(id));
+
+        return Result.build(ResultType.Success).appendData("data", courseItemDetailService.selectTree(id));
+
+    }
 
     /**
      * 根据页码分页查询所有的组成项明细记录
@@ -147,27 +150,5 @@ public class CourseItemDetailController {
         }
         response.getWriter().write(json);
     }*/
-
-
-    /**
-     * <p>
-     *     获取树状数组
-     * </p>
-     * @param id 成绩主表Id
-     * @return 成绩主表Id
-     */
-    @ApiOperation(value = "获取树状数组", notes = "已实现")
-    @GetMapping("/courseItemDetail/itemName")
-    @ResponseBody
-    public Result getInfo(@ApiParam(value = "成绩主表Id")
-                                @RequestParam(name = "id") long id) {
-
-        //System.out.println(id);
-        //System.out.println(courseItemDetailService.selectTree(id));
-
-        return Result.build(ResultType.Success).appendData("data", courseItemDetailService.selectTree(id));
-
-    }
-
 
 }

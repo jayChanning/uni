@@ -22,7 +22,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-//                .apis(RequestHandlerSelectors.basePackage("edu.uni.example.controller"))
+//                .apis(RequestHandlerSelectors.basePackage("edu.uni.gradeManagement1.controller"))
                 // 扫描使用了@Api注解的类
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())

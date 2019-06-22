@@ -3,6 +3,13 @@ package edu.uni.gradeManagement1.pojo;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
 
+/**
+ * @author 蔡政堂
+ * create 2019/6/20
+ * modified 2019/6/22
+ * description TODO 用于解析excel的对象，与excel文件每一列对应
+ */
+
 //必须extends BaseRowModel
 public class ExcelDeal extends BaseRowModel {
     //excel 的列数 从0开始

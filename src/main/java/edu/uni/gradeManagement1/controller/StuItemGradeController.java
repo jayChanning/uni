@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * description TODO
  */
 
-@Api(description = "成绩管理：成绩项主表得分模块")
+@Api(description = "蔡政堂: 成绩管理：成绩项主表得分模块")
 @Controller
 @RequestMapping("json/gradeManagement1")
 public class StuItemGradeController {
@@ -31,8 +31,6 @@ public class StuItemGradeController {
     private StuItemGradeService stuItemGradeService;
     @Autowired
     private RedisCache cache;
-    @Autowired
-    private SemesterService semesterService;
 
     /**
      * 内部类，专门用来管理每个get方法所对应缓存的名称。

@@ -34,7 +34,7 @@ public interface CourseItemMapper {
 
 
     /**
-     * Author 林晓锋
+     * @author 林晓锋
      * 根据主表id查询组成项得分
      *
      * @param id
@@ -48,7 +48,7 @@ public interface CourseItemMapper {
 
     /**
      * 查询组成项名称为作业的内容及得分
-     *Author 林晓锋
+     * @author 林晓锋
      * @param course_item_id
      * @param stu_item_grade_id
      * @return
@@ -66,7 +66,7 @@ public interface CourseItemMapper {
             + "ORDER BY `d`.`number` ")
     List<HashMap> selectCourseItemDetail1(@Param(value = "course_item_id") Long course_item_id, @Param(value = "stu_item_grade_id") Long stu_item_grade_id);
 
-    /**Author 林晓锋
+    /** @author 林晓锋
      * 查询组成项名称为考勤的内容及得分
      *@param course_item_id
      *@param stu_item_grade_id
@@ -86,7 +86,7 @@ public interface CourseItemMapper {
     List<HashMap> selectCourseItemDetail2(@Param(value = "course_item_id") Long course_item_id, @Param(value = "stu_item_grade_id") Long stu_item_grade_id);
 
 
-    /**Author 林晓锋
+    /** @author 林晓锋
      * 查询组成项名称为期中考试的内容及得分
      *
      * @param course_item_id
@@ -107,7 +107,7 @@ public interface CourseItemMapper {
     List<HashMap> selectCourseItemDetail3(@Param(value = "course_item_id") Long course_item_id, @Param(value = "stu_item_grade_id") Long stu_item_grade_id);
 
 
-    /**Author 林晓锋
+    /** @author 林晓锋
      * 查询组成项名称为实验的内容及得分
      *
      * @param course_item_id
@@ -128,7 +128,7 @@ public interface CourseItemMapper {
     List<HashMap> selectCourseItemDetail4(@Param(value = "course_item_id") Long course_item_id, @Param(value = "stu_item_grade_id") Long stu_item_grade_id);
 
 
-    /**Author 林晓锋
+    /** @author 林晓锋
      * 查询组成项名称为期末考试的内容及得分
      *
      * @param course_item_id
@@ -149,7 +149,7 @@ public interface CourseItemMapper {
     List<HashMap> selectCourseItemDetail5(@Param(value = "course_item_id") Long course_item_id, @Param(value = "stu_item_grade_id") Long stu_item_grade_id);
 
 
-    /**Author 林晓锋
+    /** @author 林晓锋
      * 查询组成项名称为其他的内容及得分
      *
      * @param course_item_id

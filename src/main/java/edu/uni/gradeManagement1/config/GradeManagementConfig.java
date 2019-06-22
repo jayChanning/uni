@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
-* @author
+* @author 陈少鑫
 * @description 成绩管理配置类
 * @date 13:33 2019-05-04
 * @modified 13:33 2019-05-10

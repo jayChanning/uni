@@ -35,10 +35,9 @@ import java.util.Map;
  * description TODO 录入成绩得分项明细的接口
  */
 
-@Api(description = "成绩管理：录入成绩得分项明细模块")
+@Api(description = "蔡政堂: 成绩管理：录入成绩得分项明细模块")
 @Controller
 @RequestMapping("json/gradeManagement1")
-
 public class StuItemGradeDetailController {
     @Autowired
     private StuItemGradeDetailService stuItemGradeDetailService;
@@ -50,7 +49,7 @@ public class StuItemGradeDetailController {
     private AuthService authService;
 
     /**
-     * 内部类，使用缓存
+     * 内部类，使用Redis缓存
      */
     static class CacheNameHelper {
         //gm_stuItemGradeDetail_{成绩明细项id}
@@ -90,7 +89,7 @@ public class StuItemGradeDetailController {
         stuItemGradeDetail.setByWho(usrId);
         stuItemGradeDetail.setUniversityId(universityId);
         // 默认0有效,亦暂且固定
-        stuItemGradeDetail.setDelete((byte)0);
+        stuItemGradeDetail.setDelete((byte) 0);
         /* inject detail data into Object StuItemGradeDetail */
         stuItemGradeDetail.setNote(gradeDetail.getNote());
         stuItemGradeDetail.setScore(gradeDetail.getScore());
@@ -144,6 +143,13 @@ public class StuItemGradeDetailController {
         /* 先从session中获得当前登录的教师id (user_id)  */
         User user = authService.getUser();
         System.out.println("user:" + user + "//userId=" + user.getId());
+        long temp_usrId;
+        if (user == null)
+            //session失效时临时代替getUser()方法
+            temp_usrId = 1952;
+        else
+            temp_usrId = user.getId();
+
         long semesterId = Long.valueOf(map.get("semesterId"));  //学期id
         long courseId = Long.valueOf(map.get("courseId"));   //课程id
         String excelAddr = map.get("excelAddr");   //excel上传地址
@@ -154,8 +160,8 @@ public class StuItemGradeDetailController {
 
         int insertCount = 0;
         for (int i = 0; i < list.size(); i++) {
-            ExcelDeal excelDeal = (ExcelDeal) list.get(i);
-            System.out.println(excelDeal.toString());
+//            ExcelDeal excelDeal = (ExcelDeal) list.get(i);
+//            System.out.println(excelDeal.toString());
 
             //根据excel表的学生学号查询获得学生id
             String stuNo = ((ExcelDeal) list.get(i)).getStuNo();
@@ -175,14 +181,13 @@ public class StuItemGradeDetailController {
             /**
              * 这是将成绩写入数据库的最终操作！
              */
-            //session失效时临时代替getUser()方法
-            long temp_usrId = 1952;
             // System.out.println("temp:"+temp_usrId);
             /* 新建一个对象并初始化，为写入数据库准备 */
             StuItemGradeDetail stuItemGradeDetail = new StuItemGradeDetail();
             stuItemGradeDetail.setStuItemGradeId(itemGradeId);
             stuItemGradeDetail.setCourseItemDetailId(itemDetailId);
-            stuItemGradeDetail.setAttachment("NULL_ADDR");  //批量导入成绩不能上传附件，因为无法把附件和每个学生对应
+            //批量导入成绩不能上传附件，因为无法把附件和每个学生对应
+            stuItemGradeDetail.setAttachment("NULL_ADDR");
             stuItemGradeDetail.setScore(((ExcelDeal) list.get(i)).getScore());
             stuItemGradeDetail.setNote(((ExcelDeal) list.get(i)).getNotes());
 //            stuItemGradeDetail.setUniversityId(usr.getUniversityId());
@@ -216,6 +221,7 @@ public class StuItemGradeDetailController {
         } //for循环
         System.out.println("END!!--insertCount=" + insertCount);
         if (insertCount == list.size()) {
+            ResultType.Success.setMSG("已成功录入" + insertCount + "个学生的成绩！");
             return Result.build(ResultType.Success);
         }
         return Result.build(ResultType.ParamError);

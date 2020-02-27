@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <shrio.version>1.2.3</shrio.version>
+        <shiro.version>1.5.1</shiro.version>
     </properties>
 
     <dependencies>
@@ -72,19 +72,19 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
-            <version>${shrio.version}</version>
+            <version>${shiro.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
-            <version>${shrio.version}</version>
+            <version>${shiro.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
-            <version>${shrio.version}</version>
+            <version>${shiro.version}</version>
         </dependency>
 
         <!-- swagger2 -->
